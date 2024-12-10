@@ -22,7 +22,7 @@ app.use("/",(req,res)=>{
     res.send("hello");
 })
 //port
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4500;
 app.listen(port, ()=>{
     console.log(`server is running on port ${port}`)
 })
