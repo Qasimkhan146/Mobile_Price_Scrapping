@@ -2,7 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
+import connectDB from "./config/mongoDBconfig.js";
 
+connectDB();
 const app = express();
 app.use(cors({
     origin:"*",
