@@ -4,7 +4,7 @@ import Price from "../model/priceModel.js";
 export const fetchSingleMobilePrice = async (req, res) => {
   try {
     const { model } = req.params;
-    const mobile = await Mobile.findOne({ model: new RegExp(model, "i") });
+    const mobile = await Mobile.findOne({ model });
     const prices = await Price.find({ model: new RegExp(model, "i") });
     if (!mobile) {
       return res.status(404).send("Mobile not found");
