@@ -8,7 +8,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
         if(!mobile){
             return res.status(404).json({message:"Mobile not found"});
         }
-        const price = await Price.findOne({model});
+        const price = await Price.find({model});
         if(!price){
             return res.status(404).json({message:"Price not found"});
         }
@@ -24,3 +24,4 @@ export const fetchSingleMobilePrice = async (req, res) => {
         return res.status(500).json({message:"Internal server error"});    
     }
 }
+
