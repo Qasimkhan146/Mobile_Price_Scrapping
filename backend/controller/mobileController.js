@@ -1,4 +1,3 @@
-import express from "express";
 import Mobile from "../model/mobileModel.js";
 import Price from "../model/priceModel.js";
 export const fetchSingleMobilePrice =async (req, res) => {

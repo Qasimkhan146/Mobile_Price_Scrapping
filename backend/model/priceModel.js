@@ -9,5 +9,6 @@ const priceSchema = new mongoose.Schema({
   brand: { type: String, required: true }, // Brand of the mobile
 }, { timestamps: true }); // Automatically adds createdAt and updatedAt fields
 
-export const Price = mongoose.model("Price", priceSchema);
+const Price = mongoose.model("Price", priceSchema);
 
+export default Price;
