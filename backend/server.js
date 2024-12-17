@@ -18,10 +18,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 dotenv.config();
 
 //routes
-app.use("/",(req,res)=>{
-    res.send("hello");
-})
+// app.use("/",(req,res)=>{
+//     res.send("hello");
+// })
 //port
+
+app.use("/mobile",);
 const port = 4500;
 app.listen(port, ()=>{
     console.log(`server is running on port ${port}`)

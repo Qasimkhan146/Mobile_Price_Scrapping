@@ -1,8 +1,10 @@
 import express from "express";
-import { getMobiles } from "../controllers/mobileController.js";
+import { fetchSingleMobilePrice } from "../controller/mobileController.js";
 
-const router = express.Router();
+const mobileRouter = express.Router();
 
-router.get("/fetchAllMobiles", fetchAllMobiles);
-router.get("/fetchSingleMobile/:id", fetchSingleMobile);
-router.post("/uploadMobile", addMobile);
+// mobileRouter.get("/fetchAllMobiles", fetchAllMobiles);
+mobileRouter.get("/fetchSingleMobile/:id", fetchSingleMobilePrice);
+// mobileRouter.post("/uploadMobile", addMobile);
+
+export default mobileRouter;
