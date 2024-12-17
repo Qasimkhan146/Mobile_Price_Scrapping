@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import connectDB from "./config/mongoDBconfig.js";
-import mobileRouter from "./routes/mobileRoute.jsx";
+import mobileRouter from "./routes/mobileRoute.js";
 
 connectDB();
 const app = express();
