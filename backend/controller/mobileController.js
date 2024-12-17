@@ -2,32 +2,25 @@ import Mobile from "../model/mobileModel.js";
 import Price from "../model/priceModel.js";
 
 export const fetchSingleMobilePrice = async (req, res) => {
-  try {
-    const { model } = req.params; // Get model name from URL parameters
+    try {
+        const {model} = req.params;
+        const mobile = await Mobile.findOne({model});
+        if(!mobile){
+            return res.status(404).json({message:"Mobile not found"});
+        }
+        const price = await Price.findOne({model});
+        if(!price){
+            return res.status(404).json({message:"Price not found"});
+        }
+        const response = {
+            mobile,
+            price,
+          };
 
-    // Find mobile details (case-insensitive match)
-    const mobile = await Mobile.findOne({ model });
-    if (!mobile) {
-      return res.status(404).json({ message: "Mobile not found" });
+        return res.status(200).json(response);
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({message:"Internal server error"});    
     }
-
-    // Find all prices for the given model (case-insensitive match)
-    const prices = await Price.find({ model });
-    if (!prices.length) {
-      return res.status(404).json({ message: "Prices not found for the selected mobile" });
-    }
-
-    // Prepare the price details
-    const priceDetails = prices.map((price) => ({
-      source: price.source,
-      price: price.price,
-      href: price.href,
-      hrefName: price.hrefName,
-    }));
-
-    // Combine mobile details and price information
-    res.status(200).json({ mobile, prices: priceDetails });
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
-  }
-};
+}
