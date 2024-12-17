@@ -6,13 +6,13 @@ export const fetchSingleMobilePrice = async (req, res) => {
     const { model } = req.params; // Get model name from URL parameters
 
     // Find mobile details (case-insensitive match)
-    const mobile = await Mobile.findOne({ model: new RegExp(model, "i") });
+    const mobile = await Mobile.findOne({ model });
     if (!mobile) {
       return res.status(404).json({ message: "Mobile not found" });
     }
 
     // Find all prices for the given model (case-insensitive match)
-    const prices = await Price.find({ model: new RegExp(model, "i") });
+    const prices = await Price.find({ model });
     if (!prices.length) {
       return res.status(404).json({ message: "Prices not found for the selected mobile" });
     }
