@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import connectDB from "./config/mongoDBconfig.js";
+import mobileRouter from "./routes/mobileRoute.jsx";
 
 connectDB();
 const app = express();
@@ -23,7 +24,7 @@ dotenv.config();
 // })
 //port
 
-app.use("/mobile",);
+app.use("/mobile",mobileRouter);
 const port = 4500;
 app.listen(port, ()=>{
     console.log(`server is running on port ${port}`)
