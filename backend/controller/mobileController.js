@@ -12,7 +12,11 @@ export const fetchSingleMobilePrice =async (req, res) => {
     if(!price){
         res.status(404).send("price not found")
     }
-    res.status(200).send(mobile && price);
+    res.status(200).send(mobile && price.map((price) => ({
+        source: price.source,
+        price: price.price,
+        href: price.href,
+      })),);
   } catch (error) {
     res.status(500).send(error.message);
   }
