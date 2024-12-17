@@ -9,18 +9,33 @@ const fetchProductsNamesAndPrices = async (url) => {
     const results = [];
 
     $("td.BiggerText").each((_, element) => {
-      const name = $(element).find("a.BiggerText").text().trim();
-      const href = $(element).find("a").attr("href");
+      const hrefName = $(element).find("a").attr("href");
+
+      const href = hrefName.startsWith("http")
+        ? hrefName
+        : `https://www.whatmobile.com.pk${hrefName}`;
+
+      const model = hrefName
+        .replace(/\//g, "")
+        .replace(/_/g, " ")
+        .replace(/-/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toUpperCase();
+
       const imagePath = $(element).find("img").attr("src");
       const imageSRC = imagePath
         ? `https://www.whatmobile.com.pk/${imagePath}`
         : null;
-      const match = imagePath?.match(/^([^\/]+\/[^\/]+)\/([^\/]+)/);
-      const category = match ? match[2] : "Unknown";
-      const price = $(element).find("span.PriceFont").text().trim();
 
-      if (name && price && href) {
-        results.push({ name, price, href, imageSRC, category });
+      const match = imagePath?.match(/^([^\/]+\/[^\/]+)\/([^\/]+)/);
+      const brand = match ? match[2].toUpperCase() : "Unknown";
+
+      let price = $(element).find("span.PriceFont").text().trim();
+      price = parseInt(price.replace(/[^\d]/g, ""), 10);
+
+      if (model && price && hrefName && href) {
+        results.push({ model, price, hrefName, href, imageSRC, brand });
       }
     });
 
@@ -49,7 +64,7 @@ const main = async () => {
   }
 
   try {
-    await fs.writeFile("data.json", JSON.stringify(results, null, 2));
+    await fs.writeFile("whatmobile.json", JSON.stringify(results, null, 2));
     console.log("Data saved to data.json");
   } catch (err) {
     console.error("Error writing to file", err.message);
