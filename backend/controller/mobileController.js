@@ -7,7 +7,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
     const { model } = req.params; // Mobile model name from URL params
 
     // Fetch the mobile from the Mobile collection
-    const mobile = await Mobile.findOne({ model: new RegExp(`^${model.trim()}$`, "i") }); // Exact match
+    const mobile = await Mobile.findOne({ model: new RegExp(`${model}`, "i") }); // Exact match
     if (!mobile) {
       return res.status(404).json({ message: "Mobile not found" });
     }
