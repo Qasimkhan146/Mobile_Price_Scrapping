@@ -35,7 +35,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
     }
 
     // If no exact matches, fall back to fuzzy matching
-    const threshold = 0.8; // Adjust similarity threshold for fallback
+    const threshold = 0.7; // Adjust similarity threshold for fallback
     const fuzzyMatchingPrices = allPrices.filter((price) => {
       const similarity = stringSimilarity.compareTwoStrings(
         mobile.model.toLowerCase(),
