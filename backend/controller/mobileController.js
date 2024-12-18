@@ -66,7 +66,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
 // }
 
 
-
+// fetch 10 latest mobiles with their prices
 export const fetch10LatestMobilesWithPrices = async (req, res) => {
     try {
       const threshold = 1; // Define the similarity threshold
@@ -110,4 +110,77 @@ export const fetch10LatestMobilesWithPrices = async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
-  };
+};
+
+//create a new mobile
+export const createMobile = async (req, res) =>{
+    try {
+        const {model, price, hrefName, href, imageSRC, brand, OS, Dimensions, weight, SIM, Colors,twoG, threeG, fourG, fiveG, CPU, Chipset, GPU, Technology, Size,Resolution, Protection, Extra_Features, Ram, Rom, Built_in, Card, Main, Back_Cam, Features, Front_Cam, Front, WLAN, Bluetooth, GPS, Data, Sensors, Audio, Browser, Messaging, Games, Extra, Capacity, PriceInUsd, Radio} = req.body;
+
+        const mobile = await Mobile.create({
+            model,
+            price,
+            hrefName,
+            href,
+            imageSRC:req.file.path,
+            brand,
+            OS,
+            Dimensions,
+            weight,
+            SIM,
+            Colors,
+            "2G Band": twoG,
+            "3G Band": threeG,
+            "4G Band": fourG,
+            "5G Band": fiveG,
+            CPU,
+            Chipset,
+            GPU,
+            Technology,
+            Size,
+            Resolution,
+            Protection,
+            Extra_Features,
+            Ram,
+            Rom,
+            Built_in,
+            Card,    
+            Main,
+            Back_Cam,
+            Features,
+            Front_Cam,
+            Front,
+            WLAN,
+            Bluetooth,
+            GPS,
+            Data,
+            Sensors,
+            Audio,
+            Browser,
+            Messaging,
+            Games,
+            Extra,
+            Capacity,
+            PriceInUsd,
+            Radio
+        });
+
+        res.status(201).json({message: true,mobile});
+        
+    } catch (error) {
+        
+    }
+}
+
+// fetch search mobile
+export const fetchSearchMobile = async (req, res) =>{
+    try {
+        const {model} = req.query;
+        const filter = model ? {model: {$regex: model, $options: "i"}} : {};
+        const mobiles = await Mobile.find(filter).limit(5);
+        res.status(200).json(mobiles);
+
+    } catch (error) {
+        res.status(500).json({message:"Internal Server Error",error:error.message})
+    }
+}
