@@ -16,7 +16,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
     const allPrices = await Price.find();
 
     // Use string similarity to filter prices with similar model names
-    const threshold = 0.6; // Adjust similarity threshold (higher = stricter match)
+    const threshold = 0.8; // Adjust similarity threshold (higher = stricter match)
     const matchingPrices = allPrices.filter((price) => {
       const similarity = stringSimilarity.compareTwoStrings(
         mobile.model.toLowerCase(),
