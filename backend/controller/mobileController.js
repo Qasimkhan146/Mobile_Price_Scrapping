@@ -7,7 +7,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
     const { model } = req.params; // Mobile model name from URL params
 
     // Fetch the mobile from the Mobile collection
-    const mobile = await Mobile.findOne({ model: new RegExp(model, "i") });
+    const mobile = await Mobile.findOne({ model: new RegExp(`^${model.trim()}$`, "i") }); // Exact match
     if (!mobile) {
       return res.status(404).json({ message: "Mobile not found" });
     }
@@ -15,9 +15,28 @@ export const fetchSingleMobilePrice = async (req, res) => {
     // Fetch all price records
     const allPrices = await Price.find();
 
-    // Use string similarity to filter prices with similar model names
-    const threshold = 0.8; // Adjust similarity threshold (higher = stricter match)
-    const matchingPrices = allPrices.filter((price) => {
+    // Filter prices for exact matches with the mobile model
+    const exactMatchingPrices = allPrices.filter((price) =>
+      price.model.toLowerCase() === mobile.model.toLowerCase()
+    );
+
+    // If exact matches are found, return them
+    if (exactMatchingPrices.length > 0) {
+      const priceDetails = exactMatchingPrices.map((price) => ({
+        source: price.source,
+        price: price.price,
+        href: price.href,
+        hrefName: price.hrefName,
+        brand: price.brand,
+        model: price.model,
+      }));
+
+      return res.status(200).json({ mobile, prices: priceDetails });
+    }
+
+    // If no exact matches, fall back to fuzzy matching
+    const threshold = 0.8; // Adjust similarity threshold for fallback
+    const fuzzyMatchingPrices = allPrices.filter((price) => {
       const similarity = stringSimilarity.compareTwoStrings(
         mobile.model.toLowerCase(),
         price.model.toLowerCase()
@@ -25,19 +44,18 @@ export const fetchSingleMobilePrice = async (req, res) => {
       return similarity >= threshold; // Include only matches above the threshold
     });
 
-    if (!matchingPrices.length) {
+    if (!fuzzyMatchingPrices.length) {
       return res.status(404).json({ message: "No matching prices found for this mobile" });
     }
 
-    // Prepare the price details
-    const priceDetails = matchingPrices.map((price) => ({
+    // Prepare the price details for fuzzy matches
+    const priceDetails = fuzzyMatchingPrices.map((price) => ({
       source: price.source,
       price: price.price,
       href: price.href,
       hrefName: price.hrefName,
       brand: price.brand,
       model: price.model,
-
     }));
 
     // Combine mobile details and matching price information
