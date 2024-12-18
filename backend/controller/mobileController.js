@@ -17,7 +17,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
         //     price,
         //   };
 
-        return res.status(200).json(mobile);
+        return res.status(200).json(model);
 
     } catch (error) {
         console.log(error);
