@@ -5,6 +5,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
     try {
         const {model} = req.params;
         const mobile = await Mobile.findOne({model});
+        
         if(!mobile){
             return res.status(404).json({message:"Mobile not found"});
         }
