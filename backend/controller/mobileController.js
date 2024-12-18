@@ -35,6 +35,9 @@ export const fetchSingleMobilePrice = async (req, res) => {
       price: price.price,
       href: price.href,
       hrefName: price.hrefName,
+      brand: price.brand,
+      model: price.model,
+
     }));
 
     // Combine mobile details and matching price information
