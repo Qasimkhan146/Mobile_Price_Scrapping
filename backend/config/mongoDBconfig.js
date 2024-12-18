@@ -5,8 +5,8 @@ dotenv.config();
 
 const connectDB = async () =>{
     try{
+        // await mongoose.connect('mongodb://localhost:27017/mobilePrice',);
         await mongoose.connect('mongodb://192.168.10.86:7842/mobileprice',);
-        // await mongoose.connect('mongodb://uzair:Uzair1234@116.202.124.91:7842/mobilePrice',);
 
         console.log("MongoDB connected")
     }catch(error){
@@ -14,3 +14,7 @@ const connectDB = async () =>{
     }
 }
 export default connectDB
+
+//mongodb://localhost:27017/mobilePrice
+
+//mongodb://192.168.10.86:7842/mobileprice
