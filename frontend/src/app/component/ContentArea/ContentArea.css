@@ -1,0 +1,25 @@
+.content__head tr th{
+   font-weight: 500;
+   font-size: 18px;
+   color: #e0134e;
+}
+/* .content__tr{
+    height: 60px;
+} */
+ .content__tr td a{
+    /* text-decoration: none; */
+    color: #000;
+    font-weight: 500;
+    font-size: 18px;
+ }
+ .content__tr th a{
+    /* text-decoration: none; */
+    color: #000;
+ }
+.spec__text{
+    margin-left: -20%;
+}
+.hero-section-link{
+    text-decoration: none !important;
+    color: #666;
+}
