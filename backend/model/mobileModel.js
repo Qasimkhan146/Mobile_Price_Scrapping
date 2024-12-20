@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const mobileSchema = new mongoose.Schema({
   model: { type: String, required: true },
   price: { type: Number, required: true },
-  hrefName: { type: String, required: true },
+  hrefName: { type: String },
   href: { type: String, required: true },
   imageSRC: { type: String, required: true },
   brand: { type: String, required: true },
