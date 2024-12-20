@@ -184,3 +184,44 @@ export const fetchSearchMobile = async (req, res) =>{
         res.status(500).json({message:"Internal Server Error",error:error.message})
     }
 }
+
+//mobiles filters
+export const fetchMobileFilters = async (req, res) => {
+  try {
+    const { brand, model, Ram, Rom, Back_Cam } = req.query;
+
+    // Initialize filter object
+    const filterMobile = {};
+
+    // Construct query filters dynamically
+    if (brand) {
+      filterMobile.brand = { $regex: brand, $options: "i" }; // Case-insensitive match for strings
+    }
+    if (model) {
+      filterMobile.model = { $regex: model, $options: "i" }; // Case-insensitive match for strings
+    }
+    if (Ram) {
+      filterMobile.Ram = parseInt(Ram); // Exact match for numbers
+    }
+    if (Rom) {
+      filterMobile.Rom = parseInt(Rom); // Exact match for numbers
+    }
+    if (Back_Cam) {
+      filterMobile.Back_Cam = parseInt(Back_Cam); // Exact match for numbers
+    }
+
+    // Fetch filtered mobiles from the database
+    const mobiles = await Mobile.find(filterMobile);
+
+    // Check if mobiles are found
+    if (mobiles.length === 0) {
+      return res.status(404).json({ message: "No mobiles found matching the filters." });
+    }
+
+    // Return the results
+    res.status(200).json(mobiles);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
