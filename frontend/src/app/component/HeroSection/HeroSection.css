@@ -1,0 +1,76 @@
+.scrollbar-none {
+    overflow-x: auto;
+    scrollbar-width: 1px; /* Firefox */
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Edge */
+  }
+  /* .brands__div{
+
+  } */
+  .brands__div ul li{
+      background-color: #e0134e;
+      color: #fff;
+  }
+ .differ__heading__text{
+    color: #fff;
+    background-color: #e0134e;
+  }
+  .select-inputs{
+    background-color: #ee1351;
+    color: #fff;
+    border-radius: 20px;
+    /* width: m; */
+    /* width: 100%; */
+    min-width: 200px;
+    padding: 8px;
+    cursor: pointer;
+  }
+  .display__brands{
+    position: absolute;
+    width: 300%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    top: 120%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    background-color: #fff;
+  }
+  .display__ram{
+    position: absolute;
+    width: 300%;
+    display: grid;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    top: 120%;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+    
+  }
+  .brand__lists{
+    list-style: none;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .brand__lists > div{
+    background: #ff0048;
+    padding: 6px;
+    border-radius: 50%;
+  }
+  .brand__lists > div > div{
+    background: #fff;
+    padding: 3px;
+    border-radius: 50%;
+  }
+  .brands__div .select-inputs:focus{
+    background: #e0134e;
+    color: #fff;
+    box-shadow: none;
+    border-color: #e0134e;
+  }

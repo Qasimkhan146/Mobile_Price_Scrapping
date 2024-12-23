@@ -1,0 +1,145 @@
+.content__head tr th {
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
+    padding: 10px;
+    background-color: #e0134e;
+}
+.content__tr {
+    height: 60px;
+}
+
+.detail__features h5 {
+    font-weight: 700;
+    font-size: 19px;
+}
+
+.detail__features p {
+    font-weight: 500;
+}
+
+.spec__text {
+    margin-left: -20%;
+}
+
+.hero-section-link {
+    text-decoration: none !important;
+    color: #666;
+}
+
+.green__div {
+    width: 100%;
+    height: 4px;
+    margin-top: 4px;
+    border-radius: 20px;
+    margin-bottom: 2px;
+    background-color: #ddd;
+}
+
+.imp__specs h5 {
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.green__div .green__underline {
+    width: 85%;
+    height: 4px;
+    border-radius: 20px;
+    background-color: green;
+}
+
+@media screen and (min-width: 1024px) {
+    .image__spec__container{
+        width: 50% !important;
+    }
+    .table__container{
+        width: 75% !important;
+    }
+    .detail__features{
+        width: auto !important;
+    }
+    .product__all__specs{
+        width: 25% !important;
+    }
+    .product__specs{
+        width: 75% !important;
+    }
+    
+}
+@media screen and (max-width: 550px) {
+.specs__head {
+ width: 20% !important;
+}
+
+}
+@media screen and (max-width: 767px) {
+    .product__specs .spec-head-div{
+        background-color: #e0134e;
+        color: #fff;
+        padding: 10px;
+        font-weight: 500;
+        font-size: 18px;
+        display: block;
+    }
+}
+.spec-head-div{
+    display: none;
+}
+.table__container h3{
+    color: #e0134e;
+    font-size: 22px;
+    font-weight: 650;
+}
+.specs__head {
+    color: #e0134e;
+    /* background: ; */
+    font-weight: 700;
+    /* border: 1px solid #222; */
+    font-size: 20px;
+}
+
+.spec__subhead>div {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.spec__subhead>p {
+    font-weight: 550;
+    font-size: 18px;
+}
+
+.red__underline {
+    width: 100%;
+    height: 2px;
+    background: #e0134e;
+    margin-top: 2px;
+}
+
+.phone__picture__section {
+    display: grid;
+    place-items: center;
+}
+
+.price__div {
+    width: 80%;
+    /* padding: 10px; */
+    font-weight: 650;
+    font-size: 20px;
+    border-left: 1px solid #e0134e;
+    border-right: 1px solid #e0134e;
+    border-bottom: 1px solid #e0134e;
+}
+
+.specs__underline {
+    width: 100%;
+    height: 4px;
+    background: #bdafaf;
+}
+.content__tr{
+    color: #222;
+    font-weight: 500;
+    font-size: 18px;
+}
+.content__tr td a{
+    text-decoration: underline;
+}
