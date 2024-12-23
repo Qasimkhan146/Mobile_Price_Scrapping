@@ -211,7 +211,7 @@ export const fetchMobileFilters = async (req, res) => {
     }
 
     // Fetch filtered mobiles from the database
-    const mobiles = await Mobile.find(filterMobile);
+    const mobiles = await Mobile.find(filterMobile).limit(10);
 
     // Check if mobiles are found
     if (mobiles.length === 0) {
