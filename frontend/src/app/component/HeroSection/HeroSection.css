@@ -13,6 +13,10 @@
       background-color: #e0134e;
       color: #fff;
   }
+  .brands__divs ul li{
+    background-color: #e0134e;
+    color: #fff;
+}
  .differ__heading__text{
     color: #fff;
     background-color: #e0134e;
@@ -23,13 +27,13 @@
     border-radius: 20px;
     /* width: m; */
     /* width: 100%; */
-    min-width: 200px;
+    min-width: 160px;
     padding: 8px;
     cursor: pointer;
   }
-  .display__brands{
+  .brands__divs >div .display__brands{
     position: absolute;
-    width: 300%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 10px;
@@ -38,6 +42,52 @@
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
     background-color: #fff;
+  z-index: 10;  
+  }
+  .display__brands{
+    position: absolute;
+    width: 300%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    top: 120%;
+    z-index: 10;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    background-color: #fff;
+  }
+  .brands__divs >div .display__ram{
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    display: grid;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    top: 120%;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+    
+  }
+  .display__camera{
+    position: absolute;
+    width: 100%;
+    display: grid;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    /* grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); */
+    gap: 10px;
+    top: 120%;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+  }
+  .cam__btn{
+    background-color: #e0134e;
+    color: #fff;
+    padding: 10px;
+    border-radius: 12px;
   }
   .display__ram{
     position: absolute;
@@ -69,6 +119,12 @@
     border-radius: 50%;
   }
   .brands__div .select-inputs:focus{
+    background: #e0134e;
+    color: #fff;
+    box-shadow: none;
+    border-color: #e0134e;
+  }
+  .brands__divs .select-inputs:focus{
     background: #e0134e;
     color: #fff;
     box-shadow: none;
