@@ -11,7 +11,6 @@ export default function RootLayout({ children }) {
         <ClientLayout>
         <Header/>
         {children}
-        <ToastContainer/>
         </ClientLayout>
       </body>
     </html>
