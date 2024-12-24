@@ -1,4 +1,4 @@
-.content__head tr th {
+.content__heads tr th {
     font-weight: 500;
     font-size: 18px;
     color: #fff;
@@ -17,7 +17,11 @@
 .detail__features p {
     font-weight: 500;
 }
-
+.loading__class{
+    width: 100%;
+    display: grid;
+    place-items: center;
+ }
 .spec__text {
     margin-left: -20%;
 }

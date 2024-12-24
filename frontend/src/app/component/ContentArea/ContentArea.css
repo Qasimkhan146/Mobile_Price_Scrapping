@@ -12,6 +12,11 @@
     font-weight: 500;
     font-size: 18px;
  }
+ .loading__class{
+    width: 100%;
+    display: grid;
+    place-items: center;
+ }
  .content__tr th a{
     /* text-decoration: none; */
     color: #000;

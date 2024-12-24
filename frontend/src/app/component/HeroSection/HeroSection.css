@@ -6,12 +6,16 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Edge */
   }
-  /* .brands__div{
-
-  } */
   .brands__div ul li{
       background-color: #e0134e;
       color: #fff;
+  }
+  .clear__filter{
+    color: #e0134e;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e0134e;  
   }
   .brands__divs ul li{
     background-color: #e0134e;
@@ -79,6 +83,7 @@
     /* grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); */
     gap: 10px;
     top: 120%;
+    z-index: 10;
     padding: 20px;
     border-radius: 20px;
     background-color: #fff;

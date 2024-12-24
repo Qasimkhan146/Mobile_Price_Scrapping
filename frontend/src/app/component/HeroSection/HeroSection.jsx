@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import "./HeroSection.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Container, Row } from "react-bootstrap";
 import {fetchAllBrands, selectAllBrands, fetchFilterMobiles, fetch10LatestMobiles} from "../../../../redux/mobileSlicer";
 import { useDispatch, useSelector } from 'react-redux';
 
 import ContentArea from "../ContentArea/ContentArea";
-import { ChevronRight, FilterAlt } from "@mui/icons-material";
+import { ChevronRight, Clear, ExpandMore, FilterAlt } from "@mui/icons-material";
 
 
 
@@ -69,7 +69,10 @@ const HeroSection = () => {
               }
             }}>
               {selectedData.selectBrand === ""?"Select a Brand": selectedData.selectBrand}
-              <ChevronRight />
+              <div>
+               {selectedData.selectBrand !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectBrand: "" })} /> } 
+              {displayDropdown === "brand" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
             </div>
             {displayDropdown === "brand" && (
               <div  className="display__brands">
@@ -104,7 +107,10 @@ const HeroSection = () => {
               }
             }}>
                 {selectedData.selectedModel === ""?"Enter Model Name": `${selectedData.selectedModel}`}
-              <ChevronRight />
+                <div>
+               {selectedData.selectedModel !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedModel: "" })} /> } 
+              {displayDropdown === "model" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
             </div>
             {displayDropdown === "model" && (
               <div className="display__camera">
@@ -123,7 +129,10 @@ const HeroSection = () => {
               }
             }}>
             {selectedData.selectedRam === ""?"RAM": `${selectedData.selectedRam} GB`}
-              <ChevronRight />
+            <div>
+               {selectedData.selectedRam !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedRam: "" })} /> } 
+              {displayDropdown === "ram" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
             </div>
             {displayDropdown === "ram" && (
               <div className="display__ram">
@@ -158,7 +167,10 @@ const HeroSection = () => {
               }
             }}>
               {selectedData.selectedStorage === ""?"Storage": `${selectedData.selectedStorage} GB`}
-              <ChevronRight />
+              <div>
+               {selectedData.selectedStorage !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedStorage: "" })} /> } 
+              {displayDropdown === "storage" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
             </div>
             {displayDropdown === "storage" && (
               <div className="display__ram">
@@ -197,7 +209,10 @@ const HeroSection = () => {
               }
             }}>
              {selectedData.selectedBackCam === ""?"Back Camera": `${selectedData.selectedBackCam} MP`}
-              <ChevronRight />
+             <div>
+               {selectedData.selectedBackCam !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedBackCam: "" })} /> } 
+              {displayDropdown === "camera" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
             </div>
             {displayDropdown === "camera" && (
               <div className="display__camera">
@@ -207,155 +222,173 @@ const HeroSection = () => {
             )
             }
           </div>
+          <div onClick={() => setSelectedData({selectBrand:"", selectedRam:"", selectedStorage:"", selectedBackCam:"", selectedModel:""})} className="clear__filter">Clear All Filter</div>
         </Col>
         {
           displayFilter && (
             <Col className="d-flex d-lg-none flex-column gap-2 brands__divs">
             <div ref={(node) => setDropdownRef("brand", node)} className="position-relative">
-              <div  className="select-inputs  d-flex flex-row justify-content-between align-items-center" onClick={() => {
-                if (displayDropdown === "brand") {
-                  setDisplayDropdown("");
-                } else {
-                  setDisplayDropdown("brand")
-                }
-              }}>
-                {selectedData.selectBrand === ""?"Select a Brand": selectedData.selectBrand}
-                <ChevronRight />
-              </div>
-              {displayDropdown === "brand" && (
-                <div  className="display__brands">
-                  {fetchBrands?.length > 0 && fetchBrands.map((brand, index) => (
-                    <div key={index} onClick={() => {
-                      setSelectedData({
-                        ...selectedData,
-                        selectBrand: brand.brand
-                      });
-                      setDisplayDropdown("");
-                    }} className="brand__lists d-flex align-items-center gap-2">
-                      <div>
-                        <div>
-  
-                        </div>
-                      </div>
-                      <li >
-                        {brand.brand}
-                      </li>
-                    </div>
-                  ))}
-                </div>
-              )
+            <div  className="select-inputs  d-flex flex-row justify-content-between align-items-center" onClick={() => {
+              if (displayDropdown === "brand") {
+                setDisplayDropdown("");
+              } else {
+                setDisplayDropdown("brand")
               }
+            }}>
+              {selectedData.selectBrand === ""?"Select a Brand": selectedData.selectBrand}
+              <div>
+               {selectedData.selectBrand !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectBrand: "" })} /> } 
+              {displayDropdown === "brand" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
             </div>
-            <div ref={(node) => setDropdownRef("model", node)}  className="position-relative">
-              <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
-                if (displayDropdown === "model") {
-                  setDisplayDropdown("");
-                } else {
-                  setDisplayDropdown("model")
-                }
-              }}>
+            {displayDropdown === "brand" && (
+              <div  className="display__brands">
+                {fetchBrands?.length > 0 && fetchBrands.map((brand, index) => (
+                  <div key={index} onClick={() => {
+                    setSelectedData({
+                      ...selectedData,
+                      selectBrand: brand.brand
+                    });
+                    setDisplayDropdown("");
+                  }} className="brand__lists d-flex align-items-center gap-2">
+                    <div>
+                      <div>
+
+                      </div>
+                    </div>
+                    <li >
+                      {brand.brand}
+                    </li>
+                  </div>
+                ))}
+              </div>
+            )
+            }
+          </div>
+          <div ref={(node) => setDropdownRef("model", node)}  className="position-relative">
+            <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
+              if (displayDropdown === "model") {
+                setDisplayDropdown("");
+              } else {
+                setDisplayDropdown("model")
+              }
+            }}>
                 {selectedData.selectedModel === ""?"Enter Model Name": `${selectedData.selectedModel}`}
-                <ChevronRight />
+                <div>
+               {selectedData.selectedModel !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedModel: "" })} /> } 
+              {displayDropdown === "model" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
               </div>
-              {displayDropdown === "model" && (
-                <div className="display__brands">
-                  <li>Apple</li>
-                </div>
-              )
-              }
             </div>
-            <div ref={(node) => setDropdownRef("ram", node)} className="position-relative">
-              <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
-                if (displayDropdown === "ram") {
-                  setDisplayDropdown("");
-                } else {
-                  setDisplayDropdown("ram")
-                }
-              }}>
-              {selectedData.selectedRam === ""?"RAM": `${selectedData.selectedRam} GB`}
-                <ChevronRight />
+            {displayDropdown === "model" && (
+              <div className="display__camera">
+              <input type="text" onChange={(e) => setModel(e.target.value)} value={model} placeholder="Enter Model Name" className="form-control"/>
+              <button className="cam__btn" onClick={()=>{setSelectedData({...selectedData, selectedModel: model}); setDisplayDropdown("")}}>Submit</button>
+          </div>
+            )
+            }
+          </div>
+          <div ref={(node) => setDropdownRef("ram", node)} className="position-relative">
+            <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
+              if (displayDropdown === "ram") {
+                setDisplayDropdown("");
+              } else {
+                setDisplayDropdown("ram")
+              }
+            }}>
+            {selectedData.selectedRam === ""?"RAM": `${selectedData.selectedRam} GB`}
+            <div>
+               {selectedData.selectedRam !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedRam: "" })} /> } 
+              {displayDropdown === "ram" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
               </div>
-              {displayDropdown === "ram" && (
-                <div className="display__ram">
-                  {ramData.map((ram, index) => (
-                    <div key={index} onClick={() => {
-                      setSelectedData({
-                        ...selectedData,
-                        selectedRam: ram
-                      });
-                      setDisplayDropdown("");
-                    }} className="brand__lists d-flex align-items-center gap-2">
+            </div>
+            {displayDropdown === "ram" && (
+              <div className="display__ram">
+                {ramData.map((ram, index) => (
+                  <div key={index} onClick={() => {
+                    setSelectedData({
+                      ...selectedData,
+                      selectedRam: ram
+                    });
+                    setDisplayDropdown("");
+                  }} className="brand__lists d-flex align-items-center gap-2">
+                    <div>
                       <div>
-                        <div>
-  
-                        </div>
+
                       </div>
-                      <li >
-                        {ram} GB
-                      </li>
                     </div>
-                  ))}
-                </div>
-              )
-              }
-            </div>
-            <div ref={(node) => setDropdownRef("storage", node)} className="position-relative">
-              <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
-                if (displayDropdown === "storage") {
-                  setDisplayDropdown("");
-                } else {
-                  setDisplayDropdown("storage")
-                }
-              }}>
-                {selectedData.selectedStorage === ""?"Storage": `${selectedData.selectedStorage} GB`}
-                <ChevronRight />
+                    <li >
+                      {ram} GB
+                    </li>
+                  </div>
+                ))}
               </div>
-              {displayDropdown === "storage" && (
-                <div className="display__ram">
-                  {storageData.map((storage, index) => (
-                    <div key={index} onClick={() => {
-                      setSelectedData({
-                        ...selectedData,
-                        selectedStorage: storage
-                      });
-                      setDisplayDropdown("");
-                    }} className="brand__lists d-flex align-items-center gap-2">
-                      <div>
-                        <div>
-  
-                        </div>
-                      </div>
-                      <li >
-                        {storage} GB
-                      </li>
-                    </div>
-                  ))}
-                </div>
-              )
+            )
+            }
+          </div>
+          <div ref={(node) => setDropdownRef("storage", node)} className="position-relative">
+            <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
+              if (displayDropdown === "storage") {
+                setDisplayDropdown("");
+              } else {
+                setDisplayDropdown("storage")
               }
+            }}>
+              {selectedData.selectedStorage === ""?"Storage": `${selectedData.selectedStorage} GB`}
+              <div>
+               {selectedData.selectedStorage !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedStorage: "" })} /> } 
+              {displayDropdown === "storage" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
             </div>
+            {displayDropdown === "storage" && (
+              <div className="display__ram">
+                {storageData.map((storage, index) => (
+                  <div key={index} onClick={() => {
+                    setSelectedData({
+                      ...selectedData,
+                      selectedStorage: storage
+                    });
+                    setDisplayDropdown("");
+                  }} className="brand__lists d-flex align-items-center gap-2">
+                    <div>
+                      <div>
+
+                      </div>
+                    </div>
+                    <li >
+                      {storage} GB
+                    </li>
+                  </div>
+                ))}
+              </div>
+            )
+            }
+          </div>
             {/* <select className="form-control select-inputs">
               <option>Storage</option>
               <option>128 GB</option>
             </select> */}
             <div ref={(node) => setDropdownRef("camera", node)} className="position-relative">
-              <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
-                if (displayDropdown === "camera") {
-                  setDisplayDropdown("");
-                } else {
-                  setDisplayDropdown("camera")
-                }
-              }}>
-                Camera
-                <ChevronRight />
-              </div>
-              {displayDropdown === "camera" && (
-                <div className="display__brands">
-                  <input type="number"/>
-                </div>
-              )
+            <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
+              if (displayDropdown === "camera") {
+                setDisplayDropdown("");
+              } else {
+                setDisplayDropdown("camera")
               }
+            }}>
+             {selectedData.selectedBackCam === ""?"Back Camera": `${selectedData.selectedBackCam} MP`}
+             <div>
+               {selectedData.selectedBackCam !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedBackCam: "" })} /> } 
+              {displayDropdown === "camera" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
             </div>
+            {displayDropdown === "camera" && (
+              <div className="display__camera">
+                  <input type="number" onChange={(e) => setBackCam(e.target.value)} value={backCam} min="1" max="100" placeholder="Enter Back Camera MP" className="form-control"/>
+                  <button className="cam__btn" onClick={()=>{setSelectedData({...selectedData, selectedBackCam: backCam}); setDisplayDropdown("")}}>Submit</button>
+              </div>
+            )
+            }
+          </div>
           </Col>
           )
 

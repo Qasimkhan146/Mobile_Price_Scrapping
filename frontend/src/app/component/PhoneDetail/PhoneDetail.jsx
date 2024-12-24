@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import image1 from "../../../../public/images/iphone.webp"
 import "./PhoneDetail.css";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMobileDetail, selectMobileDetail } from "../../../../redux/mobileSlicer";
@@ -14,7 +15,7 @@ const PhoneDetail = () => {
   useEffect(() => {
     setInterval(() => {
       setLoading(false)
-    }, [5000])
+    }, [3000])
   })
 
   const mobileDetail = useSelector(selectMobileDetail);
@@ -25,7 +26,7 @@ const PhoneDetail = () => {
   useEffect(() => {
     dispatch(fetchMobileDetail(modelName));
   }, [dispatch]);
-  console.log(mobileDetail, "mobileDetail");
+  // console.log(mobileDetail, "mobileDetail");
   const features = mobileDetail?.mobile?.Features.split(",").map((feature) => feature.trim());
   const Sound = mobileDetail?.mobile?.Audio.split(",").map((feature) => feature.trim());
   const cam = mobileDetail?.mobile?.Front.split(",").map((feature) => feature.trim());
@@ -38,7 +39,10 @@ const PhoneDetail = () => {
     return text?.length > limit ? text?.slice(0, limit) + "..." : text;
   };
   if (loading) return (
-    <DotLottieReact src="https://lottie.host/03dab9c6-46e8-4820-8d3f-ddaf145da57d/mAwu9NOErZ.lottie" loop autoplay />)
+    <div className="loading__class">
+    <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{width: "200px", height: "200px"}} loop autoplay />
+    </div>
+    )
   return (
     <section>
       <div className="col-xl-12 mt-3">
@@ -175,7 +179,7 @@ const PhoneDetail = () => {
             <h3 className="text-center mt-2 mb-2">Prices on Different Platforms</h3>
             <table className="table border-1 d-none d-md-table table-striped">
               {/* <caption>More Results</caption> */}
-              <thead className="content__head">
+              <thead className="content__heads">
                 <tr>
                   {/* <th scope="col">Mobiles</th> */}
                   {/* Dynamically render <th> for each source */}
@@ -185,7 +189,7 @@ const PhoneDetail = () => {
                     </th>
                   ))}
                   <th scope="col">MobileMate</th>
-                  <th scope="col">PriceOye.com.pk</th>
+                  <th scope="col">PriceOye</th>
                 </tr>
               </thead>
               <tbody>
