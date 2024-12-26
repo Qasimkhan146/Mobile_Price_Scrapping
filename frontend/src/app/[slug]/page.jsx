@@ -1,6 +1,6 @@
 "use client";
 import React from 'react'
-import PhoneDetail from '../../component/PhoneDetail/PhoneDetail';
+import PhoneDetail from '../component/PhoneDetail/PhoneDetail';
 
 const page = () => {
   return (

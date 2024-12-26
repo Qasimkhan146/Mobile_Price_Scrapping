@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetch10LatestMobiles, selectFetch10Mobiles, selectError } from "../../../../redux/mobileSlicer";
 import slugify from 'slugify';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import Link from "next/link";
-import { toast } from 'react-toastify';
 
 
 const ContentArea = ({ mobiles }) => {
@@ -65,9 +63,9 @@ const ContentArea = ({ mobiles }) => {
         </tr>
       </thead>
           <tbody>
-            { fetch10Mobiles.length > 0 && fetch10Mobiles.map((mobile, index) => (
+            {fetch10Mobiles.length > 0 && fetch10Mobiles.map((mobile, index) => (
               <tr key={index} className="content__tr">
-                <th scope="row"><Link href={`/Mobile/${generateSlug(mobile.mobile.model)}`}>{mobile.mobile.model}</Link></th>
+                <th scope="row"><a target="_blank" href={`/${generateSlug(mobile.mobile.model)}`}>{mobile.mobile.model}</a></th>
                 {mobile.prices.map((price, index) => (
                 <td key={index}><a target="_blank" href={price.href}>{price.price} PKR</a></td>
                 ))}
