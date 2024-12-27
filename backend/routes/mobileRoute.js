@@ -1,5 +1,5 @@
 import express from "express";
-import { createMobile, fetch10LatestMobilesWithPrices, fetchMobileFilters, fetchSearchMobile, fetchSingleMobilePrice } from "../controller/mobileController.js";
+import { createMobile, fetch10LatestMobilesWithPrices, fetchAdvanceSearchApi, fetchMobileFilters, fetchSearchMobile, fetchSingleMobilePrice } from "../controller/mobileController.js";
 import { upload } from "../config/cloudinaryConfig.js";
 
 const mobileRouter = express.Router();
@@ -8,6 +8,7 @@ const mobileRouter = express.Router();
 mobileRouter.get("/fetchSingleMobile/:model", fetchSingleMobilePrice);
 mobileRouter.get("/searchMobile",fetchSearchMobile);
 mobileRouter.get("/fetch10LatestMobiles", fetch10LatestMobilesWithPrices);
+mobileRouter.get("/fetchAdvanceFilters", fetchAdvanceSearchApi);
 mobileRouter.post("/createMobile",upload.single("image"), createMobile);
 mobileRouter.get("/mobileFilters",fetchMobileFilters);
 export default mobileRouter;
