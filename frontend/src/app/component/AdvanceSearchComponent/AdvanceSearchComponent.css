@@ -1,0 +1,27 @@
+.advance__search__slider__div >div .rc-slider-handle{
+    width: 26px;
+    height: 26px;
+    margin-top: -10px;
+    background-color: #d63563;
+    opacity: 1;
+  }
+  .advance__search__slider__div >div .slider__inputs{
+    padding-left: 0px;
+  }
+  .advance__search__slider__div >div .slider__input{
+    padding-right: 0px;
+  
+  }
+  .advance__search__slider__div >div .rc-slider{
+    width: 100%;
+  }
+  .advance__search__slider__div >div .rc-slider-track {
+      height: 10px;
+      background-color: #f30b4d; /* Change to your desired color */
+    }
+    
+    /* Change the color of the slider rail (full range background) */
+    .advance__search__slider__div >div  .rc-slider-rail {
+      height: 10px;
+      /* background-color: #fff !important; Change to your desired color */
+    }

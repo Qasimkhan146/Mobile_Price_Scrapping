@@ -4,6 +4,7 @@ import ClientLayout from "./ClientLayout"
 import { ToastContainer } from 'react-toastify';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "./component/Footer/Footer";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -11,6 +12,8 @@ export default function RootLayout({ children }) {
         <ClientLayout>
         <Header/>
         {children}
+        <ToastContainer/>
+        <Footer/>
         </ClientLayout>
       </body>
     </html>
