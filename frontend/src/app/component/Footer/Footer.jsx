@@ -1,8 +1,12 @@
 import "./Footer.css";
+import Logo from "../../../../public/images/MOBILE PRI.png"
+import Image from "next/image";
+
 const Footer = () =>{
     return(
         <div className="footer d-flex justify-content-around">
-            <h1>Pricing</h1>
+        <Image src={Logo} className='logoImg' alt='logo' width={200} height={10} style={{height:"70px"}}/>
+            
             <div>
                 <h3>Brands</h3>
                 <p>Apple</p>

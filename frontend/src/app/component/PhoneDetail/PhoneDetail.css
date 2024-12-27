@@ -56,18 +56,18 @@
     .image__spec__container{
         width: 50% !important;
     }
-    .table__container{
+    /* .table__container{
         width: 75% !important;
-    }
+    } */
     .detail__features{
         width: auto !important;
     }
     .product__all__specs{
         width: 25% !important;
     }
-    .product__specs{
+    /* .product__specs{
         width: 75% !important;
-    }
+    } */
     
 }
 @media screen and (max-width: 550px) {

@@ -47,6 +47,16 @@
     color: #e0134e;
     border-radius: 40px !important;
   }
+  .logo span{
+   color: #fff;
+  }
+  .logo{
+    color: #040002;
+    font-weight: 650;
+  }
+  .logo:hover{
+   color: #040002;
+  }
   form .btn{
     color: #e0134e;
     background: #fff;
