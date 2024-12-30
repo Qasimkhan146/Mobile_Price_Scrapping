@@ -4,7 +4,7 @@ import fs from "fs";
 // Fetch page prodcuts data
 const fetchPageProducts = async (url) => {
   try {
-    const html = await axios.get("https://priceoye.pk/mobiles?page=1");
+    const html = await axios.get(url);
     const $ = load(html.data);
 
     // Select all the product boxes
@@ -41,15 +41,9 @@ const fetchPageProducts = async (url) => {
 
 const main = async () => {
   try {
-    const html = await axios.get("https://priceoye.pk/mobiles?page=1");
-    const $ = load(html.data);
-    const nextButton = $("#next-button");
-    const previousDiv = nextButton.closest("a").prev("a");
-
-    const numberOfPages = Number(previousDiv.text().trim());
     const totalProducts = [];
 
-    const promises = Array.from({ length: numberOfPages }, (_, i) => {
+    const promises = Array.from({ length: 23 }, (_, i) => {
       return fetchPageProducts(`https://priceoye.pk/mobiles?page=${i + 1}`);
     });
     const allResults = await Promise.all(promises);
