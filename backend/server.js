@@ -30,7 +30,7 @@ app.use("/mobile",mobileRouter);
 app.use("/brand",brandRouter);
 app.use("/auth",authRoute);
 app.use("/admin",adminRoute);
-const port = 4500;
+const port = 4501;
 app.listen(port, ()=>{
     console.log(`server is running on port ${port}`)
 })
