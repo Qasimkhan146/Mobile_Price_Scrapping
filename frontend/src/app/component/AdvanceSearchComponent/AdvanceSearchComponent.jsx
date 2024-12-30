@@ -6,12 +6,20 @@ import { Form } from "react-bootstrap";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import "./AdvanceSearchComponent.css";
+import { useParams, useSearchParams } from 'next/navigation';
 
 const AdvanceSearchComponent = () => {
+    const searchParams = useSearchParams();
+    const queryTitle = searchParams.get('title');
+    const queryBrand = searchParams.get('brand');
     const [ramRange, setRamRange] = useState([2, 32]);
     const [storageRange, setStorageRange] = useState([16, 1024]);
     const [priceRange, setPriceRange] = useState([0, 700000]);
     const [backCamRange, setBackCamRange] = useState([4, 50]);
+    
+    console.log(queryTitle, "Query Title");
+    
+
     const handleRamChange = (values) => {
         // console.log(values, "Values");
     
@@ -37,10 +45,10 @@ const AdvanceSearchComponent = () => {
         // fetchAds();
       };
     return (
-        <div className="d-flex">
+        <div className="d-flex py-5 min-vh-100">
         <div className="col-lg-3 border border-2 p-4 rounded h-50">
             <form >
-              <div className="d-flex align-items-center justify-content-between flex-row">
+              <div className="d-flex align-items-center justify-content-between flex-row mb-2">
                 <h5>Search Filters</h5>
                 <div className='d-flex align-items-center gap-2 flex-row'>
                 <LuRefreshCw  className='cursor-pointer' size={18} />
@@ -145,8 +153,8 @@ const AdvanceSearchComponent = () => {
                 </div>
                 <hr />
               </div>
-              <div className='w-100'>
-              <button type="submit" className="btn btn-primary mt-3 w-100"
+              <div className='w-100 advance__btn'>
+              <button type="submit" className="btn  mt-3 w-100"
             //    onClick={handleSearchBtn}
                >Search</button>
               </div>

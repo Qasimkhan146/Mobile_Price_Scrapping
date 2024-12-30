@@ -1,3 +1,4 @@
+
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -46,7 +47,7 @@ const PhoneDetail = () => {
   return (
     <section>
       <div className="col-xl-12 mt-3">
-        <div className="d-flex  p-2 flex-column flex-lg-row justify-content-evenly align-items-center">
+        <div className="d-flex  p-2 flex-column flex-lg-row justify-content-between align-items-center">
           <div className="w-100 justify-content-between d-none d-md-flex flex-row flex-lg-column gap-4 detail__features mb-lg-0 mb-3 mt-lg-0 mt-3">
             <div className="">
               <h5>Network</h5>
@@ -226,9 +227,9 @@ const PhoneDetail = () => {
           </div>
         </div>
         <div className="d-flex flex-column flex-lg-row gap-4 mt-4">
-          <div className="w-100 border product__all__specs">
+          {/* <div className="w-100 border product__all__specs">
             ad section
-          </div>
+          </div> */}
           <div className="w-100 product__specs d-flex flex-column border">
           <h3 className="w-100 spec-head-div ">Network</h3>
             <div className="p-3 w-100 d-flex align-items-start">

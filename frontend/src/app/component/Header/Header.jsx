@@ -7,12 +7,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import "./NavBar.css";
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Logo from "../../../../public/images/MOBILE PRI.png"
+import Image from "next/image";
 
 function Header() {
   return (
     <Navbar expand="lg" variant='light' className=' drop-shadow-[10px_10px_10px_rgba(9,9,9,0.1)]'>
       <Container fluid>
-        <Navbar.Brand href="#">Pricing.pk</Navbar.Brand>
+        <Image src={Logo} className='logoImg' alt='logo' width={100} height={100}/>
+        {/* <Navbar.Brand href="/" className='logo'><span>M</span>obile<span>P</span>rice</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="navbar" />
         <Navbar.Collapse id="navbar" className='justify-content-end'>
           
