@@ -73,3 +73,29 @@ form >div h5{
     font-size: 20px;
     color: #e0134e; 
 }
+.mobile__card > div > div h3{
+    font-size: 22px;
+    font-weight: 650;
+}
+.mobile__card{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    border-radius: 8px;
+}
+.mobile__card > div > div p{
+    font-size: 18px;
+    font-weight: 500;
+}
+.total__results{
+    font-size: 26px;
+    font-weight: 500;
+}
+.price__head tr th {
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
+    padding: 10px;
+    background-color: #e0134e;
+}
+.content__tr td{
+    font-weight: 500;
+}

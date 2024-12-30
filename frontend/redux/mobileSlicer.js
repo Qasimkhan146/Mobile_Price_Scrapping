@@ -67,6 +67,23 @@ export const fetchFilterMobiles = createAsyncThunk(
     }
   }
 );
+export const fetchAdvanceFilters = createAsyncThunk(
+  "mobile/fetchAdvanceFilters",
+  async ({brand,model,minRam,maxRam,minRom,maxRom,min_Back_Cam,max_Back_Cam,minPrice,maxPrice}, { rejectWithValue }) => {
+    try {
+      
+      const response = await fetch(
+        `https://7842.mobileprice.biz.pk/mobile/fetchAdvanceFilters?brand=${brand}&model=${model}&minRam=${minRam}&maxRam=${maxRam}&minRom=${minRom}&maxRom=${maxRom}&min_Back_Cam=${min_Back_Cam}&max_Back_Cam=${max_Back_Cam}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+        
+      );
+      const data = await response.json();
+      console.log("Filter Data", data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 
 const mobileSlice = createSlice({
@@ -76,7 +93,9 @@ const mobileSlice = createSlice({
     fetch10Mobiles: [],
     mobileDetail: null,
     filterMobiles : [],
+    advanceFilterMobiles:[],
     brandData:[],
+
     error: null,
   },
   reducers: {},
@@ -125,6 +144,18 @@ const mobileSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+      .addCase(fetchAdvanceFilters.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAdvanceFilters.fulfilled, (state, action) => {
+        state.loading = false;
+        state.advanceFilterMobiles = action.payload;
+      })
+      .addCase(fetchAdvanceFilters.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       
   },
 });
@@ -134,4 +165,5 @@ export const selectMobileDetail = (state) => state.mobile.mobileDetail;
 export const selectAllBrands = (state) => state.mobile.brandData;
 export const filterMobiles = (state) => state.mobile.filterMobiles;
 export const selectError = (state) => state.mobile.error;
+export const selectAdvanceFilterMobiles = (state) => state.mobile.advanceFilterMobiles;
 export default mobileSlice.reducer;
