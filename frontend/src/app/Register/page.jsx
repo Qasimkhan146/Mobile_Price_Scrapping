@@ -11,9 +11,9 @@ const Register = () => {
   const router = useRouter();
   const { loading, error, user } = useSelector((state) => state.user);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
