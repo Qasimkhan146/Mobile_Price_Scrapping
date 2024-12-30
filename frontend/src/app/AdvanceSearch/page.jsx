@@ -1,10 +1,12 @@
-import AdvanceSearchComponent from "../component/AdvanceSearchComponent/AdvanceSearchComponent"
+import React, { Suspense } from "react";
+import AdvanceSearchComponent from "../component/AdvanceSearchComponent/AdvanceSearchComponent";
 
 const AdvanceSearch = () => {
-    return (
-        <div>
-            <AdvanceSearchComponent/>
-        </div>
-    )
-}
-export default AdvanceSearch
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AdvanceSearchComponent />
+    </Suspense>
+  );
+};
+
+export default AdvanceSearch;
