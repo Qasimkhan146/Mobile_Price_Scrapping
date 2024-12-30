@@ -6,18 +6,27 @@ import { Form } from "react-bootstrap";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import "./AdvanceSearchComponent.css";
-import { useParams, useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 
 const AdvanceSearchComponent = () => {
-    const searchParams = useSearchParams();
-    const queryTitle = searchParams.get('title');
-    const queryBrand = searchParams.get('brand');
+    // const searchParams = useSearchParams();
+    // const queryTitle = searchParams.get('title');
+    // const queryBrand = searchParams.get('brand');
+    // const queryRamMin = searchParams.get('ramMin');
+    // const queryRamMax = searchParams.get('ramMax');
+    // const queryStorageMin = searchParams.get('storageMin');
+    // const queryStorageMax = searchParams.get('storageMax');
+    // const queryBackCamMin = searchParams.get('backCamMin');
+    // const queryBackCamMax = searchParams.get('backCamMax');
+    // const queryPriceMin = searchParams.get('minPrice');
+    // const queryPriceMax = searchParams.get('maxPrice');
     const [ramRange, setRamRange] = useState([2, 32]);
     const [storageRange, setStorageRange] = useState([16, 1024]);
     const [priceRange, setPriceRange] = useState([0, 700000]);
     const [backCamRange, setBackCamRange] = useState([4, 50]);
+//   const [searchQuery, setSearchQuery] = useState({ brand: queryBrand || '', title: queryTitle || '', city: queryCity || '', minPrice: queryPriceMin || 0, maxPrice: queryPriceMax || 700000 });
     
-    console.log(queryTitle, "Query Title");
+    // console.log(queryTitle, "Query Title");
     
 
     const handleRamChange = (values) => {

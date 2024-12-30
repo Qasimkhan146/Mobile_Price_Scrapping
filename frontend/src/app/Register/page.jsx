@@ -1,36 +1,36 @@
 "use client";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser, selectUserAuth } from "../../../redux/authSlicer";
+import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { registerUser, selectUserAuth } from "../../../redux/authSlicer";
 
 const Register = () => {
-  const dispatch = useDispatch();
-  const { loading, error } = useSelector(selectUserAuth);
+  // const dispatch = useDispatch();
+  // const { loading, error } = useSelector(selectUserAuth);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role: "admin"
-  });
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   role: "admin"
+  // });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    dispatch(registerUser(formData));
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (!formData.name || !formData.email || !formData.password) {
+  //     alert("Please fill in all fields.");
+  //     return;
+  //   }
+  //   dispatch(registerUser(formData));
+  // };
 
   return (
     <div>
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
@@ -59,7 +59,7 @@ const Register = () => {
           {loading ? "Registering..." : "Register"}
         </button>
       </form>
-      {error && <p style={{ color: "red" }}>{error.message}</p>}
+      {error && <p style={{ color: "red" }}>{error.message}</p>} */}
     </div>
   );
 };
