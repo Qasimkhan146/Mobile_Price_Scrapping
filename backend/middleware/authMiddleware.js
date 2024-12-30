@@ -11,17 +11,11 @@ export const authorizeRole = (requiredRole) =>{
 }
 
 export const authenticateToken = (req,res,next) =>{
-    let token ;
-    let authHeader = req.headers.authorization || req.headers.Authorization;
-    if(authHeader && authHeader.startsWith("Bearer ")){
-        token = authHeader.split(" ")[1];
+    try {
+        const token = req.cookies.token;
         if(!token){
             res.status(404).json({message:"access failed , token not found"})
         }
-    } 
-    // const token = req.headers.authorization?.split(" ")[1];
-    
-    try {
         const decoded = jwt.verify(token,process.env.JWT_SECRET);
         req.user = decoded;
         next();

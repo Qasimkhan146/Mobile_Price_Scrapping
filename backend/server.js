@@ -7,19 +7,22 @@ import mobileRouter from "./routes/mobileRoute.js";
 import brandRouter from "./routes/brandRoute.js";
 import adminRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
+import cookieParser from "cookie-parser";
 // import { downloadImages } from "./utills/script.js";
 
 connectDB();
 // downloadImages();
+
 const app = express();
 app.use(cors({
-    origin:"*",
-    credentials:true,
-    methods:["GET","POST"]
-}))
+    origin: "http://localhost:3000", // Frontend URL
+    credentials: true,              // Allow cookies
+    methods: ["GET", "POST"],       // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 //env
 dotenv.config();
 

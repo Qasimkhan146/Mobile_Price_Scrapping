@@ -4,7 +4,7 @@ import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.j
 const userRoute = Router();
 
 userRoute.get("/adminRoute",authenticateToken,authorizeRole("admin"),(req, res)=>{
-    res.status(200).json({message:"admin route"})
+    res.status(200).json({message:"admin route access granted"})
 } )
 
 export default userRoute;
