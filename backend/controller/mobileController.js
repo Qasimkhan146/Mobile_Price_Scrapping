@@ -127,6 +127,81 @@ export const fetch10LatestMobilesWithPrices = async (req, res) => {
       res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 };
+export const fetchAdvanceSearchApi = async (req, res) => {
+  try {
+    const threshold = 1; // Adjust similarity threshold as needed
+    const { model, brand, minRam,maxRam, minRom, maxRom, min_Back_Cam, max_Back_Cam,minPrice,maxPrice, page = 1, limit = 10 } = req.query;
+    const filterMobile = {};
+
+    if (model) {
+      filterMobile.model = new RegExp(model, "i");
+    }
+
+    if (brand) {
+      filterMobile.brand = new RegExp(brand, "i");
+    }
+
+    if(minRam && maxRam){
+      filterMobile.Ram = { $gte: parseInt(minRam), $lte: parseInt(maxRam) };
+    }
+    if(minRom && maxRom){
+      filterMobile.Rom = { $gte: parseInt(minRom), $lte: parseInt(maxRom) };
+    }
+    if(min_Back_Cam && max_Back_Cam){
+      filterMobile.Back_Cam = { $gte: parseInt(min_Back_Cam), $lte: parseInt(max_Back_Cam) };
+    }
+    if(minPrice && maxPrice){
+      filterMobile.price = { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) };
+    }
+
+    const totalMobiles = await Mobile.countDocuments(filterMobile);
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    const latestMobiles = await Mobile.find(filterMobile).sort({ createdAt: -1 }).skip(skip).limit(parseInt(limit));
+
+    if (!latestMobiles.length) {
+      return res.status(404).json({ message: "No mobiles found" });
+    }
+
+    const mobilesWithPrices = await Promise.all(
+      latestMobiles.map(async (mobile) => {
+        const allPrices = await Price.find();
+        const matchingPrices = allPrices.filter((price) => {
+          const similarity = stringSimilarity.compareTwoStrings(
+            mobile.model.toLowerCase(),
+            price.model.toLowerCase()
+          );
+          return similarity >= threshold;
+        });
+
+        return {
+          mobile,
+          prices: matchingPrices.map((price) => ({
+            source: price.source,
+            price: price.price,
+            href: price.href,
+            hrefName: price.hrefName,
+            brand: price.brand,
+            model: price.model,
+          })),
+        };
+      })
+    );
+
+    res.status(200).json({
+      data: mobilesWithPrices,
+      pagination: {
+        total: totalMobiles,
+        page: parseInt(page),
+        limit: parseInt(limit),
+        totalPages: Math.ceil(totalMobiles / limit),
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
 
 //create a new mobile
 export const createMobile = async (req, res) =>{
