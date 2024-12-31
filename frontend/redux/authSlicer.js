@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4500/auth';
+const API_URL = 'https://7842.mobileprice.biz.pk/auth';
 
 export const loginUser = createAsyncThunk('user/login', async (credentials, thunkAPI) => {
   try {
