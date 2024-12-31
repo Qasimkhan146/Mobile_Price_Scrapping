@@ -1,4 +1,6 @@
+"use client";
 import React, { Suspense } from "react";
+
 import AdvanceSearchComponent from "../component/AdvanceSearchComponent/AdvanceSearchComponent";
 
 const AdvanceSearch = () => {

@@ -24,7 +24,7 @@ const ContentArea = ({ mobiles }) => {
   useEffect(() => {
       dispatch(fetch10LatestMobiles());
   }, [dispatch]);
-  const sources = fetch10Mobiles[0]?.prices.map((price) => price.source);
+  const sources = fetch10Mobiles[1]?.prices.map((price) => price.source);
  
   useEffect(()=>{
     if(fetch10Mobiles?.message){

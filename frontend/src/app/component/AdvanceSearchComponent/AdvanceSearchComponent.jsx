@@ -7,19 +7,21 @@ import Slider from 'rc-slider';
 import Link from "next/link";
 import 'rc-slider/assets/index.css';
 import "./AdvanceSearchComponent.css";
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdvanceFilters, selectAdvanceFilterMobiles } from '../../../../redux/mobileSlicer';
 import { FormatListBulleted, Window } from "@mui/icons-material";
 import slugify from 'slugify';
-
+// import { useRouter } from "next/router";
 const AdvanceSearchComponent = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const generateSlug = (title) => {
         return `${slugify(title)}`;
       };
     const [displayView, setDisplayView] = useState("list");
     const advanceMobiles = useSelector(selectAdvanceFilterMobiles);
+    const [advanceData, setAdvanceData] = useState([]);
     const searchParams = useSearchParams();
     const queryModel = searchParams.get('model');
     const queryBrand = searchParams.get('brand');
@@ -33,17 +35,45 @@ const AdvanceSearchComponent = () => {
     const queryPriceMax = searchParams.get('maxPrice');
     const [brandName, setBrandName] = useState(queryBrand || "");
     const [modelName, setModelName] = useState(queryModel || "");
-    const [ramRange, setRamRange] = useState([queryRamMin || 2, queryRamMax || 32]);
+    const [ramRange, setRamRange] = useState([queryRamMin || 2, queryRamMax || 12]);
     const [storageRange, setStorageRange] = useState([queryStorageMin || 16, queryStorageMax || 1024]);
     const [priceRange, setPriceRange] = useState([queryPriceMin || 0, queryPriceMax || 700000]);
     const [backCamRange, setBackCamRange] = useState([queryBackCamMin || 4, queryBackCamMax || 50]);
     // const [searchQuery, setSearchQuery] = useState({ brand: queryBrand || '', model: queryModel || '', ramMin: queryRamMin || 2, ramMax: queryRamMax || 32, storageMin: queryStorageMin || 16, storageMax: queryStorageMax || 1024, backCamMin: queryBackCamMin || 4, backCamMax: queryBackCamMax || 50, minPrice: queryPriceMin || 0, maxPrice: queryPriceMax || 700000 });
+    const [page, setPage] = useState(1);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isSmallLaptop, setIsSmallLaptop] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1] }));
-    }, [dispatch]);
-    console.log(advanceMobiles, "Advance Mobiles");
+        const mediaQuery = window.matchMedia("(max-width: 1024px)");
+        const handleChange = () => setIsMobile(mediaQuery.matches);
 
+        handleChange(); // Set initial state
+        mediaQuery.addEventListener("change", handleChange);
+
+        return () => mediaQuery.removeEventListener("change", handleChange);
+    }, []);
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 1280px)");
+        const handleChange = () => setIsSmallLaptop(mediaQuery.matches);
+
+        handleChange(); // Set initial state
+        mediaQuery.addEventListener("change", handleChange);
+
+        return () => mediaQuery.removeEventListener("change", handleChange);
+    }, []);
+    useEffect(() => {
+        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page }));
+    }, [dispatch,page]);
+    // console.log(advanceMobiles, "Advance Mobiles");
+    // const addDataToAdvanceData = (newData) => {
+    //     setAdvanceData((prevData) => [...prevData, ...newData]);
+    // };
+    useEffect(() => {
+        if (advanceMobiles?.data?.length > 0) {
+            setAdvanceData((prevData) => [...prevData, ...advanceMobiles?.data]);
+        }
+    }, [advanceMobiles]);
 
     const handleRamChange = (values) => {
         setRamRange(values);
@@ -65,11 +95,30 @@ const AdvanceSearchComponent = () => {
     };
     const handleSearch = (e) => {
         e.preventDefault();
-        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1] }))
+        setAdvanceData([]);
+        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1],page: page }))
+        const params = new URLSearchParams(searchParams); // Clone existing query parameters
+        params.set("brand", brandName);
+        params.set("model", modelName);
+        params.set("minRam", ramRange[0]);
+        params.set("maxRam", ramRange[1]);
+        params.set("storageMin", storageRange[0]);
+        params.set("storageMax", storageRange[1]);
+        params.set("backCamMin", backCamRange[0]);
+        params.set("backCamMax", backCamRange[1]);
+        params.set("minPrice", priceRange[0]);
+        params.set("maxPrice", priceRange[1]);
+        router.push(`/AdvanceSearch?${params.toString()}`);
     }
+    console.log(advanceData, "Advance Mobiles");
+    
     return (
-        <div className="d-flex py-5 min-vh-100 gap-4">
-            <div className="col-lg-3 border border-2 p-4 rounded h-50">
+        <>
+        <div className='mt-4 mb-4'>
+       {brandName === "" && modelName ==="" &&<h1>Latest Mobile Price in Pakistan</h1>} {(brandName !== "" || modelName !=="") && <h1>{ramRange[0]} GB {brandName} {modelName}  Mobile Price in Pakistan</h1>}
+       </div>
+        <div className={`d-flex ${isMobile ? "flex-column" : "flex-row"} py-1 min-vh-100 gap-4 mb-4`}>
+            <div className={`${isMobile ? "col-12" : "col-3"} border border-2 p-4 rounded h-50 `}>
                 <form onSubmit={handleSearch}>
                     <div className="d-flex align-items-center justify-content-between flex-row mb-2">
                         <h5>Search Filters</h5>
@@ -109,7 +158,7 @@ const AdvanceSearchComponent = () => {
                                     <Slider
                                         range
                                         min={2}
-                                        max={32}
+                                        max={12}
                                         step={2}
                                         value={ramRange}
                                         onChange={handleRamChange}
@@ -189,14 +238,14 @@ const AdvanceSearchComponent = () => {
                     <div>
                         <h3 className='total__results'>Total Results:{advanceMobiles?.pagination?.total}</h3>
                     </div>
-                    <div className='d-none gap-2'>
+                    {/* <div className={`gap-2 ${isMobile ?"d-none":"d-flex"}`}>
                         <button onClick={() => setDisplayView("list")}> <FormatListBulleted sx={{ fontSize: 35, color: displayView === "list" ? "#fff" : "#111", background: displayView === "list" ? "#000" : "#fff", borderRadius: "10px" }} /> </button>
                         <button onClick={() => setDisplayView("grid")}><Window sx={{ fontSize: 35, color: displayView === "grid" ? "#fff" : "#111", background: displayView === "grid" ? "#000" : "#fff", borderRadius: "10px" }} /></button>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={`d-flex flex-wrap mt-2 justify-content-between gap-3 ${displayView === "list" ? "flex-column" : "flex-row"}`}>
 
-                    {advanceMobiles && advanceMobiles?.data?.length > 0 && advanceMobiles.data.map((mobile, index) => (
+                    {advanceData && advanceData?.length > 0 && advanceData.map((mobile, index) => (
                         <div key={index} className={`mobile__card p-2 ${displayView === "list" ? "w-100" : "w-[48%]"} gap-2`}>
                             <div className=' gap-2 p-2 d-flex ' >
 
@@ -213,7 +262,7 @@ const AdvanceSearchComponent = () => {
                                         <p><b>Storage:</b> {mobile.mobile.Rom} GB</p>
                                         <Link className='font-bold underline' href={`/Mobile/${generateSlug(mobile.mobile.model)}`}>More Details</Link>
                                     </div>
-                                    {displayView === "list" && <div>
+                                    {(displayView === "list" && !isSmallLaptop) && <div>
                                         <p><b>Front Camera:</b> {mobile.mobile.front_Cam} MP</p>
                                         <p><b>Chipset:</b> {mobile.mobile.Chipset}</p>
                                         <p><b>Battery:</b> {mobile.mobile.Capacity} MAH</p>
@@ -231,8 +280,6 @@ const AdvanceSearchComponent = () => {
                                                 {source.source}
                                             </th>
                                         ))}
-                                        <th scope="col">MobileMate</th>
-                                        <th scope="col">PriceOye</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -240,8 +287,6 @@ const AdvanceSearchComponent = () => {
                                         {mobile && mobile?.prices?.map((mobile, index) => (
                                             <td key={index}><a target="_blank" href={mobile.href}>{mobile.price} PKR</a></td>
                                         ))}
-                                        <td>Coming Soon</td>
-                                        <td>Coming Soon</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -249,9 +294,13 @@ const AdvanceSearchComponent = () => {
                         </div>
                     ))}
                 </div>
+                <div className='d-flex justify-content-center'>
+                <button className={`load__more__btn mb-3 mt-3 ${page === advanceMobiles?.pagination?.totalPages ? "d-none" : ""}`} onClick={()=>setPage(page+1)}>Load More</button>
+                </div>
             </div>
 
         </div>
+        </>
     )
 }
 export default AdvanceSearchComponent
