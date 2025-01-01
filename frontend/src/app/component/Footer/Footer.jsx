@@ -1,35 +1,35 @@
 import "./Footer.css";
 import Logo from "../../../../public/images/MOBILE PRI.png"
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () =>{
     return(
         <div className="footer flex-md-row flex-column text-center d-flex justify-content-around">
-        <Image src={Logo} className='logoImg' alt='logo' width={200} height={10} style={{height:"70px"}}/>
+       <Link href="/"> <Image src={Logo} className='logoImg' alt='logo' width={200} height={10}/> </Link>
             
-            <div>
+            <div className="d-flex flex-column">
                 <h3>Brands</h3>
-                <p>Apple</p>
-                <p>Samsung</p>
-                <p>Huawei</p>
-                <p>Google</p>
-                <p>Xiaomi</p>
-                <p>Vivo</p>
+                <Link href="/AdvanceSearch?brand=Apple">Apple</Link>
+                <Link href="/AdvanceSearch?brand=Samsung">Samsung</Link>
+                <Link href="/AdvanceSearch?brand=Huawei">Huawei</Link>
+                <Link href="/AdvanceSearch?brand=Google">Oppo</Link>
+                <Link href="/AdvanceSearch?brand=Xiaomi">Xiaomi</Link>
+                <Link href="/AdvanceSearch?brand=Vivo">Vivo</Link>
             </div>
-            <div>
+            <div className="d-flex flex-column">
                 <h3>Models</h3>
-                <p>Iphone 16 Pro Max</p>
-                <p>S25 Ultra</p>
-                <p>P30 Pro</p>
-                <p>Pixel 9 Pro</p>
-                <p>Redmi Note 14 Pro</p>
-                <p>V30 Pro</p>
+                <Link href="/AdvanceSearch?model=Iphone+16+Pro+Max">Iphone 16 Pro Max</Link>
+                <Link href="/AdvanceSearch?model=Galaxy+S24">Galaxy S24</Link>
+                <Link href="/AdvanceSearch?model=P30+Pro">P30 Pro</Link>
+                <Link href="/AdvanceSearch?model=OPPO+RENO+11">OPPO RENO 11</Link>
+                <Link href="/AdvanceSearch?model=XIAOMI+REDMI+10">XIAOMI REDMI 10</Link>
+                <Link href="/AdvanceSearch?model=VIVO+X70+PRO">VIVO X70 PRO</Link>
             </div>
-            <div>
+            <div className="d-flex flex-column">
                 <h3>Pages</h3>
-                <p>Home</p>
-                <p>Brands</p>
-                <p>Models</p>
+                <Link href="/">Home</Link>
+                <Link href="/AdvanceSearch">AdvanceSearch</Link>
             </div>
         </div>
     );

@@ -49,6 +49,35 @@ export const fetchAllBrands = createAsyncThunk(
     }
   }
 );
+export const editMobile = createAsyncThunk(
+  "mobile/editMobile",
+  async ({ model, updatedData }, { rejectWithValue }) => {
+    try {
+      console.log(model,"Model");
+      
+      const response = await fetch(
+        `https://7842.mobileprice.biz.pk/mobile/updateMobile/${model}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const fetchFilterMobiles = createAsyncThunk(
   "mobile/fetchFilterMobiles",
   async ({brand}, { rejectWithValue }) => {
