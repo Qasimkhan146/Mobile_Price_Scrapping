@@ -26,7 +26,7 @@ const Footer = () =>{
                 <Link href="/AdvanceSearch?model=XIAOMI+REDMI+10">XIAOMI REDMI 10</Link>
                 <Link href="/AdvanceSearch?model=VIVO+X70+PRO">VIVO X70 PRO</Link>
             </div>
-            <div>
+            <div className="d-flex flex-column">
                 <h3>Pages</h3>
                 <Link href="/">Home</Link>
                 <Link href="/AdvanceSearch">AdvanceSearch</Link>
