@@ -85,6 +85,13 @@ form >div h5{
     font-size: 18px;
     font-weight: 500;
 }
+.load__more__btn{
+    background-color: #e0134e;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px;
+}
 .total__results{
     font-size: 26px;
     font-weight: 500;
@@ -98,4 +105,8 @@ form >div h5{
 }
 .content__tr td{
     font-weight: 500;
+}
+h1{
+    font-size: 26px;
+    font-weight: 600;
 }

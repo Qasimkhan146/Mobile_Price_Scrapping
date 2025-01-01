@@ -12,7 +12,7 @@ import { ChevronRight, Clear, ExpandMore, FilterAlt } from "@mui/icons-material"
 
 
 
-const ramData = ["2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24"];
+const ramData = ["2", "4", "6", "8", "10", "12"];
 const storageData = ["32", "64", "128", "256", "512", "1024"];
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const HeroSection = () => {
     <Container>
       <Row className="mt-4">
       <div className="w-100 d-flex justify-content-end d-block d-lg-none"><FilterAlt onClick={()=>setDisplayFilter(!displayFilter)} sx={{ fontSize: 40, color: '#ee1351', cursor:"pointer"}}/></div>
-        <Col className="d-none d-lg-flex gap-2 brands__div">
+        <Col className="d-none d-lg-flex gap-2 brands__div flex-wrap">
           <div ref={(node) => setDropdownRef("brand", node)} className="position-relative">
             <div  className="select-inputs  d-flex flex-row justify-content-between align-items-center" onClick={() => {
               if (displayDropdown === "brand") {
@@ -173,7 +173,7 @@ const HeroSection = () => {
               </div>
             </div>
             {displayDropdown === "storage" && (
-              <div className="display__ram">
+              <div className="display__storage">
                 {storageData.map((storage, index) => (
                   <div key={index} onClick={() => {
                     setSelectedData({
@@ -242,7 +242,7 @@ const HeroSection = () => {
               </div>
             </div>
             {displayDropdown === "brand" && (
-              <div  className="display__brands">
+              <div  className="display__brand">
                 {fetchBrands?.length > 0 && fetchBrands.map((brand, index) => (
                   <div key={index} onClick={() => {
                     setSelectedData({
@@ -389,6 +389,10 @@ const HeroSection = () => {
             )
             }
           </div>
+          <div className="d-flex justify-content-start">
+            <button className="clear__filter" onClick={() => setSelectedData({selectBrand:"", selectedRam:"", selectedStorage:"", selectedBackCam:"", selectedModel:""})}>Clear All Filter</button>
+            </div>
+
           </Col>
           )
 

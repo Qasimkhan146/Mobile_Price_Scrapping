@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetch10LatestMobiles = createAsyncThunk(
   "mobile/fetchCreateMobile",
-  async ({brand,Ram,Rom,Back_Cam,model}, { rejectWithValue }) => {
+  async ({brand,Ram,Rom,Back_Cam,model, page}, { rejectWithValue }) => {
     try {
       const response = await fetch(
         `https://7842.mobileprice.biz.pk/mobile/fetch10LatestMobiles?brand=${brand}&Ram=${Ram}&Rom=${Rom}&Back_Cam=${Back_Cam}&model=${model}`
@@ -69,11 +69,12 @@ export const fetchFilterMobiles = createAsyncThunk(
 );
 export const fetchAdvanceFilters = createAsyncThunk(
   "mobile/fetchAdvanceFilters",
-  async ({brand,model,minRam,maxRam,minRom,maxRom,min_Back_Cam,max_Back_Cam,minPrice,maxPrice}, { rejectWithValue }) => {
+  async ({brand,model,minRam,maxRam,minRom,maxRom,min_Back_Cam,max_Back_Cam,minPrice,maxPrice,page}, { rejectWithValue }) => {
     try {
+      // console.log();
       
       const response = await fetch(
-        `https://7842.mobileprice.biz.pk/mobile/fetchAdvanceFilters?brand=${brand}&model=${model}&minRam=${minRam}&maxRam=${maxRam}&minRom=${minRom}&maxRom=${maxRom}&min_Back_Cam=${min_Back_Cam}&max_Back_Cam=${max_Back_Cam}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+        `https://7842.mobileprice.biz.pk/mobile/fetchAdvanceFilters?brand=${brand}&model=${model}&minRam=${minRam}&maxRam=${maxRam}&minRom=${minRom}&maxRom=${maxRom}&min_Back_Cam=${min_Back_Cam}&max_Back_Cam=${max_Back_Cam}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}`
         
       );
       const data = await response.json();

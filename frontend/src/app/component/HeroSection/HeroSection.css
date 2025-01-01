@@ -43,9 +43,38 @@
     gap: 10px;
     top: 120%;
     padding: 20px;
+    z-index: 10;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
     background-color: #fff;
+  }
+  .display__brand{
+    position: absolute;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    top: 120%;
+    padding: 20px;
+    z-index: 10;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    background-color: #fff;
+    
+  }
+  .display__storage{
+    position: absolute;
+    width: 150%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    top: 120%;
+    padding: 20px;
+    z-index: 10;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    background-color: #fff;
+    
   }
   .brands__divs >div .display__ram{
     position: absolute;
@@ -82,7 +111,7 @@
   }
   .display__ram{
     position: absolute;
-    width: 300%;
+    width: 200%;
     display: grid;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
