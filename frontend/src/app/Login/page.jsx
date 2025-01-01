@@ -64,14 +64,7 @@ const Login = () => {
           </button>
         </form>
         {error && <p className="text-red-500 text-center mt-4">{error.message}</p>}
-        <div className="text-center text-gray-600">
-          <p>
-            Don't have an account?{" "}
-            <a href="/Register" className="text-blue-600 hover:text-blue-700 font-medium">
-              Register
-            </a>
-          </p>
-        </div>
+        
       </div>
     </div>
   );
