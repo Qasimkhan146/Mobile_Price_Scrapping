@@ -8,7 +8,23 @@
 .content__tr {
     height: 60px;
 }
-
+.main-description-1{
+    background-color: #e5e3e3;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+  }
+  .description-ul{
+    list-style: none;
+    padding: 8px;
+    margin: 0px;
+    background-color: #e5e3e3;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+    margin-bottom: 18px;
+  }
+  .description-ul .description-para{
+    font-size: small;
+    font-weight: 600;
+  
+  }
 .detail__features h5 {
     font-weight: 700;
     font-size: 19px;
