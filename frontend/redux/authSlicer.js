@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4501/auth';
+// const API_URL = 'http://localhost:4501/auth';
+const API_URL = 'https://7842.mobileprice.biz.pk/auth';
 
 // Initialize from localStorage
 const savedUser = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : null;
