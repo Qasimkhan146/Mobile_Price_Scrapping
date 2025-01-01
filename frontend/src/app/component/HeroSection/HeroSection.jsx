@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ContentArea from "../ContentArea/ContentArea";
 import { ChevronRight, Clear, ExpandMore, FilterAlt } from "@mui/icons-material";
+import Link from "next/link";
 
 
 
@@ -223,6 +224,7 @@ const HeroSection = () => {
             }
           </div>
           <div onClick={() => setSelectedData({selectBrand:"", selectedRam:"", selectedStorage:"", selectedBackCam:"", selectedModel:""})} className="clear__filter">Clear All Filter</div>
+          <Link href="/AdvanceSearch" className="clear__filter">Advance Search</Link>
         </Col>
         {
           displayFilter && (

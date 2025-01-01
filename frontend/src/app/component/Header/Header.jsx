@@ -9,12 +9,13 @@ import "./NavBar.css";
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logo from "../../../../public/images/MOBILE PRI.png"
 import Image from "next/image";
+import Link from 'next/link';
 
 function Header() {
   return (
     <Navbar expand="lg" variant='light' className=' drop-shadow-[10px_10px_10px_rgba(9,9,9,0.1)]'>
       <Container fluid>
-        <Image src={Logo} className='logoImg' alt='logo' width={100} height={100}/>
+       <Link href="/"> <Image src={Logo} className='logoImg' alt='logo' width={100} height={100}/></Link>
         {/* <Navbar.Brand href="/" className='logo'><span>M</span>obile<span>P</span>rice</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="navbar" />
         <Navbar.Collapse id="navbar" className='justify-content-end'>
@@ -30,10 +31,7 @@ function Header() {
           </Form> */}
           <Nav  style={{ maxHeight: '100px' }} navbarScroll>
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/Brands">Brands</Nav.Link>
-            <Nav.Link href="#action3">Mobile</Nav.Link>
-            <Nav.Link href="#action4">About us</Nav.Link>
-            <Nav.Link href="#action5">Contact us</Nav.Link>
+            <Nav.Link href="/AdvanceSearch">AdvanceSearch</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

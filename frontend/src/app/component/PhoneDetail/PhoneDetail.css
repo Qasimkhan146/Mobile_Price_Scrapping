@@ -133,6 +133,16 @@
     border-right: 1px solid #e0134e;
     border-bottom: 1px solid #e0134e;
 }
+.model__div{
+    width: 100%;
+    /* padding: 10px; */
+    font-weight: 650;
+    font-size: 20px;
+    border-left: 1px solid #e0134e;
+    border-right: 1px solid #e0134e;
+    border-bottom: 1px solid #e0134e;
+
+}
 
 .specs__underline {
     width: 100%;

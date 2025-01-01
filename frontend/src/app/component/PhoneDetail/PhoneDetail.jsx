@@ -92,8 +92,8 @@ const PhoneDetail = () => {
                 <div className="red__underline"></div>
               </div>
               <div>
-                <h5>Model</h5>
-                <b>{modelName}</b>
+                <h5>Bluetooth</h5>
+                <b>{mobileDetail?.mobile.Bluetooth}</b>
                 <div className="red__underline"></div>
               </div>
               <div>
@@ -108,6 +108,8 @@ const PhoneDetail = () => {
               </div>
             </div>
             <div className="w-50 text-center phone__picture__section">
+            <h3 className="model__div px-2 mb-2">{mobileDetail?.mobile.model}</h3>
+
               <Image
                 src={mobileDetail?.mobile.imageSRC || image1}
                 height={500}
@@ -189,21 +191,26 @@ const PhoneDetail = () => {
                       {source}
                     </th>
                   ))}
-                  <th scope="col">MobileMate</th>
-                  <th scope="col">PriceOye</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="content__tr">
                   {mobileDetail && mobileDetail?.prices?.map((mobile, index) => (
-                    <td key={index}><a target="_blank" href={mobile.href}>{mobile.price} PKR</a></td>
+                    <td key={index}>
+                    {mobile.href === "N/A" ? (
+                      <span className="fw-semibold">{mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}</span>
+                    ) : (
+                      <a target="_blank" href={mobile.href}>
+                        {mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}
+                      </a>
+                    )}
+
+                    </td>
                   ))}
-                  <td>Coming Soon</td>
-                  <td>Coming Soon</td>
                 </tr>
               </tbody>
             </table>
-            <table className="w-100 border-1 d-md-none table-striped">
+            <table className="w-100 table border-1 d-md-none table-striped">
               <thead className="content__head">
                 <tr>
                   <th scope="col">Platform</th>
@@ -215,9 +222,13 @@ const PhoneDetail = () => {
                   <tr key={index} className="content__tr">
                     <td>{mobile.source}</td>
                     <td>
-                      <a target="_blank" rel="noopener noreferrer" href={mobile.href}>
-                        {mobile.price} PKR
+                    {mobile.href === "N/A" ? (
+                      <span className="fw-semibold">{mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}</span>
+                    ) : (
+                      <a target="_blank" href={mobile.href}>
+                        {mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}
                       </a>
+                    )}
                     </td>
                   </tr>
                 ))}
