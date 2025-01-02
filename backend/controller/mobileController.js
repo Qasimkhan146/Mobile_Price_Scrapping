@@ -415,7 +415,11 @@ export const updateMobilesWithPrices = async (req, res) => {
 export const updateMobileAndPrices = async (req, res) => {
   try {
     const { model } = req.params; // Mobile model name from URL params
-    const { mobileData, prices } = req.body; // Data to update
+    const { mobileData , prices } = req.body; // Data to update
+
+    if (mobileData && mobileData._id) {
+      delete mobileData._id; // Remove the `_id` field
+    }
 
     // Step 1: Mobile search karein (case-insensitive query)
     const mobile = await Mobile.findOne({ model: new RegExp(model, "i") });
