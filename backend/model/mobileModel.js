@@ -46,6 +46,7 @@ const mobileSchema = new mongoose.Schema({
   Capacity: { type: Number, default: 0 },
   PriceInUsd: { type: String, default: "Not Available" },
   Radio: { type: String, default: "Nill" },
+  release:{ type: Date },
 });
 
 const Mobile = mongoose.model("Mobile", mobileSchema);

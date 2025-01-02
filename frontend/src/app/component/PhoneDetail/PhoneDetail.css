@@ -21,9 +21,10 @@
     margin-bottom: 18px;
   }
   .description-ul .description-para{
-    font-size: small;
+    font-size: 16px;
     font-weight: 600;
-  
+    /* text-decoration: underline; */
+    /* color: blue; */
   }
 .detail__features h5 {
     font-weight: 700;

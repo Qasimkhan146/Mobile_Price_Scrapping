@@ -4,32 +4,28 @@ import stringSimilarity from "string-similarity";
 
 export const fetchSingleMobilePrice = async (req, res) => {
   try {
-    const { model } = req.params; // Mobile model name from URL params
+    const { model } = req.params;
 
-    // Fetch the mobile from the Mobile collection
     const mobile = await Mobile.findOne({ model: new RegExp(model, "i") });
     if (!mobile) {
       return res.status(404).json({ message: "Mobile not found" });
     }
 
-    // Fetch all price records
     const allPrices = await Price.find();
 
-    // Use string similarity to filter prices with similar model names
-    const threshold = 1; // Adjust similarity threshold (higher = stricter match)
+    const threshold = 1; 
     const matchingPrices = allPrices.filter((price) => {
       const similarity = stringSimilarity.compareTwoStrings(
         mobile.model.toLowerCase(),
         price.model.toLowerCase()
       );
-      return similarity >= threshold; // Include only matches above the threshold
+      return similarity >= threshold;
     });
 
     if (!matchingPrices.length) {
       return res.status(404).json({ message: "No matching prices found for this mobile" });
     }
-    
-    // Prepare the price details
+  
     const priceDetails = matchingPrices.map((price) => ({
       source: price.source,
       price: price.price,
@@ -39,38 +35,17 @@ export const fetchSingleMobilePrice = async (req, res) => {
       model: price.model,
 
     }));
-
-    // Combine mobile details and matching price information
     res.status(200).json({ mobile, prices: priceDetails });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 
-// fetch10LatestMobiles and there price in price collection
-// export const fetch10LatestMobiles = async (req, res) => {
-//     try {
-//         const mobiles = await Mobile.find().limit(10);
-//         if(!mobiles){
-//             return res.status(404).json({message:"Mobiles not found"})
-//         }
-        
-//         const price = await Price.find().limit(10);
-//         if(!price){
-//             return res.status(404).json({message:"Price not found"})
-//         }
-
-//     } catch (error) {
-        
-//     }
-// }
-
-
 // fetch 10 latest mobiles with their prices
 export const fetch10LatestMobilesWithPrices = async (req, res) => {
     try {
       const threshold = 1;
-      const {model, brand, Ram, Rom, Back_Cam} = req.query;
+      const {model, brand, Ram, Rom, Back_Cam,Year} = req.query;
       const filterMobile = {};
 
       if (model) {
@@ -92,8 +67,13 @@ export const fetch10LatestMobilesWithPrices = async (req, res) => {
       if (Back_Cam) {
         filterMobile.Back_Cam = parseInt(Back_Cam);
       }
+      if (Year) {
+        const startOfYear = new Date(`${Year}-01-01T00:00:00.000Z`); // Start of the year
+        const endOfYear = new Date(`${Year}-12-31T23:59:59.999Z`); // End of the year
+        filter.release = { $gte: startOfYear, $lte: endOfYear };
+      }
 
-      const latestMobiles = await Mobile.find(filterMobile).sort({ createdAt: -1 }).limit(10);
+      const latestMobiles = await Mobile.find(filterMobile).sort({ release: -1 }).limit(10);
       if (!latestMobiles.length) {
         return res.status(404).json({ message: "No mobiles found" });
       }
@@ -127,6 +107,7 @@ export const fetch10LatestMobilesWithPrices = async (req, res) => {
       res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 };
+// advance search
 export const fetchAdvanceSearchApi = async (req, res) => {
   try {
     const threshold = 1; // Adjust similarity threshold as needed
@@ -201,7 +182,6 @@ export const fetchAdvanceSearchApi = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
-
 
 //create a new mobile
 export const createMobile = async (req, res) =>{
@@ -312,6 +292,7 @@ export const fetchMobileFilters = async (req, res) => {
   }
 };
 
+//update mobile
 export const updateMobilesWithPrices = async (req, res) => {
   try {
     const { updates } = req.body; // Expect an array of mobile updates, each containing mobile details and prices.
@@ -368,60 +349,15 @@ export const updateMobilesWithPrices = async (req, res) => {
   }
 };
 
-
-//update mobiles
-
-// export const fetchMobileWithPriceById = async (req, res) => {
-//   try {
-//     const { model } = req.params; // Mobile ID from URL params
-//     const UpdateMobile = req.body;
-//     console.log("update",UpdateMobile)
-//     // Fetch the mobile by its ID
-//     const mobile = await Mobile.findOne({ model: new RegExp(model, "i") });
-//     if (!mobile) {
-//       return res.status(404).json({ message: "Mobile not found" });
-//     }
-
-//     // Fetch all price records for that mobile
-//     const allPrices = await Price.find({ model: mobile.model });
-
-//     // Use string similarity to filter prices with similar model names if needed
-//     const threshold = 1; // Adjust similarity threshold (higher = stricter match)
-//     const matchingPrices = allPrices.filter((price) => {
-//       const similarity = stringSimilarity.compareTwoStrings(
-//         mobile.model.toLowerCase(),
-//         price.model.toLowerCase()
-//       );
-//       return similarity >= threshold; // Include only matches above the threshold
-//     });
-
-//     // Prepare the price details for the matching prices
-//     const priceDetails = matchingPrices.map((price) => ({
-//       source: price.source,
-//       price: price.price,
-//       href: price.href,
-//       hrefName: price.hrefName,
-//       brand: price.brand,
-//       model: price.model,
-//     }));
-
-//     // Combine mobile details and matching price information
-//     res.status(200).json({ mobile, prices: priceDetails });
-//   } catch (error) {
-//     res.status(500).json({ message: "Internal Server Error", error: error.message });
-//   }
-// };
-
 export const updateMobileAndPrices = async (req, res) => {
   try {
-    const { model } = req.params; // Mobile model name from URL params
-    const { mobileData , prices } = req.body; // Data to update
+    const { model } = req.params; 
+    const { mobileData , prices } = req.body;
 
     if (mobileData && mobileData._id) {
-      delete mobileData._id; // Remove the `_id` field
+      delete mobileData._id;
     }
 
-    // Step 1: Mobile search karein (case-insensitive query)
     const mobile = await Mobile.findOne({ model: new RegExp(model, "i") });
     if (!mobile) {
       return res.status(404).json({ message: "Mobile not found" });
@@ -436,37 +372,27 @@ export const updateMobileAndPrices = async (req, res) => {
       return res.status(404).json({ message: "Mobile not found" });
     }
     const allPrices = await Price.find({ model: mobile.model });
-    // console.log("allprice",allPrices)
 
-    // Step 3: Prices update karein
     if (prices && Array.isArray(prices)) {
-      // console.log("prices",prices);
       
       for (const price of prices) {
-        // Log each price for debugging
-        console.log(price, "price");
         
-        // Find the existing price document
         const existingPrice = await Price.findOne({
           model: new RegExp(`^${price.model}$`, "i"),
           source: price.source,
         });
-        
-        // If the existing price document is found, update it
+
         if (existingPrice) {
           const updateResult = await Price.updateOne(
             {
               model: new RegExp(`^${price.model}$`, "i"),
               source: price.source,
             },
-            { $set: price } // Update with new values
+            { $set: price } 
           );
-      
-          // Log the result of the update
           console.log(updateResult, "Update Result");
         }
       }
-      
     }
 
     res.status(200).json({ message: "Mobile and prices updated successfully." });
@@ -474,50 +400,3 @@ export const updateMobileAndPrices = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
-
-
-
-
-// export const fetchMobileWithPriceById = async (req, res) => {
-//   try {
-//     const { model } = req.params;
-//     const UpdateMobile = req.body;
-
-//     // Fetch the mobile by its ID
-//     const mobile = await Mobile.findOne({ model: new RegExp(model, "i") });
-//     if (!mobile) {
-//       return res.status(404).json({ message: "Mobile not found" });
-//     }
-
-//     // Update mobile details if data is provided
-//     if (Object.keys(UpdateMobile).length > 0) {
-//       const updatedMobile = await Mobile.updateOne(
-//         { model: mobile.model },
-//         { $set: UpdateMobile }
-//       );
-//       if (updatedMobile.nModified === 0) {
-//         return res.status(400).json({ message: "No updates were made" });
-//       }
-//     }
-
-//     // Fetch all price records for the mobile
-//     const allPrices = await Price.find({
-//       model: { $regex: new RegExp(mobile.model, "i") },
-//     });
-
-//     // Prepare price details
-//     const priceDetails = allPrices.map((price) => ({
-//       source: price.source,
-//       price: price.price,
-//       href: price.href,
-//       hrefName: price.hrefName,
-//       brand: price.brand,
-//       model: price.model,
-//     }));
-
-//     // Combine mobile details and matching price information
-//     res.status(200).json({ mobile, prices: priceDetails });
-//   } catch (error) {
-//     res.status(500).json({ message: "Internal Server Error", error: error.message });
-//   }
-// };
