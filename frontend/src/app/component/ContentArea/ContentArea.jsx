@@ -24,8 +24,14 @@ const ContentArea = ({ mobiles }) => {
   useEffect(() => {
     dispatch(fetch10LatestMobiles());
   }, [dispatch]);
-  const sources = fetch10Mobiles[2]?.prices.map((price) => price.source);
-
+  // const sources = fetch10Mobiles[1]?.prices.map((price) => price.source);
+  const sources = fetch10Mobiles && fetch10Mobiles.reduce(
+    (maxObj, currentObj) =>
+      currentObj.prices.length > maxObj.prices.length ? currentObj : maxObj,
+    { prices: [] } // Initial value to avoid errors on empty arrays
+  );
+  console.log(sources?.prices,"sourcea");
+  
   useEffect(() => {
     if (fetch10Mobiles?.message) {
       toast.error(fetch10Mobiles.message);
@@ -40,7 +46,7 @@ const ContentArea = ({ mobiles }) => {
   //  console.log(loading,"loading");
   //  console.log(selectAllBrands,"Select All Brands");
 
-  if (loading) return (
+  if (fetch10Mobiles.length === 0) return (
     <div className="loading__class" >
       <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
     </div>
@@ -53,20 +59,22 @@ const ContentArea = ({ mobiles }) => {
         {fetch10Mobiles?.message && <h2 className="text-center">{fetch10Mobiles.message}</h2>}
         <table className="table table-light">
           {/* <caption>More Results</caption> */}
-          <thead className="content__head">
+          <thead className="contents__head">
             <tr>
               <th scope="col">Mobiles</th>
               {/* Dynamically render <th> for each source */}
-              {sources?.length > 0 && sources?.map((source, index) => (
+              {sources?.prices?.length > 0 && sources?.prices?.map((source, index) => (
                 <th key={index} scope="col">
-                  {source}
+                  {source.source.includes('Mobilemate.io') ? source.source.replace('.io', '') : source.source}
+                  {/* {source.source} */}
                 </th>
               ))}
+
             </tr>
           </thead>
           <tbody>
             {fetch10Mobiles.length > 0 && fetch10Mobiles.map((mobile, index) => (
-              <tr key={index} className="content__tr">
+              <tr key={index} className="contents__tr">
                 <th scope="row"><Link href={`/Mobile/${generateSlug(mobile.mobile.model)}`}>{mobile.mobile.model}</Link></th>
                 {mobile.prices.map((price, index) => (
                   <td key={index}>

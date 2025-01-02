@@ -15,6 +15,7 @@ import Link from "next/link";
 
 const ramData = ["2", "4", "6", "8", "10", "12"];
 const storageData = ["32", "64", "128", "256", "512", "1024"];
+const releaseDate = ["2020","2021","2022","2023","2024"];
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [displayFilter, setDisplayFilter] = useState(false);
@@ -26,7 +27,8 @@ const HeroSection = () => {
     selectedRam:"",
     selectedStorage:"",
     selectedBackCam:"",
-    selectedModel:""
+    selectedModel:"",
+    selectedDate:""
   });
   useEffect(() => {
     dispatch(fetchAllBrands());  
@@ -35,7 +37,7 @@ const HeroSection = () => {
   const [displayDropdown, setDisplayDropdown] = useState("");
   useEffect(() => {
     // if(selectedData.selectBrand){
-      dispatch(fetch10LatestMobiles({brand: selectedData.selectBrand, Ram:selectedData.selectedRam, Rom:selectedData.selectedStorage, Back_Cam: selectedData.selectedBackCam, model:selectedData.selectedModel}));
+      dispatch(fetch10LatestMobiles({brand: selectedData.selectBrand, Ram:selectedData.selectedRam, Rom:selectedData.selectedStorage, Back_Cam: selectedData.selectedBackCam, model:selectedData.selectedModel, Year: selectedData.selectedDate}));
     
 }, [dispatch, selectedData]);
   useEffect(() => {
@@ -190,6 +192,44 @@ const HeroSection = () => {
                     </div>
                     <li >
                       {storage} GB
+                    </li>
+                  </div>
+                ))}
+              </div>
+            )
+            }
+          </div>
+          <div ref={(node) => setDropdownRef("date", node)} className="position-relative">
+            <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
+              if (displayDropdown === "date") {
+                setDisplayDropdown("");
+              } else {
+                setDisplayDropdown("date")
+              }
+            }}>
+              {selectedData.selectedDate === ""?"Date": `${selectedData.selectedDate} `}
+              <div>
+               {selectedData.selectedDate !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedDate: "" })} /> } 
+              {displayDropdown === "storage" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
+            </div>
+            {displayDropdown === "date" && (
+              <div className="display__storage">
+                {releaseDate.map((date, index) => (
+                  <div key={index} onClick={() => {
+                    setSelectedData({
+                      ...selectedData,
+                      selectedDate: date
+                    });
+                    setDisplayDropdown("");
+                  }} className="brand__lists d-flex align-items-center gap-2">
+                    <div>
+                      <div>
+
+                      </div>
+                    </div>
+                    <li >
+                      {date}
                     </li>
                   </div>
                 ))}
@@ -358,6 +398,44 @@ const HeroSection = () => {
                     </div>
                     <li >
                       {storage} GB
+                    </li>
+                  </div>
+                ))}
+              </div>
+            )
+            }
+          </div>
+          <div ref={(node) => setDropdownRef("date", node)} className="position-relative">
+            <div className="select-inputs d-flex flex-row justify-content-between align-items-center" onClick={() => {
+              if (displayDropdown === "date") {
+                setDisplayDropdown("");
+              } else {
+                setDisplayDropdown("date")
+              }
+            }}>
+              {selectedData.selectedDate === ""?"Date": `${selectedData.selectedDate} `}
+              <div>
+               {selectedData.selectedDate !== "" && <Clear sx={{ fontSize: 16, color: '#fff', cursor:"pointer"}} onClick={() => setSelectedData({ ...selectedData, selectedDate: "" })} /> } 
+              {displayDropdown === "storage" ? <ExpandMore sx={{ color: '#fff', cursor:"pointer"}}  /> : <ChevronRight />}
+              </div>
+            </div>
+            {displayDropdown === "date" && (
+              <div className="display__date">
+                {releaseDate.map((date, index) => (
+                  <div key={index} onClick={() => {
+                    setSelectedData({
+                      ...selectedData,
+                      selectedDate: date
+                    });
+                    setDisplayDropdown("");
+                  }} className="brand__lists d-flex align-items-center gap-2">
+                    <div>
+                      <div>
+
+                      </div>
+                    </div>
+                    <li >
+                      {date}
                     </li>
                   </div>
                 ))}

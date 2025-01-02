@@ -41,7 +41,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 10px;
-    top: 120%;
+    top: 100%;
     padding: 20px;
     z-index: 10;
     border-radius: 20px;
@@ -54,7 +54,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 10px;
-    top: 120%;
+    top: 100%;
     padding: 20px;
     z-index: 10;
     border-radius: 20px;
@@ -68,7 +68,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 10px;
-    top: 120%;
+    top: 100%;
     padding: 20px;
     z-index: 10;
     border-radius: 20px;
@@ -84,7 +84,7 @@
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 10px;
-    top: 120%;
+    top: 100%;
     padding: 20px;
     border-radius: 20px;
     background-color: #fff;
@@ -97,7 +97,21 @@
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
     /* grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); */
     gap: 10px;
-    top: 120%;
+    top: 100%;
+    z-index: 10;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+  }
+  .display__date{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
+    /* grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); */
+    gap: 10px;
+    top: 100%;
     z-index: 10;
     padding: 20px;
     border-radius: 20px;
@@ -116,7 +130,7 @@
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 10px;
-    top: 120%;
+    top: 100%;
     padding: 20px;
     border-radius: 20px;
     background-color: #fff;

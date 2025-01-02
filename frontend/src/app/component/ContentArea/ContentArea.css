@@ -1,4 +1,4 @@
-.content__head tr th{
+.content__heads tr th{
    font-weight: 500;
    font-size: 18px;
    color: #e0134e;
@@ -6,20 +6,26 @@
 /* .content__tr{
     height: 60px;
 } */
- .content__tr td a{
+ .contents__tr td a{
     /* text-decoration: none; */
     color: #000;
     font-weight: 500;
     font-size: 18px;
+ }
+ .contents__tr td{
+   padding: 6px;
  }
  .loading__class{
     width: 100%;
     display: grid;
     place-items: center;
  }
- .content__tr th a{
+ .contents__tr th a{
     /* text-decoration: none; */
     color: #000;
+ }
+ .contents__tr th{
+   padding: 6px;
  }
 .spec__text{
     margin-left: -20%;

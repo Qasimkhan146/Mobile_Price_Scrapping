@@ -103,6 +103,11 @@ form >div h5{
     padding: 10px;
     background-color: #e0134e;
 }
+.loading__class{
+    width: 100%;
+    display: grid;
+    place-items: center;
+ }
 .content__tr td{
     font-weight: 500;
 }

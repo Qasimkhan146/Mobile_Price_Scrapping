@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LuRefreshCw } from "react-icons/lu";
 import Image from "next/image";
 import { Form } from "react-bootstrap";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import Slider from 'rc-slider';
 import Link from "next/link";
 import 'rc-slider/assets/index.css';
@@ -19,6 +20,7 @@ const AdvanceSearchComponent = () => {
     const generateSlug = (title) => {
         return `${slugify(title)}`;
     };
+    const  loading  = useSelector((state) => state.mobile.loading);
     const [displayView, setDisplayView] = useState("list");
     const advanceMobiles = useSelector(selectAdvanceFilterMobiles);
     const [advanceData, setAdvanceData] = useState([]);
@@ -33,17 +35,21 @@ const AdvanceSearchComponent = () => {
     const queryBackCamMax = searchParams.get('backCamMax');
     const queryPriceMin = searchParams.get('minPrice');
     const queryPriceMax = searchParams.get('maxPrice');
-    const [brandName, setBrandName] = useState(queryBrand || "");
+    const [brandName, setBrandName] = useState("");
     const [modelName, setModelName] = useState(queryModel || "");
     const [ramRange, setRamRange] = useState([queryRamMin || 2, queryRamMax || 12]);
     const [storageRange, setStorageRange] = useState([queryStorageMin || 16, queryStorageMax || 1024]);
     const [priceRange, setPriceRange] = useState([queryPriceMin || 0, queryPriceMax || 700000]);
-    const [backCamRange, setBackCamRange] = useState([queryBackCamMin || 4, queryBackCamMax || 50]);
+    const [backCamRange, setBackCamRange] = useState([queryBackCamMin || 4, queryBackCamMax || 100]);
     // const [searchQuery, setSearchQuery] = useState({ brand: queryBrand || '', model: queryModel || '', ramMin: queryRamMin || 2, ramMax: queryRamMax || 32, storageMin: queryStorageMin || 16, storageMax: queryStorageMax || 1024, backCamMin: queryBackCamMin || 4, backCamMax: queryBackCamMax || 50, minPrice: queryPriceMin || 0, maxPrice: queryPriceMax || 700000 });
     const [page, setPage] = useState(1);
     const [isMobile, setIsMobile] = useState(false);
     const [isSmallLaptop, setIsSmallLaptop] = useState(false);
+    // const [currentBrand, setCurrentBrand] = useState(brandName);
     const [isSmallMobile, setIsSmallMobile] = useState(false);
+    // console.log(loading,"Loading");
+
+    
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 1024px)");
         const handleChange = () => setIsMobile(mediaQuery.matches);
@@ -53,6 +59,20 @@ const AdvanceSearchComponent = () => {
 
         return () => mediaQuery.removeEventListener("change", handleChange);
     }, []);
+    useEffect(() => {
+        if (queryBrand && queryBrand !== brandName) {
+            setBrandName(queryBrand)
+            // console.log("dsda");
+
+        }
+    }, [queryBrand])
+    useEffect(() => {
+        if (queryModel && queryModel !== modelName) {
+            setModelName(queryModel)
+            //  console.log("dsda");
+
+        }
+    }, [queryModel])
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 1280px)");
 
@@ -81,16 +101,23 @@ const AdvanceSearchComponent = () => {
     }, []);
     useEffect(() => {
         dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page }));
-    }, [dispatch, page]);
-    // console.log(advanceMobiles, "Advance Mobiles");
-    // const addDataToAdvanceData = (newData) => {
-    //     setAdvanceData((prevData) => [...prevData, ...newData]);
-    // };
+    }, [dispatch, page, brandName, modelName]);
+    // useEffect(() => {
+    //     if (advanceMobiles?.data?.length > 0) {
+    //         setAdvanceData((prevData) => [...prevData, ...advanceMobiles?.data]);
+    //     }
+    // }, [advanceMobiles]);
     useEffect(() => {
         if (advanceMobiles?.data?.length > 0) {
-            setAdvanceData((prevData) => [...prevData, ...advanceMobiles?.data]);
+            if (advanceData.length === 0 || advanceData[0]?.mobile.brand !== brandName && brandName !== "" || advanceData[0]?.mobile.model !== modelName || advanceData[0]?.mobile.model !== advanceData[1]?.mobile.model) {
+                setAdvanceData([...advanceMobiles.data]);
+            } else {
+                // Append data for "load more"
+                setAdvanceData((prevData) => [...prevData, ...advanceMobiles.data]);
+            }
         }
-    }, [advanceMobiles]);
+    }, [advanceMobiles, brandName, modelName]);
+    // console.log(advanceData,"Advance Data");
 
     const handleRamChange = (values) => {
         setRamRange(values);
@@ -127,7 +154,7 @@ const AdvanceSearchComponent = () => {
         params.set("maxPrice", priceRange[1]);
         router.push(`/AdvanceSearch?${params.toString()}`);
     }
-    // console.log(advanceData, "Advance Mobiles");
+    // console.log(advanceMobiles, "Advance Mobiles");
     const handleRefresh = () => {
         setBrandName("");
         setModelName("");
@@ -136,10 +163,15 @@ const AdvanceSearchComponent = () => {
         setBackCamRange([4, 50]);
         setPriceRange([0, 700000]);
     }
+    if (advanceMobiles.length === 0 ) return (
+        <div className="loading__class" >
+          <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
+        </div>
+      )
     return (
         <>
             <div className='mt-4 mb-4'>
-                {brandName === "" && modelName === "" && <h1>Latest Mobile Price in Pakistan</h1>} {(brandName !== "" || modelName !== "") && <h1> {brandName} {modelName}  Mobile Price in Pakistan {priceRange[0]} to {priceRange[1]}</h1>}
+                {brandName === "" && <h1>Latest Mobile Price in Pakistan</h1>} {(brandName !== "") && <h1> {brandName} Mobile Price in Pakistan {priceRange[0]} to {priceRange[1]}</h1>}
             </div>
             <div className={`d-flex ${isMobile ? "flex-column" : "flex-row"} py-1 min-vh-100 gap-4 mb-4`}>
                 <div className={`${isMobile ? "col-12" : "col-3"} border border-2 p-4 rounded h-50 `}>
@@ -216,8 +248,8 @@ const AdvanceSearchComponent = () => {
                                         <Slider
                                             range
                                             min={4}
-                                            max={50}
-                                            step={2}
+                                            max={100}
+                                            // step={2}
                                             value={backCamRange}
                                             onChange={handleBackCamChange}
                                             tipFormatter={(value) => `Rs ${value}`}
@@ -304,9 +336,10 @@ const AdvanceSearchComponent = () => {
                                             <tr>
                                                 {mobile?.prices?.length > 0 && mobile?.prices?.map((source, index) => (
                                                     <th key={index} scope="col">
-                                                        {source.source}
+                                                        {source.source.includes('Mobilemate.io') ? source.source.replace('.io', '') : source.source}
                                                     </th>
                                                 ))}
+
                                             </tr>
                                         </thead>
                                         <tbody>
