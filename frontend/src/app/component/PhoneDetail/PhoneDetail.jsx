@@ -656,17 +656,8 @@ const PhoneDetail = () => {
             {/* </div> */}
             <div>
               <h2 className="fs-6">
-                {/* <Link
-                    href={`/${mobileDetail?.brand?.toUpperCase()}`}
-                    className="fw-bold"
-                  >
-                    {mobileDetail.brand}{" "}
-                  </Link> */}
                 <Link
-                  href={`/${mobileDetail?.brand?.toUpperCase()}/${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
+                 href={`/Mobile/${mobileDetail?.mobile?.model?.replace(/ /g, "-")}`}
                   className="fw-bold"
                 >
                   {mobileDetail.mobile.model}{" "}
@@ -676,39 +667,18 @@ const PhoneDetail = () => {
             </div>
             <ul>
               <li>
-                <Link
-                  href={`/${mobileDetail?.brand?.toUpperCase()}`}
-                  className="fw-bold"
-                >
+                <Link href={`/Mobile/${mobileDetail?.mobile?.model?.replace(/ /g, "-")}`}className="fw-bold">
                   {mobileDetail.mobile.model}{" "}
-                </Link>
-                <Link
-                  href={`/${mobileDetail?.brand?.toUpperCase()}/${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
-                  className="fw-bold"
-                >
-                  {mobileDetail.model}{" "}
                 </Link>
                 Price in Pakistan: PKR.
                 <span className="fw-bold"> {mobileDetail.mobile.price}</span>
               </li>
               <li>
-                <Link
-                  href={`/${mobileDetail?.brand?.toUpperCase()}`}
-                  className="fw-bold"
-                >
+                <Link href={`/Mobile/${mobileDetail?.mobile?.model?.replace(/ /g, "-")}`} className="fw-bold">
                   {mobileDetail.brand}{" "}
                 </Link>
-                <Link
-                  href={`/${mobileDetail?.brand?.toUpperCase()}/${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
-                  className="fw-bold"
-                >
-                  {mobileDetail.model}{" "}
+                <Link href={`/Mobile/${mobileDetail?.mobile?.model?.replace(/ /g, "-")}`}className="fw-bold">
+                  {mobileDetail.mobile.model}{" "}
                 </Link>
                 Price in USD:${" "}
                 <span className="fw-bold">
@@ -758,231 +728,220 @@ const PhoneDetail = () => {
             performance smartphone.
           </div>
         </div>
+        {/* our website */}
         <div className="row">
-          
+          <h6 className="fw-bold text-center bg-[#eee]">MobilePrice.biz.pk</h6>
+          <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
+            <ul className="description-ul">
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minPrice=15000&maxPrice=30000`}>
+                  {mobileDetail?.mobile?.brand} mobile price in Pakistan 15000 to 30000
+                </Link>
+              </li>
+              {/* <li className="description-para">
+                <Link href={`/mobile_price_15000_to_30000`}>
+                  {mobileDetail.mobile.brand} mobile price in Pakistan 20000 to 30000
+                </Link>
+              </li> */}
+              {/* <li className="description-para">
+                <Link href={"/mobile_price_15000_to_30000"}>
+                  {mobileDetail.mobile.brand} mobile price in Pakistan 20000 to 40000
+                </Link>
+              </li> */}
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minPrice=30000&maxPrice=50000`}>
+                  {mobileDetail.mobile.brand} mobile price in Pakistan 30000 to 50000
+                </Link>
+              </li>
+              {/* <li className="description-para">
+                <Link href="/mobile_price_40000_to_50000">
+                  {mobileDetail.mobile.brand} mobile price in Pakistan 40000 to 60000
+                </Link>
+              </li> */}
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minPrice=50000&maxPrice=70000`}>
+                  {mobileDetail.mobile.brand} mobile price in Pakistan 50000 to 70000
+                </Link>
+              </li>
+              {/* <li className="description-para">
+                <Link href="/mobile_price_50000_to_100000">
+                  {mobileDetail.mobile.brand} mobile price in Pakistan 70000 to 80000
+                </Link>
+              </li> */}
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minPrice=80000&maxPrice=100000`}>
+                  {mobileDetail.mobile.brand} mobile price in Pakistan 80000 to 100000
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
+            <ul className="description-ul mx-1">
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?minRam=4&maxRam=4`}>4GB Ram Mobile Phones Price in Pakistan{" "}</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?minRam=6&maxRam=6`}> 6GB Ram Mobile Phones Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?minRam=8&maxRam=8`}>8GB Ram Mobile Phones Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?minRam=12&maxRam=12`}>12GB Ram Mobile Phones Price in Pakistan</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
+            <ul className="description-ul">
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?storageMin=64&storageMax=64`}>64GB Rom Mobile Phones  Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?storageMin=128&storageMax=128`}>128GB Rom Mobile Phones Price in Lahore</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?storageMin=256&storageMax=256`}>256GB Rom Mobile Phones Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?storageMin=1024&storageMax=1024`}>1TB Rom Mobile Phones Price in Pakistan</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
+            <ul className="description-ul">
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?backCamMin=20&backCamMax=29`}>20MP Camera Phones Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link
+                  href={`/AdvanceSearch?backCamMin=30&backCamMax=49`}
+                >
+                  30MP Camera Phones Price in Pakistan
+                </Link>
+              </li>
+              <li className="description-para">
+                <Link
+                  href={`/AdvanceSearch?backCamMin=50&backCamMax=99`}
+                >
+                  50MP Camera Phones Price in Pakistan
+                </Link>{" "}
+              </li>
+              <li className="description-para">
+                <Link
+                  href={`/AdvanceSearch?backCamMin=100&backCamMax=99`}
+                >
+                  100MP Camera Phones Price in Pakistan
+                </Link>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+        
+        {/* other websites */}
+        <div className="row">
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
           <h6>MobileMate</h6>
             <ul className="description-ul">
               <li className="description-para">
-                <Link href="/mobile_price_15000_to_30000">
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 15000 to 30000
+                <Link href="https://www.mobilemate.io/">
+                Mobile phone prices in Pakistan mobilemate
                 </Link>
               </li>
               <li className="description-para">
-                <Link href={`/mobile_price_15000_to_30000`}>
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 20000 to 30000
+                <Link href={`https://www.mobilemate.io/`}>
+                Latest mobile phone prices in Pakistan mobilemate
                 </Link>
               </li>
               <li className="description-para">
-                <Link href={"/mobile_price_15000_to_30000"}>
-                  {mobileDetail.brand} mobile price in Pakistan 20000 to 40000
+                <Link href={"https://www.mobilemate.io/"}>
+                latest mobile Price list in Pakistan mobilemate
                 </Link>
               </li>
               <li className="description-para">
-                <Link href="/mobile_price_30000_to_40000">
-                  {mobileDetail.brand} mobile price in Pakistan 30000 to 50000
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href="/mobile_price_40000_to_50000">
-                  {mobileDetail.brand} mobile price in Pakistan 40000 to 60000
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href="/mobile_price_50000_to_100000">
-                  {mobileDetail.brand} mobile price in Pakistan 50000 to 70000
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href="/mobile_price_50000_to_100000">
-                  {mobileDetail.brand} mobile price in Pakistan 70000 to 80000
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href="/mobile_price_50000_to_100000">
-                  {mobileDetail.brand} mobile price in Pakistan 80000 to 100000
+                <Link href="https://www.mobilemate.io/OPPO">
+                Oppo mobile phone price in Pakistan mobilemate
                 </Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
           <h6>PriceOye</h6>
-            <ul className="description-ul mx-1">
+          <ul className="description-ul">
               <li className="description-para">
-                <Link
-                  href={`/${mobileDetail?.brand?.toUpperCase()}/${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
-                >
-                  {mobileDetail.brand} {mobileDetail.model} Price in Pakistan{" "}
+                <Link href="https://priceoye.pk/mobiles">
+                Mobile phone prices in Pakistan PriceOye
                 </Link>
               </li>
               <li className="description-para">
-                <Link
-                  href={`/${mobileDetail?.brand?.toUpperCase()}/${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
-                >
-                  {mobileDetail.brand} {mobileDetail.model} price in Lahore{" "}
+                <Link href={`https://priceoye.pk/mobiles`}>
+                Latest mobile phone prices in Pakistan PriceOye
                 </Link>
               </li>
               <li className="description-para">
-                <Link
-                  href={`/Phone/${mobileDetail?.brand?.toUpperCase()}-${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
-                >
-                  {mobileDetail.brand} {mobileDetail.model} used phone in
-                  Pakistan
+                <Link href={"https://priceoye.pk/mobiles"}>
+                latest mobile Price list in Pakistan PriceOye
                 </Link>
               </li>
               <li className="description-para">
-                <Link
-                  href={`/Phone/${mobileDetail?.brand?.toUpperCase()}-${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
-                >
-                  {mobileDetail.brand} {mobileDetail.model} PTA approved price
-                  in Pakistan{" "}
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link
-                  href={`/Phone/${mobileDetail?.brand?.toUpperCase()}-${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
-                >
-                  {mobileDetail.brand} {mobileDetail.model} non PTA price in
-                  Pakistan{" "}
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link
-                  href={`/${mobileDetail?.brand?.toUpperCase()}/${mobileDetail?.model?.replace(
-                    / /g,
-                    "-"
-                  )}`}
-                >
-                  {mobileDetail.brand} {mobileDetail.model} new phone price in
-                  Pakistan
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href={`/${mobileDetail?.brand?.toUpperCase()}`}>
-                  Latest {mobileDetail.brand} mobile phones in Pakistan{" "}
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href={`/${mobileDetail?.brand?.toUpperCase()}`}>
-                  {mobileDetail.brand} new Mobile Price in Pakistan
+                <Link href="https://priceoye.pk/mobiles/oppo">
+                Oppo mobile phone price in Pakistan PriceOye
                 </Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
           <h6>WhatMobile</h6>
-            <ul className="description-ul">
+          <ul className="description-ul">
               <li className="description-para">
-                <Link href={`/Phone/${mobileDetail?.brand?.toUpperCase()} `}>
-                  {mobileDetail.brand} used mobile phones prices in Pakistan
+                <Link href="https://www.whatmobile.com.pk/">
+                Mobile phone prices in Pakistan WhatMobile
                 </Link>
               </li>
               <li className="description-para">
-                <Link
-                  href={`/advancesearch?brand=${mobileDetail?.brand?.toUpperCase()}&city=Lahore`}
-                >
-                  {mobileDetail.brand} used mobile phone for sale in Lahore{" "}
+                <Link href={`https://www.whatmobile.com.pk/`}>
+                Latest mobile phone prices in Pakistan WhatMobile
                 </Link>
               </li>
               <li className="description-para">
-                <Link
-                  href={`/advancesearch?brand=${mobileDetail?.brand?.toUpperCase()}&city=&city=Karachi`}
-                >
-                  {mobileDetail.brand} used mobile phone for sale in Karachi
-                </Link>{" "}
-              </li>
-              <li className="description-para">
-                <Link
-                  href={`/advancesearch?brand=${mobileDetail?.brand?.toUpperCase()}&city=&city=Islamabad`}
-                >
-                  {mobileDetail.brand} used mobile phone for sale in Islamabad
+                <Link href={"https://www.whatmobile.com.pk/"}>
+                latest mobile Price list in Pakistan WhatMobile
                 </Link>
               </li>
               <li className="description-para">
-                <Link href="/News">{mobileDetail.brand} mobile phone news</Link>
-              </li>
-              <li className="description-para">
-                <Link href="/Reviews">
-                  {mobileDetail.brand} mobile phone reviews
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href="/Compare">
-                  Compare {mobileDetail.brand} mobile phones
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href="/AdvanceSearch">
-                  Search {mobileDetail.brand} phones by Advance Search{" "}
+                <Link href="https://www.whatmobile.com.pk/Oppo_Mobiles_Prices">
+                Oppo mobile phone price in Pakistan WhatMobile
                 </Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
           <h6>HamariWeb</h6>
-            <ul className="description-ul">
+          <ul className="description-ul">
               <li className="description-para">
-                <Link href={`/Phone/${mobileDetail?.brand?.toUpperCase()} `}>
-                  {mobileDetail.brand} used mobile phones prices in Pakistan
+                <Link href="https://hamariweb.com/">
+                Mobile phone prices in Pakistan HamariWeb
                 </Link>
               </li>
               <li className="description-para">
-                <Link
-                  href={`/advancesearch?brand=${mobileDetail?.brand?.toUpperCase()}&city=Lahore`}
-                >
-                  {mobileDetail.brand} used mobile phone for sale in Lahore{" "}
+                <Link href={`https://hamariweb.com/`}>
+                Latest mobile phone prices in Pakistan HamariWeb
                 </Link>
               </li>
               <li className="description-para">
-                <Link
-                  href={`/advancesearch?brand=${mobileDetail?.brand?.toUpperCase()}&city=&city=Karachi`}
-                >
-                  {mobileDetail.brand} used mobile phone for sale in Karachi
-                </Link>{" "}
-              </li>
-              <li className="description-para">
-                <Link
-                  href={`/advancesearch?brand=${mobileDetail?.brand?.toUpperCase()}&city=&city=Islamabad`}
-                >
-                  {mobileDetail.brand} used mobile phone for sale in Islamabad
+                <Link href={"https://hamariweb.com/"}>
+                latest mobile Price list in Pakistan HamariWeb
                 </Link>
               </li>
               <li className="description-para">
-                <Link href="/News">{mobileDetail.brand} mobile phone news</Link>
-              </li>
-              <li className="description-para">
-                <Link href="/Reviews">
-                  {mobileDetail.brand} mobile phone reviews
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href="/Compare">
-                  Compare {mobileDetail.brand} mobile phones
-                </Link>
-              </li>
-              <li className="description-para">
-                <Link href="/AdvanceSearch">
-                  Search {mobileDetail.brand} phones by Advance Search{" "}
+                <Link href="https://hamariweb.com/mobiles/oppo">
+                Oppo mobile phone price in Pakistan HamariWeb
                 </Link>
               </li>
             </ul>
           </div>
         </div>
+
       </div>
     </section>
   );
