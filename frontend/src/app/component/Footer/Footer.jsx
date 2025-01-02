@@ -1,3 +1,4 @@
+"use client";
 import "./Footer.css";
 import Logo from "../../../../public/images/MOBILE PRI.png";
 import Image from "next/image";
