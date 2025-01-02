@@ -70,7 +70,7 @@ export const fetch10LatestMobilesWithPrices = async (req, res) => {
       if (Year) {
         const startOfYear = new Date(`${Year}-01-01T00:00:00.000Z`); // Start of the year
         const endOfYear = new Date(`${Year}-12-31T23:59:59.999Z`); // End of the year
-        filter.release = { $gte: startOfYear, $lte: endOfYear };
+        filterMobile.release = { $gte: startOfYear, $lte: endOfYear };
       }
 
       const latestMobiles = await Mobile.find(filterMobile).sort({ release: -1 }).limit(10);
