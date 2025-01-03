@@ -13,14 +13,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdvanceFilters, selectAdvanceFilterMobiles } from '../../../../redux/mobileSlicer';
 import { FormatListBulleted, Window } from "@mui/icons-material";
 import slugify from 'slugify';
-// import { useRouter } from "next/router";
+import { toast } from 'react-toastify';
+
 const AdvanceSearchComponent = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const generateSlug = (title) => {
         return `${slugify(title)}`;
     };
-    const  loading  = useSelector((state) => state.mobile.loading);
+    const loading = useSelector((state) => state.mobile.loading);
     const [displayView, setDisplayView] = useState("list");
     const advanceMobiles = useSelector(selectAdvanceFilterMobiles);
     const [advanceData, setAdvanceData] = useState([]);
@@ -35,7 +36,7 @@ const AdvanceSearchComponent = () => {
     const queryBackCamMax = searchParams.get('backCamMax');
     const queryPriceMin = searchParams.get('minPrice');
     const queryPriceMax = searchParams.get('maxPrice');
-    const [brandName, setBrandName] = useState("");
+    const [brandName, setBrandName] = useState(queryBrand || "");
     const [modelName, setModelName] = useState(queryModel || "");
     const [ramRange, setRamRange] = useState([queryRamMin || 2, queryRamMax || 12]);
     const [storageRange, setStorageRange] = useState([queryStorageMin || 16, queryStorageMax || 1024]);
@@ -47,9 +48,15 @@ const AdvanceSearchComponent = () => {
     const [isSmallLaptop, setIsSmallLaptop] = useState(false);
     // const [currentBrand, setCurrentBrand] = useState(brandName);
     const [isSmallMobile, setIsSmallMobile] = useState(false);
-    // console.log(loading,"Loading");
+    const [selectedYear, setSelectedYear] = useState("");
 
-    
+    const handleSelect = (year) => {
+      setSelectedYear(year);
+    };
+  
+    const years = ["2020", "2021", "2022", "2023", "2024"];
+    const mainColor = "#e0134e";
+  
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 1024px)");
         const handleChange = () => setIsMobile(mediaQuery.matches);
@@ -59,20 +66,20 @@ const AdvanceSearchComponent = () => {
 
         return () => mediaQuery.removeEventListener("change", handleChange);
     }, []);
-    useEffect(() => {
-        if (queryBrand && queryBrand !== brandName) {
-            setBrandName(queryBrand)
-            // console.log("dsda");
+    // useEffect(() => {
+    //     if (queryBrand && queryBrand !== brandName) {
+    //         setBrandName(queryBrand)
+    //         // console.log("dsda");
 
-        }
-    }, [queryBrand])
-    useEffect(() => {
-        if (queryModel && queryModel !== modelName) {
-            setModelName(queryModel)
-            //  console.log("dsda");
+    //     }
+    // }, [queryBrand])
+    // useEffect(() => {
+    //     if (queryModel && queryModel !== modelName) {
+    //         setModelName(queryModel)
+    //         //  console.log("dsda");
 
-        }
-    }, [queryModel])
+    //     }
+    // }, [queryModel])
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 1280px)");
 
@@ -100,23 +107,23 @@ const AdvanceSearchComponent = () => {
         return () => mediaQuery.removeEventListener("change", handleChange);
     }, []);
     useEffect(() => {
-        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page }));
-    }, [dispatch, page, brandName, modelName]);
-    // useEffect(() => {
-    //     if (advanceMobiles?.data?.length > 0) {
-    //         setAdvanceData((prevData) => [...prevData, ...advanceMobiles?.data]);
-    //     }
-    // }, [advanceMobiles]);
+        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page,Year: selectedYear }));
+    }, [dispatch, page]);
     useEffect(() => {
         if (advanceMobiles?.data?.length > 0) {
-            if (advanceData.length === 0 || advanceData[0]?.mobile.brand !== brandName && brandName !== "" || advanceData[0]?.mobile.model !== modelName || advanceData[0]?.mobile.model !== advanceData[1]?.mobile.model) {
-                setAdvanceData([...advanceMobiles.data]);
-            } else {
-                // Append data for "load more"
-                setAdvanceData((prevData) => [...prevData, ...advanceMobiles.data]);
-            }
+            setAdvanceData((prevData) => [...prevData, ...advanceMobiles?.data]);
         }
-    }, [advanceMobiles, brandName, modelName]);
+    }, [advanceMobiles]);
+    // useEffect(() => {
+    //     if (advanceMobiles?.data?.length > 0) {
+    //         if (advanceData[0]?.mobile.brand !== brandName && brandName !== "" || advanceData[0]?.mobile.model !== modelName || advanceData[0]?.mobile.model !== advanceData[1]?.mobile.model) {
+    //             setAdvanceData([...advanceMobiles.data]);
+    //         } else {
+    //             // Append data for "load more"
+    //             setAdvanceData((prevData) => [...prevData, ...advanceMobiles.data]);
+    //         }
+    //     }
+    // }, [advanceMobiles, brandName, modelName]);
     // console.log(advanceData,"Advance Data");
 
     const handleRamChange = (values) => {
@@ -137,10 +144,17 @@ const AdvanceSearchComponent = () => {
         setPriceRange(values);
         // fetchAds();
     };
+    // console.log(selectedYear,"sdsajkdhsjdh");
+    useEffect(()=>{
+           if(advanceMobiles?.message){
+            toast.error(advanceMobiles?.message)
+           }
+    },[advanceMobiles])
     const handleSearch = (e) => {
         e.preventDefault();
         setAdvanceData([]);
-        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page }))
+        
+        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page,Year: selectedYear }))
         const params = new URLSearchParams(searchParams); // Clone existing query parameters
         params.set("brand", brandName);
         params.set("model", modelName);
@@ -152,6 +166,7 @@ const AdvanceSearchComponent = () => {
         params.set("backCamMax", backCamRange[1]);
         params.set("minPrice", priceRange[0]);
         params.set("maxPrice", priceRange[1]);
+        params.set("Year", selectedYear)
         router.push(`/AdvanceSearch?${params.toString()}`);
     }
     // console.log(advanceMobiles, "Advance Mobiles");
@@ -163,15 +178,17 @@ const AdvanceSearchComponent = () => {
         setBackCamRange([4, 50]);
         setPriceRange([0, 700000]);
     }
-    if (advanceMobiles.length === 0 ) return (
+    
+    if (advanceMobiles.length === 0) return (
         <div className="loading__class" >
-          <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
+            <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
         </div>
-      )
+    )
+    
     return (
         <>
             <div className='mt-4 mb-4'>
-                {brandName === "" && <h1>Latest Mobile Price in Pakistan</h1>} {(brandName !== "") && <h1> {brandName} Mobile Price in Pakistan {priceRange[0]} to {priceRange[1]}</h1>}
+                {brandName === "" && <h1 className='advance__heading'>Latest Mobile Price in Pakistan</h1>} {(brandName !== "") && <h1> {brandName} Mobile Price in Pakistan {priceRange[0]} to {priceRange[1]}</h1>}
             </div>
             <div className={`d-flex ${isMobile ? "flex-column" : "flex-row"} py-1 min-vh-100 gap-4 mb-4`}>
                 <div className={`${isMobile ? "col-12" : "col-3"} border border-2 p-4 rounded h-50 `}>
@@ -256,7 +273,7 @@ const AdvanceSearchComponent = () => {
                                             tipProps={{ placement: 'top', visible: true }}
                                             className="custom-slider"
                                         />
-                                        <div className='d-flex justify-content-between mt-2'><input className='form-control w-auto' value={backCamRange[0]} type='number' min={4} max={49} onChange={(e) => setBackCamRange([e.target.value, backCamRange[1]])} /> <input value={backCamRange[1]} className='form-control w-auto' type='number' min={5} max={50} onChange={(e) => setBackCamRange([backCamRange[0], e.target.value])} /> </div>
+                                        <div className='d-flex justify-content-between mt-2'><input className='form-control w-auto' value={backCamRange[0]} type='number' min={4} max={49} onChange={(e) => setBackCamRange([e.target.value, backCamRange[1]])} /> <input value={backCamRange[1]} className='form-control w-auto' type='number' min={5} max={100} onChange={(e) => setBackCamRange([backCamRange[0], e.target.value])} /> </div>
 
                                     </Form.Group>
                                     <Form.Group controlId="backCam" >
@@ -280,8 +297,23 @@ const AdvanceSearchComponent = () => {
 
                                     </Form.Group>
                                 </div>
-
+                                <div className=''>
+                                    <h3 className='year__heading mb-1'>Select Year</h3>
+                                    <div className="flex space-x-2 flex-wrap">
+                                        {years.map((year) => (
+                                            <div
+                                                key={year}
+                                                type='button'
+                                                className={`${selectedYear === year ?"select_year":"not-select-year"} mb-2`}
+                                                onClick={() => handleSelect(year)}
+                                            >
+                                                {year}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
+
                             <hr />
                         </div>
                         <div className='w-100 advance__btn'>
@@ -303,7 +335,7 @@ const AdvanceSearchComponent = () => {
                         </div>
                     </div>
                     <div className={`d-flex flex-wrap mt-2 justify-content-between gap-3 ${displayView === "list" ? "flex-column" : "flex-row"}`}>
-
+                    {advanceMobiles?.message && <h2 className="text-center">{advanceMobiles?.message}</h2>}
                         {advanceData && advanceData?.length > 0 && advanceData.map((mobile, index) => (
                             <div key={index} className={`mobile__card p-2 ${displayView === "list" ? "w-100" : "w-[48%]"} gap-2`}>
                                 <div className={` gap-2 p-2 d-flex ${displayView === "grid" || isSmallMobile ? "flex-column align-items-center" : "flex-row"}`}>

@@ -61,7 +61,6 @@
 .advance__search__slider__div > div > div > p{
     font-weight: 600;
     font-size: 18px;
-    /* color: #e0134e;  */
 }
 .advance__search__slider__div > div label{
     font-size: 20px;
@@ -111,7 +110,36 @@ form >div h5{
 .content__tr td{
     font-weight: 500;
 }
-h1{
+/* h1{
+} */
+ .advance__heading{
     font-size: 26px;
     font-weight: 600;
-}
+
+ }
+ .not-select-year{
+    background: #fff;
+    color: #e0134e;
+    border: 1px solid #e0134e;
+    padding: 6px;
+    width: 80px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+ }
+ .select_year{
+    background: #e0134e;
+    color: #fff;
+    /* border: 1px solid #e0134e; */
+    padding: 6px;
+    width: 80px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center; 
+ }
+ .year__heading{
+    font-size: 22px;
+    font-weight: 600;
+    color: #e0134e;
+
+ }

@@ -45,12 +45,12 @@ const PhoneDetail = () => {
   );
 
   const sources = mobileDetail?.prices.map((price) => price.source);
-  console.log("Sources", sources);
+  // console.log("Sources", sources);
 
   const limitCharacters = (text, limit) => {
     return text?.length > limit ? text?.slice(0, limit) + "..." : text;
   };
-  if (loading)
+  if (!mobileDetail)
     return (
       <div className="loading__class">
         <DotLottieReact
@@ -151,7 +151,7 @@ const PhoneDetail = () => {
               </div>
             </div>
             <div className="w-50 text-center phone__picture__section">
-            <h3 className="model__div px-2 mb-2">{mobileDetail?.mobile.model}</h3>
+            <h1 className="model__div px-2 mb-2">{mobileDetail?.mobile.model}</h1>
 
               <Image
                 src={mobileDetail?.mobile.imageSRC || image1}
