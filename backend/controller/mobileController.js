@@ -111,7 +111,7 @@ export const fetch10LatestMobilesWithPrices = async (req, res) => {
 export const fetchAdvanceSearchApi = async (req, res) => {
   try {
     const threshold = 1; // Adjust similarity threshold as needed
-    const { model, brand, minRam,maxRam, minRom, maxRom, min_Back_Cam, max_Back_Cam,minPrice,maxPrice, page = 1, limit = 10 } = req.query;
+    const { model, brand, minRam,maxRam, minRom, maxRom, min_Back_Cam, max_Back_Cam,minPrice,maxPrice, page = 1, limit = 10, Year } = req.query;
     const filterMobile = {};
 
     if (model) {
@@ -133,6 +133,11 @@ export const fetchAdvanceSearchApi = async (req, res) => {
     }
     if(minPrice && maxPrice){
       filterMobile.price = { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) };
+    }
+    if (Year) {
+      const startOfYear = new Date(`${Year}-01-01T00:00:00.000Z`); // Start of the year
+      const endOfYear = new Date(`${Year}-12-31T23:59:59.999Z`); // End of the year
+      filterMobile.release = { $gte: startOfYear, $lte: endOfYear };
     }
 
     const totalMobiles = await Mobile.countDocuments(filterMobile);
@@ -259,7 +264,7 @@ export const fetchSearchMobile = async (req, res) =>{
 //mobiles filters
 export const fetchMobileFilters = async (req, res) => {
   try {
-    const { brand, model, Ram, Rom, Back_Cam } = req.query;
+    const { brand, model, Ram, Rom, Back_Cam ,Year} = req.query;
 
     const filterMobile = {};
 
@@ -277,6 +282,11 @@ export const fetchMobileFilters = async (req, res) => {
     }
     if (Back_Cam) {
       filterMobile.Back_Cam = parseInt(Back_Cam);
+    }
+    if (Year) {
+      const startOfYear = new Date(`${Year}-01-01T00:00:00.000Z`); // Start of the year
+      const endOfYear = new Date(`${Year}-12-31T23:59:59.999Z`); // End of the year
+      filterMobile.release = { $gte: startOfYear, $lte: endOfYear };
     }
 
     const mobiles = await Mobile.find(filterMobile).limit(10);

@@ -259,8 +259,6 @@ const PhoneDetail = () => {
                         {source}
                       </th>
                     ))}
-                  <th scope="col">MobileMate</th>
-                  <th scope="col">PriceOye</th>
                 </tr>
               </thead>
               <tbody>
@@ -268,13 +266,15 @@ const PhoneDetail = () => {
                   {mobileDetail &&
                     mobileDetail?.prices?.map((mobile, index) => (
                       <td key={index}>
-                        <a target="_blank" href={mobile.href}>
-                          {mobile.price} PKR
-                        </a>
+                        {mobile.href === "N/A" ? (
+                      <span className="fw-semibold">{mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}</span>
+                    ) : (
+                      <a target="_blank" href={mobile.href}>
+                        {mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}
+                      </a>
+                    )}
                       </td>
                     ))}
-                  <td>Coming Soon</td>
-                  <td>Coming Soon</td>
                 </tr>
               </tbody>
             </table>
@@ -292,13 +292,13 @@ const PhoneDetail = () => {
                     <tr key={index} className="content__tr">
                       <td>{mobile.source}</td>
                       <td>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={mobile.href}
-                        >
-                          {mobile.price} PKR
-                        </a>
+                      {mobile.href === "N/A" ? (
+                      <span className="fw-semibold">{mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}</span>
+                    ) : (
+                      <a target="_blank" href={mobile.href}>
+                        {mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}
+                      </a>
+                    )}
                       </td>
                     </tr>
                   ))}
@@ -730,7 +730,6 @@ const PhoneDetail = () => {
         </div>
         {/* our website */}
         <div className="row">
-          <h6 className="fw-bold text-center bg-[#eee]">MobilePrice.biz.pk</h6>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul">
               <li className="description-para">
@@ -778,59 +777,59 @@ const PhoneDetail = () => {
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul mx-1">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?minRam=4&maxRam=4`}>4GB Ram Mobile Phones Price in Pakistan{" "}</Link>
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minRam=4&maxRam=4`}>{mobileDetail?.mobile?.brand}{" "}4GB Ram Mobile Phones Price in Pakistan{" "}</Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?minRam=6&maxRam=6`}> 6GB Ram Mobile Phones Price in Pakistan</Link>
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minRam=6&maxRam=6`}>{mobileDetail?.mobile?.brand}{" "}6GB Ram Mobile Phones Price in Pakistan</Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?minRam=8&maxRam=8`}>8GB Ram Mobile Phones Price in Pakistan</Link>
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minRam=8&maxRam=8`}>{mobileDetail?.mobile?.brand}{" "}8GB Ram Mobile Phones Price in Pakistan</Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?minRam=12&maxRam=12`}>12GB Ram Mobile Phones Price in Pakistan</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
-            <ul className="description-ul">
-              <li className="description-para">
-                <Link href={`/AdvanceSearch?storageMin=64&storageMax=64`}>64GB Rom Mobile Phones  Price in Pakistan</Link>
-              </li>
-              <li className="description-para">
-                <Link href={`/AdvanceSearch?storageMin=128&storageMax=128`}>128GB Rom Mobile Phones Price in Lahore</Link>
-              </li>
-              <li className="description-para">
-                <Link href={`/AdvanceSearch?storageMin=256&storageMax=256`}>256GB Rom Mobile Phones Price in Pakistan</Link>
-              </li>
-              <li className="description-para">
-                <Link href={`/AdvanceSearch?storageMin=1024&storageMax=1024`}>1TB Rom Mobile Phones Price in Pakistan</Link>
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minRam=12&maxRam=12`}>{mobileDetail?.mobile?.brand}{" "}12GB Ram Mobile Phones Price in Pakistan</Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?backCamMin=20&backCamMax=29`}>20MP Camera Phones Price in Pakistan</Link>
+                <Link href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&storageMin=64&storageMax=64`}>{mobileDetail?.mobile?.brand}{" "}64GB Rom Mobile Phones  Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&storageMin=128&storageMax=128`}>{mobileDetail?.mobile?.brand}{" "}128GB Rom Mobile Phones Price in Lahore</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&storageMin=256&storageMax=256`}>{mobileDetail?.mobile?.brand}{" "}256GB Rom Mobile Phones Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&storageMin=1024&storageMax=1024`}>{mobileDetail?.mobile?.brand}{" "}1TB Rom Mobile Phones Price in Pakistan</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
+            <ul className="description-ul">
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&backCamMin=20&backCamMax=29`}>{mobileDetail.mobile.brand}{" "} 20MP Camera Phones Price in Pakistan</Link>
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?backCamMin=30&backCamMax=49`}
+                  href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&backCamMin=30&backCamMax=49`}
                 >
-                  30MP Camera Phones Price in Pakistan
+                 {mobileDetail.mobile.brand}{" "}30MP Camera Phones Price in Pakistan
                 </Link>
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?backCamMin=50&backCamMax=99`}
+                  href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&backCamMin=50&backCamMax=99`}
                 >
-                  50MP Camera Phones Price in Pakistan
+                  {mobileDetail.mobile.brand}{" "}50MP Camera Phones Price in Pakistan
                 </Link>{" "}
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?backCamMin=100&backCamMax=99`}
+                  href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&backCamMin=100&backCamMax=99`}
                 >
-                  100MP Camera Phones Price in Pakistan
+                  {mobileDetail.mobile.brand}{" "}100MP Camera Phones Price in Pakistan
                 </Link>
               </li>
               

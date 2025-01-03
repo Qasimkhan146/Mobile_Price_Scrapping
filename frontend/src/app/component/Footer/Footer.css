@@ -1,25 +1,10 @@
 .footer{
     background-color: #e0134e;
     color: #fff;
-    padding: 20px;
-    width: 100%;
+    width: 100%; 
      
 }
-.footer h1{
-    font-size: 30px;
-    font-weight: 600;
-}
-.footer > div h3{
-    font-size: 22px;
-    margin-bottom: 10px;
-    /* text-align: center; */
-    font-weight: 600;
-}
-.footer > div a{
-    font-size: 16px;
-    /* text-align: center; */
-    font-weight: 550;
-}
+
 .footer img{
-    height: 70px;
+    height: 40px;
 }
