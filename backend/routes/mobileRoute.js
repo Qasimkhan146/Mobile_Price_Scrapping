@@ -13,5 +13,5 @@ mobileRouter.get("/fetchAdvanceFilters", fetchAdvanceSearchApi);
 mobileRouter.post("/createMobile",upload.single("image"), createMobile);
 mobileRouter.get("/mobileFilters",fetchMobileFilters);
 // mobileRouter.put("/updateMobile/:model",fetchMobileWithPriceById)
-mobileRouter.put("/updateMobile/:model",updateMobileAndPrices)
+mobileRouter.put("/updateMobile/:model",authenticateToken,authorizeRole("admin"),updateMobileAndPrices)
 export default mobileRouter;
