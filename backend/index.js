@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
-import connectDB from "./config/mongoConfig.js";
+import connectDB from "./config/mongoDBconfig.js";
 // import mobileRouter from "./routes/mobileRoute.js";
 import brandRouter from "./routes/brandRoute.js";
 // import adminRoute from "./routes/userRoute.js";
