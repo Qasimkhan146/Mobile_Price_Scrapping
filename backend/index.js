@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import connectDB from "./config/mongoConfig.js";
 // import mobileRouter from "./routes/mobileRoute.js";
-// import brandRouter from "./routes/brandRoute.js";
+import brandRouter from "./routes/brandRoute.js";
 // import adminRoute from "./routes/userRoute.js";
 // import authRoute from "./routes/authRoute.js";
 import mobileDetailsRoute from "./routes/mobileDetailsRoute.js";
@@ -28,7 +28,7 @@ app.use(cookieParser());
 dotenv.config();
 
 app.use("/mobile",mobileDetailsRoute);
-// app.use("/brand",brandRouter);
+app.use("/brand",brandRouter);
 // app.use("/auth",authRoute);
 // app.use("/admin",adminRoute);
 const port = 4501;

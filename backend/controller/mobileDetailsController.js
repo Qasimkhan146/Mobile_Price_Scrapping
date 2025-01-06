@@ -17,7 +17,32 @@ export const fetchSingleMobilePrice = async (req, res) => {
 // fetch ten latest mobiles
 export const fetch10LatestMobiles = async (req, res) => {
     try{
-        const mobiles = await MobileDetails.find().limit(10).sort({release: -1});
+        const {model, brand, Ram, Rom, Back_Cam,Year} = req.query;
+        const filterMobile = {};
+        if(model){
+            filterMobile.model = { $regex: model, $options: "i" };
+        }
+        if(brand){
+            filterMobile.brand = { $regex: brand, $options: "i" };
+        }
+        if(Ram){
+            filterMobile.Ram = parseInt(Ram);
+        }
+        if(Rom){
+            filterMobile.Rom = parseInt(Rom);
+        }
+        if(Back_Cam){
+            filterMobile.Back_Cam = parseInt(Back_Cam);
+        }
+        if(Year){
+            const startOfYear = new Date(`${Year}-01-01T00:00:00.000Z`); // Start of the year
+            const endOfYear = new Date(`${Year}-12-31T23:59:59.999Z`); // End of the year
+            filterMobile.release = { $gte: startOfYear, $lte: endOfYear };
+        }
+        const mobiles = await MobileDetails.find(filterMobile).limit(10).sort({release: -1});
+        if(!mobiles.length){
+            return res.status(404).json({message:"Mobile not found"});
+        }
         res.status(200).json(mobiles);
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
@@ -152,3 +177,16 @@ export const updateMobile = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+
+export const fetchAllMobiles = async (req, res) => {
+  try{
+    const mobiles = await MobileDetails.find();
+    if(!mobiles.length){
+      return res.status(404).json({message:"No mobiles found"});
+    }
+    res.status(200).json(mobiles);
+  }
+  catch(error){
+    res.status(500).json({message:"Internal Server Error",error:error.message})
+  }
+}
