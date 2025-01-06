@@ -51,12 +51,12 @@ const AdvanceSearchComponent = () => {
     const [selectedYear, setSelectedYear] = useState("");
 
     const handleSelect = (year) => {
-      setSelectedYear(year);
+        setSelectedYear(year);
     };
-  
+
     const years = ["2020", "2021", "2022", "2023", "2024"];
     const mainColor = "#e0134e";
-  
+
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 1024px)");
         const handleChange = () => setIsMobile(mediaQuery.matches);
@@ -107,11 +107,11 @@ const AdvanceSearchComponent = () => {
         return () => mediaQuery.removeEventListener("change", handleChange);
     }, []);
     useEffect(() => {
-        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page,Year: selectedYear }));
+        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page, Year: selectedYear }));
     }, [dispatch, page]);
     useEffect(() => {
-        if (advanceMobiles?.data?.length > 0) {
-            setAdvanceData((prevData) => [...prevData, ...advanceMobiles?.data]);
+        if (advanceMobiles?.latestMobiles?.length > 0) {
+            setAdvanceData((prevData) => [...prevData, ...advanceMobiles?.latestMobiles]);
         }
     }, [advanceMobiles]);
     // useEffect(() => {
@@ -145,16 +145,16 @@ const AdvanceSearchComponent = () => {
         // fetchAds();
     };
     // console.log(selectedYear,"sdsajkdhsjdh");
-    useEffect(()=>{
-           if(advanceMobiles?.message){
+    useEffect(() => {
+        if (advanceMobiles?.message) {
             toast.error(advanceMobiles?.message)
-           }
-    },[advanceMobiles])
+        }
+    }, [advanceMobiles])
     const handleSearch = (e) => {
         e.preventDefault();
         setAdvanceData([]);
-        
-        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page,Year: selectedYear }))
+
+        dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page, Year: selectedYear }))
         const params = new URLSearchParams(searchParams); // Clone existing query parameters
         params.set("brand", brandName);
         params.set("model", modelName);
@@ -175,16 +175,17 @@ const AdvanceSearchComponent = () => {
         setModelName("");
         setRamRange([2, 12]);
         setStorageRange([16, 1024]);
-        setBackCamRange([4, 50]);
+        setBackCamRange([4, 100]);
         setPriceRange([0, 700000]);
+        setSelectedYear("")
     }
-    
+
     if (advanceMobiles.length === 0) return (
         <div className="loading__class" >
             <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
         </div>
     )
-    
+
     return (
         <>
             <div className='mt-4 mb-4'>
@@ -304,7 +305,7 @@ const AdvanceSearchComponent = () => {
                                             <div
                                                 key={year}
                                                 type='button'
-                                                className={`${selectedYear === year ?"select_year":"not-select-year"} mb-2`}
+                                                className={`${selectedYear === year ? "select_year" : "not-select-year"} mb-2`}
                                                 onClick={() => handleSelect(year)}
                                             >
                                                 {year}
@@ -335,28 +336,28 @@ const AdvanceSearchComponent = () => {
                         </div>
                     </div>
                     <div className={`d-flex flex-wrap mt-2 justify-content-between gap-3 ${displayView === "list" ? "flex-column" : "flex-row"}`}>
-                    {advanceMobiles?.message && <h2 className="text-center">{advanceMobiles?.message}</h2>}
+                        {advanceMobiles?.message && <h2 className="text-center">{advanceMobiles?.message}</h2>}
                         {advanceData && advanceData?.length > 0 && advanceData.map((mobile, index) => (
                             <div key={index} className={`mobile__card p-2 ${displayView === "list" ? "w-100" : "w-[48%]"} gap-2`}>
                                 <div className={` gap-2 p-2 d-flex ${displayView === "grid" || isSmallMobile ? "flex-column align-items-center" : "flex-row"}`}>
 
-                                    <Image src={mobile.mobile.imageSRC} alt={mobile.mobile.model} width={100} height={100} />
+                                    <Image src={mobile.imageSRC} alt={mobile.model} width={100} height={100} />
                                     <div className={` ${displayView === "grid" ? "w-100" : "w-[80%]"} ${isSmallMobile && "w-100 flex-column"} d-flex justify-content-between`}>
                                         <div>
-                                            <h3>{mobile.mobile.model}</h3>
-                                            <p><b>Brand: </b>{mobile.mobile.brand}</p>
-                                            <p><b>Price: </b>Rs {mobile.mobile.price}</p>
+                                            <h3>{mobile.model}</h3>
+                                            <p><b>Brand: </b>{mobile.brand}</p>
+                                            <p><b>Price: </b>Rs {mobile.price}</p>
                                         </div>
                                         <div>
-                                            <p><b>Ram:</b> {mobile.mobile.Ram} GB</p>
-                                            <p><b>Back Camera:</b> {mobile.mobile.Back_Cam} MP</p>
-                                            <p><b>Storage:</b> {mobile.mobile.Rom} GB</p>
-                                            <Link className='font-bold underline' href={`/Mobile/${generateSlug(mobile.mobile.model)}`}>More Details</Link>
+                                            <p><b>Ram:</b> {mobile.Ram} GB</p>
+                                            <p><b>Back Camera:</b> {mobile.Back_Cam} MP</p>
+                                            <p><b>Storage:</b> {mobile.Rom} GB</p>
+                                            <Link className='font-bold underline' href={`/Mobile/${generateSlug(mobile.model)}`}>More Details</Link>
                                         </div>
                                         {(displayView === "list" && !isSmallLaptop) && <div>
-                                            <p><b>Front Camera:</b> {mobile.mobile.front_Cam} MP</p>
-                                            <p><b>Chipset:</b> {mobile.mobile.Chipset}</p>
-                                            <p><b>Battery:</b> {mobile.mobile.Capacity} MAH</p>
+                                            <p><b>Front Camera:</b> {mobile.front_Cam} MP</p>
+                                            <p><b>Chipset:</b> {mobile.Chipset}</p>
+                                            <p><b>Battery:</b> {mobile.Capacity} MAH</p>
 
                                         </div>
                                         }
@@ -366,27 +367,51 @@ const AdvanceSearchComponent = () => {
                                     <table className="overflow-auto w-100 table border-1 table-responsive">
                                         <thead className="price__head">
                                             <tr>
-                                                {mobile?.prices?.length > 0 && mobile?.prices?.map((source, index) => (
-                                                    <th key={index} scope="col">
-                                                        {source.source.includes('Mobilemate.io') ? source.source.replace('.io', '') : source.source}
-                                                    </th>
-                                                ))}
-
+                                                <th>Mobilemate</th>
+                                                <th>Hamari Web</th>
+                                                <th>WhatMobile</th>
+                                                <th>PriceOye</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr className="content__tr">
-                                                {mobile && mobile?.prices?.map((mobile, index) => (
-                                                    <td key={index}>
-                                                        {mobile.href === "N/A" ? (
-                                                            <span className="fw-semibold">{mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}</span>
-                                                        ) : (
-                                                            <a target="_blank" href={mobile.href}>
-                                                                {mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}
-                                                            </a>
-                                                        )}
-                                                    </td>
-                                                ))}
+                                                <td>
+                                                    {mobile?.mobilemate_link === "N/A" ? (
+                                                        <span className="fw-semibold">{mobile?.mobilemate_price === 0 ? "N/A" : `${mobile?.mobilemate_price} PKR`}</span>
+                                                    ) : (
+                                                        <a target="_blank" href={mobile?.mobilemate_link}>
+                                                            {mobile?.mobilemate_price === 0 ? "N/A" : `${mobile?.mobilemate_price} PKR`}
+                                                        </a>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {mobile?.hamariweb_link === "N/A" ? (
+                                                        <span className="fw-semibold">{mobile?.hamariweb_price === 0 ? "N/A" : `${mobile?.hamariweb_price} PKR`}</span>
+                                                    ) : (
+                                                        <a target="_blank" href={mobile?.hamariweb_link}>
+                                                            {mobile?.hamariweb_price === 0 ? "N/A" : `${mobile?.hamariweb_price} PKR`}
+                                                        </a>
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    {mobile?.whatmobile_link === "N/A" ? (
+                                                        <span className="fw-semibold">{mobile?.whatmobile_price === 0 ? "N/A" : `${mobile?.whatmobile_price} PKR`}</span>
+                                                    ) : (
+                                                        <a target="_blank" href={mobile?.whatmobile_link}>
+                                                            {mobile?.whatmobile_price === 0 ? "N/A" : `${mobile?.whatmobile_price} PKR`}
+                                                        </a>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {mobile?.priceoye_link === "N/A" ? (
+                                                        <span className="fw-semibold">{mobile?.priceoye_price === 0 ? "N/A" : `${mobile?.priceoye_price} PKR`}</span>
+                                                    ) : (
+                                                        <a target="_blank" href={mobile?.priceoye_link}>
+                                                            {mobile?.priceoye_price === 0 ? "N/A" : `${mobile?.priceoye_price} PKR`}
+                                                        </a>
+                                                    )}
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

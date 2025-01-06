@@ -25,13 +25,13 @@ const ContentArea = ({ mobiles }) => {
     dispatch(fetch10LatestMobiles());
   }, [dispatch]);
   // const sources = fetch10Mobiles[1]?.prices.map((price) => price.source);
-  const sources = fetch10Mobiles.length > 0 && fetch10Mobiles?.reduce(
-    (maxObj, currentObj) =>
-      currentObj.prices.length > maxObj.prices.length ? currentObj : maxObj,
-    { prices: [] } // Initial value to avoid errors on empty arrays
-  );
-  console.log(sources?.prices,"sourcea");
-  
+  // const sources = fetch10Mobiles.length > 0 && fetch10Mobiles?.reduce(
+  //   (maxObj, currentObj) =>
+  //     currentObj.prices.length > maxObj.prices.length ? currentObj : maxObj,
+  //   { prices: [] } // Initial value to avoid errors on empty arrays
+  // );
+  // console.log(sources?.prices,"sourcea");
+
   useEffect(() => {
     if (fetch10Mobiles?.message) {
       toast.error(fetch10Mobiles.message);
@@ -62,31 +62,53 @@ const ContentArea = ({ mobiles }) => {
           <thead className="contents__head">
             <tr>
               <th scope="col">Mobiles</th>
-              {/* Dynamically render <th> for each source */}
-              {sources?.prices?.length > 0 && sources?.prices?.map((source, index) => (
-                <th key={index} scope="col">
-                  {source.source.includes('Mobilemate.io') ? source.source.replace('.io', '') : source.source}
-                  {/* {source.source} */}
-                </th>
-              ))}
-
+              <th>Mobilemate</th>
+              <th>Hamari Web</th>
+              <th>WhatMobile</th>
+              <th>PriceOye</th>
             </tr>
           </thead>
           <tbody>
             {fetch10Mobiles.length > 0 && fetch10Mobiles.map((mobile, index) => (
               <tr key={index} className="contents__tr">
-                <th scope="row"><Link href={`/Mobile/${generateSlug(mobile.mobile.model)}`}>{mobile.mobile.model}</Link></th>
-                {mobile.prices.map((price, index) => (
-                  <td key={index}>
-                    {price.href === "N/A" ? (
-                      <span className="fw-semibold">{price.price === 0 ? "N/A" : `${price.price} PKR`}</span>
-                    ) : (
-                      <a target="_blank" href={price.href}>
-                        {price.price === 0 ? "N/A" : `${price.price} PKR`}
-                      </a>
-                    )}
-                  </td>
-                ))}
+                <th scope="row"><Link href={`/Mobile/${generateSlug(mobile.model)}`}>{mobile.model}</Link></th>
+                <td>
+                  {mobile.mobilemate_link === "N/A" ? (
+                 <span className="fw-semibold">{mobile.mobilemate_price === 0 ? "N/A" : `${mobile.mobilemate_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobile.mobilemate_link}>
+                      {mobile.mobilemate_price === 0 ? "N/A" : `${mobile.mobilemate_price} PKR`}
+                    </a>
+                  )}
+                </td>
+                <td>
+                  {mobile.hamariweb_link === "N/A" ? (
+                 <span className="fw-semibold">{mobile.hamariweb_price === 0 ? "N/A" : `${mobile.hamariweb_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobile.hamariweb_link}>
+                      {mobile.hamariweb_price === 0 ? "N/A" : `${mobile.hamariweb_price} PKR`}
+                    </a>
+                  )}
+                </td>
+
+                <td>
+                  {mobile.whatmobile_link === "N/A" ? (
+                 <span className="fw-semibold">{mobile.whatmobile_price === 0 ? "N/A" : `${mobile.whatmobile_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobile.whatmobile_link}>
+                      {mobile.whatmobile_price === 0 ? "N/A" : `${mobile.whatmobile_price} PKR`}
+                    </a>
+                  )}
+                </td>
+                <td>
+                  {mobile.priceoye_link === "N/A" ? (
+                 <span className="fw-semibold">{mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobile.priceoye_link}>
+                      {mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}
+                    </a>
+                  )}
+                </td>
               </tr>
             ))}
 
