@@ -53,7 +53,7 @@ export const editMobile = createAsyncThunk(
   "mobile/editMobile",
   async ({ model, updatedData }, { rejectWithValue }) => {
     try {
-      console.log(model,"Model");
+      // console.log(model,"Model");
       
       const response = await fetch(
         `https://7842.mobileprice.biz.pk/mobile/updateMobile/${model}`,
@@ -82,14 +82,14 @@ export const fetchFilterMobiles = createAsyncThunk(
   "mobile/fetchFilterMobiles",
   async ({brand}, { rejectWithValue }) => {
     try {
-      console.log(brand,"Select Brand");
+      // console.log(brand,"Select Brand");
       
       const response = await fetch(
         `https://7842.mobileprice.biz.pk/mobile/mobileFilters?brand=${brand}`
         
       );
       const data = await response.json();
-      console.log("Filter Data", data);
+      // console.log("Filter Data", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -98,16 +98,16 @@ export const fetchFilterMobiles = createAsyncThunk(
 );
 export const fetchAdvanceFilters = createAsyncThunk(
   "mobile/fetchAdvanceFilters",
-  async ({brand,model,minRam,maxRam,minRom,maxRom,min_Back_Cam,max_Back_Cam,minPrice,maxPrice,page}, { rejectWithValue }) => {
+  async ({brand,model,minRam,maxRam,minRom,maxRom,min_Back_Cam,max_Back_Cam,minPrice,maxPrice,page,Year}, { rejectWithValue }) => {
     try {
-      // console.log();
+      // console.log(Year,"dsdsada");
       
       const response = await fetch(
-        `https://7842.mobileprice.biz.pk/mobile/fetchAdvanceFilters?brand=${brand}&model=${model}&minRam=${minRam}&maxRam=${maxRam}&minRom=${minRom}&maxRom=${maxRom}&min_Back_Cam=${min_Back_Cam}&max_Back_Cam=${max_Back_Cam}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}`
+        `https://7842.mobileprice.biz.pk/mobile/fetchAdvanceFilters?brand=${brand}&model=${model}&minRam=${minRam}&maxRam=${maxRam}&minRom=${minRom}&maxRom=${maxRom}&min_Back_Cam=${min_Back_Cam}&max_Back_Cam=${max_Back_Cam}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&Year=${Year}`
         
       );
       const data = await response.json();
-      console.log("Filter Data", data);
+      // console.log("Filter Data", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

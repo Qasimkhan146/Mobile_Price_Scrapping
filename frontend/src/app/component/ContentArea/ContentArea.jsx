@@ -25,7 +25,7 @@ const ContentArea = ({ mobiles }) => {
     dispatch(fetch10LatestMobiles());
   }, [dispatch]);
   // const sources = fetch10Mobiles[1]?.prices.map((price) => price.source);
-  const sources = fetch10Mobiles && fetch10Mobiles.reduce(
+  const sources = fetch10Mobiles.length > 0 && fetch10Mobiles?.reduce(
     (maxObj, currentObj) =>
       currentObj.prices.length > maxObj.prices.length ? currentObj : maxObj,
     { prices: [] } // Initial value to avoid errors on empty arrays
