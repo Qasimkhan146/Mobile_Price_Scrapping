@@ -31,20 +31,20 @@ const PhoneDetail = () => {
     dispatch(fetchMobileDetail(modelName));
   }, [dispatch]);
   // console.log(mobileDetail, "mobileDetail");
-  const features = mobileDetail?.mobile?.Features.split(",").map((feature) =>
+  const features = mobileDetail?.Features.split(",").map((feature) =>
     feature.trim()
   );
-  const Sound = mobileDetail?.mobile?.Audio.split(",").map((feature) =>
+  const Sound = mobileDetail?.Audio.split(",").map((feature) =>
     feature.trim()
   );
-  const cam = mobileDetail?.mobile?.Front.split(",").map((feature) =>
+  const cam = mobileDetail?.Front.split(",").map((feature) =>
     feature.trim()
   );
-  const MainDisplay = mobileDetail?.mobile?.Main.split(",").map((feature) =>
+  const MainDisplay = mobileDetail?.Main.split(",").map((feature) =>
     feature.trim()
   );
 
-  const sources = mobileDetail?.prices.map((price) => price.source);
+  // const sources = mobileDetail?.prices.map((price) => price.source);
   // console.log("Sources", sources);
 
   const limitCharacters = (text, limit) => {
@@ -71,18 +71,18 @@ const PhoneDetail = () => {
               <div className="green__div">
                 <div className="green__underline"></div>
               </div>
-              <p>{mobileDetail?.mobile["2G Band"] ? "2G Band" : ""}</p>
-              <p>{mobileDetail?.mobile["3G Band"] ? "3G Band" : ""}</p>
-              <p>{mobileDetail?.mobile["4G Band"] ? "4G Band" : ""}</p>
-              <p>{mobileDetail?.mobile["5G Band"] ? "5G Band" : ""}</p>
+              <p>{mobileDetail?.["2G Band"] ? "2G Band" : ""}</p>
+              <p>{mobileDetail?.["3G Band"] ? "3G Band" : ""}</p>
+              <p>{mobileDetail?.["4G Band"] ? "4G Band" : ""}</p>
+              <p>{mobileDetail?.["5G Band"] ? "5G Band" : ""}</p>
             </div>
             <div>
               <h5>Memory</h5>
               <div className="green__div">
                 <div className="green__underline"></div>
               </div>
-              <p>{mobileDetail?.mobile.Ram}GB RAM</p>
-              <p>{mobileDetail?.mobile.Rom}GB Storage</p>
+              <p>{mobileDetail?.Ram}GB RAM</p>
+              <p>{mobileDetail?.Rom}GB Storage</p>
               {/* <p>128GB storage</p> */}
             </div>
             <div>
@@ -126,7 +126,7 @@ const PhoneDetail = () => {
             <div className="d-none d-md-flex  flex-column gap-4 w-50 text-end imp__specs">
               <div>
                 <h5>Main Camera's</h5>
-                <b>{mobileDetail?.mobile.Back_Cam}MP</b>
+                <b>{mobileDetail?.Back_Cam}MP</b>
                 <div className="red__underline"></div>
               </div>
               <div>
@@ -136,58 +136,58 @@ const PhoneDetail = () => {
               </div>
               <div>
                 <h5>Bluetooth</h5>
-                <b>{mobileDetail?.mobile.Bluetooth}</b>
+                <b>{mobileDetail?.Bluetooth}</b>
                 <div className="red__underline"></div>
               </div>
               <div>
                 <h5>Weight</h5>
-                <b>{mobileDetail?.mobile.weight}g</b>
+                <b>{mobileDetail?.weight}g</b>
                 <div className="red__underline"></div>
               </div>
               <div>
                 <h5>USB</h5>
-                <b>{mobileDetail?.mobile.USB}</b>
+                <b>{mobileDetail?.USB}</b>
                 <div className="red__underline"></div>
               </div>
             </div>
             <div className="w-50 text-center phone__picture__section">
-            <h1 className="model__div px-2 mb-2">{mobileDetail?.mobile.model}</h1>
+            <h1 className="model__div px-2 mb-2">{mobileDetail?.model}</h1>
 
               <Image
-                src={mobileDetail?.mobile.imageSRC || image1}
+                src={mobileDetail?.imageSRC || image1}
                 height={500}
                 width={500}
                 alt="main-section"
                 className=" custom-image"
               />
               <h3 className="price__div px-2">
-                RS: {mobileDetail?.mobile.price}
+                RS: {mobileDetail?.price}
               </h3>
             </div>
             <div className="d-flex flex-column gap-4 w-50 text-start imp__specs">
               <div>
                 <h5>Screen Size</h5>
-                <b>{mobileDetail?.mobile.Size} Inches</b>
+                <b>{mobileDetail?.Size} Inches</b>
                 <div className="red__underline"></div>
               </div>
               <div>
                 <h5>Resolution</h5>
-                <b>{mobileDetail?.mobile.Resolution}</b>
+                <b>{mobileDetail?.Resolution}</b>
                 <div className="red__underline"></div>
               </div>
               <div>
                 <h5>Color's</h5>
-                <b>{mobileDetail?.mobile.Colors}</b>
+                <b>{mobileDetail?.Colors}</b>
                 <div className="red__underline"></div>
               </div>
               <div>
                 <h5>Front Len's</h5>
-                <b>{mobileDetail?.mobile.front_Cam}MP</b>
+                <b>{mobileDetail?.front_Cam}MP</b>
                 <div className="red__underline"></div>
               </div>
               <div>
                 <h5>Chipset</h5>
-                <b>{mobileDetail?.mobile.Chipset}</b>
+                <b>{mobileDetail?.Chipset}</b>
                 <div className="red__underline"></div>
               </div>
             </div>
@@ -207,8 +207,8 @@ const PhoneDetail = () => {
               <div className="green__div">
                 <div className="green__underline"></div>
               </div>
-              <p>{mobileDetail?.mobile.Capacity} MAH</p>
-              <p>{mobileDetail?.mobile.USB}</p>
+              <p>{mobileDetail?.Capacity} MAH</p>
+              <p>{mobileDetail?.USB}</p>
               {/* <p>128GB storage</p> */}
             </div>
             <div>
@@ -237,8 +237,8 @@ const PhoneDetail = () => {
               <div className="green__div">
                 <div className="green__underline"></div>
               </div>
-              <p>{limitCharacters(mobileDetail?.mobile.CPU, 20)}</p>
-              <p>{mobileDetail?.mobile.Ram}GB RAM</p>
+              <p>{limitCharacters(mobileDetail?.CPU, 20)}</p>
+              <p>{mobileDetail?.Ram}GB RAM</p>
             </div>
           </div>
         </div>
@@ -250,35 +250,58 @@ const PhoneDetail = () => {
             <table className="table border-1 d-none d-md-table table-striped">
               {/* <caption>More Results</caption> */}
               <thead className="content__heads">
-                <tr>
-                  {/* <th scope="col">Mobiles</th> */}
-                  {/* Dynamically render <th> for each source */}
-                  {sources?.length > 0 &&
-                    sources?.map((source, index) => (
-                      <th key={index} scope="col">
-                        {source}
-                      </th>
-                    ))}
-                </tr>
+              <tr>
+              {/* <th scope="col">Mobiles</th> */}
+              <th>Mobilemate</th>
+              <th>Hamari Web</th>
+              <th>WhatMobile</th>
+              <th>PriceOye</th>
+            </tr>
               </thead>
               <tbody>
                 <tr className="content__tr">
-                  {mobileDetail &&
-                    mobileDetail?.prices?.map((mobile, index) => (
-                      <td key={index}>
-                        {mobile.href === "N/A" ? (
-                      <span className="fw-semibold">{mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}</span>
-                    ) : (
-                      <a target="_blank" href={mobile.href}>
-                        {mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}
-                      </a>
-                    )}
-                      </td>
-                    ))}
+                {/* <th scope="row"><Link href={`/Mobile/${generateSlug(mobileDetail?.model)}`}>{mobileDetail?.model}</Link></th> */}
+                <td>
+                  {mobileDetail?.mobilemate_link === "N/A" ? (
+                 <span className="fw-semibold">{mobileDetail?.mobilemate_price === 0 ? "N/A" : `${mobileDetail?.mobilemate_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobileDetail?.mobilemate_link}>
+                      {mobileDetail?.mobilemate_price === 0 ? "N/A" : `${mobileDetail?.mobilemate_price} PKR`}
+                    </a>
+                  )}
+                </td>
+                <td>
+                  {mobileDetail?.hamariweb_link === "N/A" ? (
+                 <span className="fw-semibold">{mobileDetail?.hamariweb_price === 0 ? "N/A" : `${mobileDetail?.hamariweb_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobileDetail?.hamariweb_link}>
+                      {mobileDetail?.hamariweb_price === 0 ? "N/A" : `${mobileDetail?.hamariweb_price} PKR`}
+                    </a>
+                  )}
+                </td>
+
+                <td>
+                  {mobileDetail?.whatmobile_link === "N/A" ? (
+                 <span className="fw-semibold">{mobileDetail?.whatmobile_price === 0 ? "N/A" : `${mobileDetail?.whatmobile_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobileDetail?.whatmobile_link}>
+                      {mobileDetail?.whatmobile_price === 0 ? "N/A" : `${mobileDetail?.whatmobile_price} PKR`}
+                    </a>
+                  )}
+                </td>
+                <td>
+                  {mobileDetail?.priceoye_link === "N/A" ? (
+                 <span className="fw-semibold">{mobileDetail?.priceoye_price === 0 ? "N/A" : `${mobileDetail?.priceoye_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobileDetail?.priceoye_link}>
+                      {mobileDetail?.priceoye_price === 0 ? "N/A" : `${mobileDetail?.priceoye_price} PKR`}
+                    </a>
+                  )}
+                </td>
                 </tr>
               </tbody>
             </table>
-            <table className="w-100 table border-1 d-md-none table-striped">
+            {/* <table className="w-100 table border-1 d-md-none table-striped">
               <thead className="content__head">
                 <tr>
                   <th scope="col">Platform</th>
@@ -303,7 +326,7 @@ const PhoneDetail = () => {
                     </tr>
                   ))}
               </tbody>
-            </table>
+            </table> */}
           </div>
         </div>
         <div className="d-flex flex-column flex-lg-row gap-4 mt-4">
@@ -322,29 +345,29 @@ const PhoneDetail = () => {
                     <div>
                       {" "}
                       <b>2G</b>:{" "}
-                      {mobileDetail?.mobile["2G Band"]
-                        ? mobileDetail?.mobile["2G Band"]
+                      {mobileDetail?.["2G Band"]
+                        ? mobileDetail?.["2G Band"]
                         : ""}
                     </div>
                     <p>
                       {" "}
                       <b>3G</b>:{" "}
-                      {mobileDetail?.mobile["3G Band"]
-                        ? mobileDetail?.mobile["3G Band"]
+                      {mobileDetail?.["3G Band"]
+                        ? mobileDetail?.["3G Band"]
                         : ""}
                     </p>
                     <p>
                       {" "}
                       <b>4G</b>:{" "}
-                      {mobileDetail?.mobile["4G Band"]
-                        ? mobileDetail?.mobile["4G Band"]
+                      {mobileDetail?.["4G Band"]
+                        ? mobileDetail?.["4G Band"]
                         : ""}
                     </p>
                     <p>
                       {" "}
                       <b>5G</b>:{" "}
-                      {mobileDetail?.mobile["5G Band"]
-                        ? mobileDetail?.mobile["5G Band"]
+                      {mobileDetail?.["5G Band"]
+                        ? mobileDetail?.["5G Band"]
                         : ""}
                     </p>
                   </div>
@@ -373,37 +396,37 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Dimensions && "Dimensions"}
+                    {mobileDetail?.Dimensions && "Dimensions"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Dimensions &&
-                      mobileDetail?.mobile?.Dimensions}
+                    {mobileDetail?.Dimensions &&
+                      mobileDetail?.Dimensions}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.weight && "Weight"}
+                    {mobileDetail?.weight && "Weight"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.weight &&
-                      mobileDetail?.mobile?.weight}
+                    {mobileDetail?.weight &&
+                      mobileDetail?.weight}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.SIM && "SIM"}
+                    {mobileDetail?.SIM && "SIM"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.SIM && mobileDetail?.mobile?.SIM}
+                    {mobileDetail?.SIM && mobileDetail?.SIM}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Dimensions && "Dimensions"}
+                    {mobileDetail?.Dimensions && "Dimensions"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Dimensions &&
-                      mobileDetail?.mobile?.Dimensions}
+                    {mobileDetail?.Dimensions &&
+                      mobileDetail?.Dimensions}
                   </p>
                 </div>
               </div>
@@ -415,29 +438,29 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Protection && "Protection"}
+                    {mobileDetail?.Protection && "Protection"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Protection &&
-                      mobileDetail?.mobile?.Protection}
+                    {mobileDetail?.Protection &&
+                      mobileDetail?.Protection}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Size && "Size"}
+                    {mobileDetail?.Size && "Size"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Size &&
-                      `${mobileDetail?.mobile?.Size}Inches`}
+                    {mobileDetail?.Size &&
+                      `${mobileDetail?.Size}Inches`}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Resolution && "Resolution"}
+                    {mobileDetail?.Resolution && "Resolution"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Resolution &&
-                      mobileDetail?.mobile?.Resolution}
+                    {mobileDetail?.Resolution &&
+                      mobileDetail?.Resolution}
                   </p>
                 </div>
               </div>
@@ -449,36 +472,36 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.OS && "OS"}
+                    {mobileDetail?.OS && "OS"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.OS && mobileDetail?.mobile?.OS}
+                    {mobileDetail?.OS && mobileDetail?.OS}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.GPU && "GPU"}
+                    {mobileDetail?.GPU && "GPU"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.GPU &&
-                      `${mobileDetail?.mobile?.GPU}`}
+                    {mobileDetail?.GPU &&
+                      `${mobileDetail?.GPU}`}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.CPU && "CPU"}
+                    {mobileDetail?.CPU && "CPU"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.CPU && mobileDetail?.mobile?.CPU}
+                    {mobileDetail?.CPU && mobileDetail?.CPU}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Chipset && "Chipset"}
+                    {mobileDetail?.Chipset && "Chipset"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Chipset &&
-                      mobileDetail?.mobile?.Chipset}
+                    {mobileDetail?.Chipset &&
+                      mobileDetail?.Chipset}
                   </p>
                 </div>
               </div>
@@ -490,19 +513,19 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Card && "Card Slot"}
+                    {mobileDetail?.Card && "Card Slot"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.OS && mobileDetail?.mobile?.Card}
+                    {mobileDetail?.OS && mobileDetail?.Card}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3  fw-bold">
-                    {mobileDetail?.mobile["Built-in"] && "Internal"}
+                    {mobileDetail?.["Built-in"] && "Internal"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile["Built-in"] &&
-                      `${mobileDetail?.mobile["Built-in"]}`}
+                    {mobileDetail?.["Built-in"] &&
+                      `${mobileDetail?.["Built-in"]}`}
                   </p>
                 </div>
               </div>
@@ -516,19 +539,19 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Main && "Camera"}
+                    {mobileDetail?.Main && "Camera"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Main && mobileDetail?.mobile?.Main}
+                    {mobileDetail?.Main && mobileDetail?.Main}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Features && "Features"}
+                    {mobileDetail?.Features && "Features"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Features &&
-                      `${mobileDetail?.mobile?.Features}`}
+                    {mobileDetail?.Features &&
+                      `${mobileDetail?.Features}`}
                   </p>
                 </div>
               </div>
@@ -542,10 +565,10 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Front && "Front"}
+                    {mobileDetail?.Front && "Front"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Front && mobileDetail?.mobile?.Front}
+                    {mobileDetail?.Front && mobileDetail?.Front}
                   </p>
                 </div>
               </div>
@@ -557,10 +580,10 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Audio && "Audio"}
+                    {mobileDetail?.Audio && "Audio"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Audio && mobileDetail?.mobile?.Audio}
+                    {mobileDetail?.Audio && mobileDetail?.Audio}
                   </p>
                 </div>
               </div>
@@ -572,43 +595,43 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.WLAN && "WLAN"}
+                    {mobileDetail?.WLAN && "WLAN"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.WLAN && mobileDetail?.mobile?.WLAN}
+                    {mobileDetail?.WLAN && mobileDetail?.WLAN}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Bluetooth && "Bluetooth"}
+                    {mobileDetail?.Bluetooth && "Bluetooth"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Bluetooth &&
-                      mobileDetail?.mobile?.Bluetooth}
+                    {mobileDetail?.Bluetooth &&
+                      mobileDetail?.Bluetooth}
                   </p>
                 </div>
                 <div className="row mb-2 spec__subhead">
                   <div className="col-3 gap-2 fw-bold">
-                    {mobileDetail?.mobile?.GPS && "GPS"}
+                    {mobileDetail?.GPS && "GPS"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.GPS && mobileDetail?.mobile?.GPS}
+                    {mobileDetail?.GPS && mobileDetail?.GPS}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Radio && "Radio"}
+                    {mobileDetail?.Radio && "Radio"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Radio && mobileDetail?.mobile?.Radio}
+                    {mobileDetail?.Radio && mobileDetail?.Radio}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.USB && "USB"}
+                    {mobileDetail?.USB && "USB"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.USB && mobileDetail?.mobile?.USB}
+                    {mobileDetail?.USB && mobileDetail?.USB}
                   </p>
                 </div>
               </div>
@@ -620,28 +643,28 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Extra && "Extra Features"}
+                    {mobileDetail?.Extra && "Extra Features"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Extra && mobileDetail?.mobile?.Extra}
+                    {mobileDetail?.Extra && mobileDetail?.Extra}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Sensors && "Sensors"}
+                    {mobileDetail?.Sensors && "Sensors"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Sensors &&
-                      mobileDetail?.mobile?.Sensors}
+                    {mobileDetail?.Sensors &&
+                      mobileDetail?.Sensors}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">
-                    {mobileDetail?.mobile?.Technology && "Technology"}
+                    {mobileDetail?.Technology && "Technology"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.mobile?.Technology &&
-                      mobileDetail?.mobile?.Technology}
+                    {mobileDetail?.Technology &&
+                      mobileDetail?.Technology}
                   </p>
                 </div>
               </div>
@@ -657,71 +680,71 @@ const PhoneDetail = () => {
             <div>
               <h2 className="fs-6">
                 <Link
-                 href={`/Mobile/${mobileDetail?.mobile?.model?.replace(/ /g, "-")}`}
+                 href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
                   className="fw-bold"
                 >
-                  {mobileDetail.mobile.model}{" "}
+                  {mobileDetail?.model}{" "}
                 </Link>
                 Prices in Pakistan 2024
               </h2>
             </div>
             <ul>
               <li>
-                <Link href={`/Mobile/${mobileDetail?.mobile?.model?.replace(/ /g, "-")}`}className="fw-bold">
-                  {mobileDetail.mobile.model}{" "}
+                <Link href={`/Mobile/${mobileDetail.model?.replace(/ /g, "-")}`}className="fw-bold">
+                  {mobileDetail.model}{" "}
                 </Link>
                 Price in Pakistan: PKR.
-                <span className="fw-bold"> {mobileDetail.mobile.price}</span>
+                <span className="fw-bold"> {mobileDetail.price}</span>
               </li>
               <li>
-                <Link href={`/Mobile/${mobileDetail?.mobile?.model?.replace(/ /g, "-")}`} className="fw-bold">
+                <Link href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`} className="fw-bold">
                   {mobileDetail.brand}{" "}
                 </Link>
-                <Link href={`/Mobile/${mobileDetail?.mobile?.model?.replace(/ /g, "-")}`}className="fw-bold">
-                  {mobileDetail.mobile.model}{" "}
+                <Link href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}className="fw-bold">
+                  {mobileDetail.model}{" "}
                 </Link>
                 Price in USD:${" "}
                 <span className="fw-bold">
-                  {mobileDetail.mobile.PriceInUsd}
+                  {mobileDetail.PriceInUsd}
                 </span>
               </li>
             </ul>
-            The <span className="fw-bold"> {mobileDetail.mobile.model}</span> is
+            The <span className="fw-bold"> {mobileDetail.model}</span> is
             powered by{" "}
-            <span className="fw-bold">{mobileDetail.mobile.brand}</span>
+            <span className="fw-bold">{mobileDetail.brand}</span>
             {"'"}s , providing exceptional performance for all your daily
             activities and multitasking. Running on{" "}
-            <span className="fw-bold">{mobileDetail.mobile.os}</span>, this{" "}
-            <span className="fw-bold">{mobileDetail.mobile.model}</span> boasts{" "}
-            <span className="fw-bold">{mobileDetail.mobile.brand}</span>
+            <span className="fw-bold">{mobileDetail.os}</span>, this{" "}
+            <span className="fw-bold">{mobileDetail.model}</span> boasts{" "}
+            <span className="fw-bold">{mobileDetail.brand}</span>
             {"'"}s signature sleek and premium design, measuring{" "}
-            <span className="fw-bold">{mobileDetail.mobile.Dimensions}</span>,
+            <span className="fw-bold">{mobileDetail.Dimensions}</span>,
             making it not only stylish but also comfortable to handle. The{" "}
-            <span className="fw-bold">{mobileDetail.mobile.model}</span>{" "}
+            <span className="fw-bold">{mobileDetail.model}</span>{" "}
             features a{" "}
-            <span className="fw-bold">{mobileDetail.mobile.Size}</span> inch
+            <span className="fw-bold">{mobileDetail.Size}</span> inch
             Retina display with a resolution of{" "}
-            <span className="fw-bold">{mobileDetail.mobile.Resolution}</span>,
+            <span className="fw-bold">{mobileDetail.Resolution}</span>,
             offers an immersive and crystal clear visual experience, perfect for
             streaming, gaming, or everyday use. Under the hood, the{" "}
-            <span className="fw-bold">{mobileDetail.mobile.model}</span>{" "}
-            includes <span className="fw-bold">{mobileDetail.mobile.Ram}</span>{" "}
+            <span className="fw-bold">{mobileDetail.model}</span>{" "}
+            includes <span className="fw-bold">{mobileDetail.Ram}</span>{" "}
             GB of RAM and{" "}
-            <span className="fw-bold">{mobileDetail.mobile.Rom}</span> GB of
+            <span className="fw-bold">{mobileDetail.Rom}</span> GB of
             internal storage, ensuring ample space for your apps, media, and
             files. The{" "}
-            <span className="fw-bold">{mobileDetail.mobile.model}</span> excels
+            <span className="fw-bold">{mobileDetail.model}</span> excels
             in photography, featuring a{" "}
-            <span className="fw-bold">{mobileDetail.mobile.Back_Cam}</span> MP
+            <span className="fw-bold">{mobileDetail.Back_Cam}</span> MP
             rear camera that captures professional quality photos and a{" "}
-            <span className="fw-bold">{mobileDetail.mobile.front_Cam}</span> MP
+            <span className="fw-bold">{mobileDetail.front_Cam}</span> MP
             front camera for stunning selfies and FaceTime calls. Additionally,
             the long lasting{" "}
-            <span className="fw-bold">{mobileDetail.mobile.Capacity}</span> mAh
+            <span className="fw-bold">{mobileDetail.Capacity}</span> mAh
             battery ensures you can enjoy uninterrupted usage throughout the day
             without needing frequent recharges. The{" "}
             <span className="fw-bold">
-              {mobileDetail.mobile.brand} {mobileDetail.mobile.model}
+              {mobileDetail.brand} {mobileDetail.model}
             </span>{" "}
             is the perfect blend of cutting edge technology, style, and
             reliability, making it an ideal choice for anyone seeking a high
@@ -733,8 +756,8 @@ const PhoneDetail = () => {
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minPrice=15000&maxPrice=30000`}>
-                  {mobileDetail?.mobile?.brand} mobile price in Pakistan 15000 to 30000
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=15000&maxPrice=30000`}>
+                  {mobileDetail.brand} mobile price in Pakistan 15000 to 30000
                 </Link>
               </li>
               {/* <li className="description-para">
@@ -748,8 +771,8 @@ const PhoneDetail = () => {
                 </Link>
               </li> */}
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minPrice=30000&maxPrice=50000`}>
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 30000 to 50000
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=30000&maxPrice=50000`}>
+                  {mobileDetail.brand} mobile price in Pakistan 30000 to 50000
                 </Link>
               </li>
               {/* <li className="description-para">
@@ -758,8 +781,8 @@ const PhoneDetail = () => {
                 </Link>
               </li> */}
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minPrice=50000&maxPrice=70000`}>
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 50000 to 70000
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=50000&maxPrice=70000`}>
+                  {mobileDetail.brand} mobile price in Pakistan 50000 to 70000
                 </Link>
               </li>
               {/* <li className="description-para">
@@ -768,8 +791,8 @@ const PhoneDetail = () => {
                 </Link>
               </li> */}
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minPrice=80000&maxPrice=100000`}>
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 80000 to 100000
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=80000&maxPrice=100000`}>
+                  {mobileDetail.brand} mobile price in Pakistan 80000 to 100000
                 </Link>
               </li>
             </ul>
@@ -777,59 +800,59 @@ const PhoneDetail = () => {
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul mx-1">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minRam=4&maxRam=4`}>{mobileDetail?.mobile?.brand}{" "}4GB Ram Mobile Phones Price in Pakistan{" "}</Link>
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=4&maxRam=4`}>{mobileDetail?.brand}{" "}4GB Ram Mobile Phones Price in Pakistan{" "}</Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minRam=6&maxRam=6`}>{mobileDetail?.mobile?.brand}{" "}6GB Ram Mobile Phones Price in Pakistan</Link>
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=6&maxRam=6`}>{mobileDetail?.brand}{" "}6GB Ram Mobile Phones Price in Pakistan</Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minRam=8&maxRam=8`}>{mobileDetail?.mobile?.brand}{" "}8GB Ram Mobile Phones Price in Pakistan</Link>
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=8&maxRam=8`}>{mobileDetail?.brand}{" "}8GB Ram Mobile Phones Price in Pakistan</Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&minRam=12&maxRam=12`}>{mobileDetail?.mobile?.brand}{" "}12GB Ram Mobile Phones Price in Pakistan</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
-            <ul className="description-ul">
-              <li className="description-para">
-                <Link href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&storageMin=64&storageMax=64`}>{mobileDetail?.mobile?.brand}{" "}64GB Rom Mobile Phones  Price in Pakistan</Link>
-              </li>
-              <li className="description-para">
-                <Link href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&storageMin=128&storageMax=128`}>{mobileDetail?.mobile?.brand}{" "}128GB Rom Mobile Phones Price in Lahore</Link>
-              </li>
-              <li className="description-para">
-                <Link href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&storageMin=256&storageMax=256`}>{mobileDetail?.mobile?.brand}{" "}256GB Rom Mobile Phones Price in Pakistan</Link>
-              </li>
-              <li className="description-para">
-                <Link href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&storageMin=1024&storageMax=1024`}>{mobileDetail?.mobile?.brand}{" "}1TB Rom Mobile Phones Price in Pakistan</Link>
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=12&maxRam=12`}>{mobileDetail?.brand}{" "}12GB Ram Mobile Phones Price in Pakistan</Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.mobile?.brand}&backCamMin=20&backCamMax=29`}>{mobileDetail.mobile.brand}{" "} 20MP Camera Phones Price in Pakistan</Link>
+                <Link href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=64&storageMax=64`}>{mobileDetail?.brand}{" "}64GB Rom Mobile Phones  Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=128&storageMax=128`}>{mobileDetail?.brand}{" "}128GB Rom Mobile Phones Price in Lahore</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=256&storageMax=256`}>{mobileDetail?.brand}{" "}256GB Rom Mobile Phones Price in Pakistan</Link>
+              </li>
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=1024&storageMax=1024`}>{mobileDetail?.brand}{" "}1TB Rom Mobile Phones Price in Pakistan</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
+            <ul className="description-ul">
+              <li className="description-para">
+                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&backCamMin=20&backCamMax=29`}>{mobileDetail.brand}{" "} 20MP Camera Phones Price in Pakistan</Link>
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&backCamMin=30&backCamMax=49`}
+                  href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=30&backCamMax=49`}
                 >
-                 {mobileDetail.mobile.brand}{" "}30MP Camera Phones Price in Pakistan
+                 {mobileDetail.brand}{" "}30MP Camera Phones Price in Pakistan
                 </Link>
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&backCamMin=50&backCamMax=99`}
+                  href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=50&backCamMax=99`}
                 >
-                  {mobileDetail.mobile.brand}{" "}50MP Camera Phones Price in Pakistan
+                  {mobileDetail.brand}{" "}50MP Camera Phones Price in Pakistan
                 </Link>{" "}
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.mobile?.brand}&backCamMin=100&backCamMax=99`}
+                  href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=100&backCamMax=99`}
                 >
-                  {mobileDetail.mobile.brand}{" "}100MP Camera Phones Price in Pakistan
+                  {mobileDetail.brand}{" "}100MP Camera Phones Price in Pakistan
                 </Link>
               </li>
               
