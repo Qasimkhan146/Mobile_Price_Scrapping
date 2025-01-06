@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 const ContentArea = ({ mobiles }) => {
   const fetch10Mobiles = useSelector(selectFetch10Mobiles);
+  console.log(fetch10Mobiles,"fetch10Mobiles");
   // const  fetchFilterMobiles  = useSelector(filterMobiles);
   const error = useSelector(selectError);
 
