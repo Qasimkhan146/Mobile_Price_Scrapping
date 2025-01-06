@@ -1,5 +1,4 @@
 import {Router} from "express"
-import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.js";
 import { loginUser, registerUser } from "../controller/authController.js";
 
 const authRoute = Router();

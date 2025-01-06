@@ -40,7 +40,6 @@ export const fetchSingleMobilePrice = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
-
 // fetch 10 latest mobiles with their prices
 export const fetch10LatestMobilesWithPrices = async (req, res) => {
     try {
