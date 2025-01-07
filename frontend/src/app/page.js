@@ -1,3 +1,4 @@
+//page.js   //home page
 import { Col, Container, Row } from "react-bootstrap";
 import HeroSection from "./component/HeroSection/HeroSection";
 
