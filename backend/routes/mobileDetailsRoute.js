@@ -1,6 +1,6 @@
 import express from "express";
 import { fetch10LatestMobiles, fetchAdvanceSearchApi, fetchAllMobiles, fetchSearchMobile, fetchSingleMobilePrice, updateMobile } from "../controller/mobileDetailsController.js";
-import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.js";
+// import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.js";
 
 const mobileDetailsRouter = express.Router();
 
@@ -10,7 +10,7 @@ mobileDetailsRouter.get("/fetchAllMobiles", fetchAllMobiles);
 mobileDetailsRouter.get("/searchMobile",fetchSearchMobile);
 mobileDetailsRouter.get("/fetchAdvanceFilters", fetchAdvanceSearchApi);
 // mobileDetailsRouter.put("/updateMobile/:model",authenticateToken,authorizeRole("admin"),updateMobileAndPrices)
-mobileDetailsRouter.put("/updateMobile/:model",authenticateToken,authorizeRole("admin"),updateMobile)
+mobileDetailsRouter.put("/updateMobile/:model",updateMobile)
 
 
 export default mobileDetailsRouter;
