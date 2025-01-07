@@ -263,7 +263,7 @@ const HeroSection = () => {
             )
             }
           </div>
-          <div onClick={() => setSelectedData({selectBrand:"", selectedRam:"", selectedStorage:"", selectedBackCam:"", selectedModel:""})} className="clear__filter">Clear All Filter</div>
+          <div onClick={() => setSelectedData({selectBrand:"", selectedRam:"", selectedStorage:"", selectedBackCam:"", selectedModel:"", selectedDate:""})} className="clear__filter">Clear All Filter</div>
           <Link href="/AdvanceSearch" className="clear__filter">Advance Search</Link>
         </Col>
         {
@@ -470,7 +470,7 @@ const HeroSection = () => {
             }
           </div>
           <div className="d-flex justify-content-start">
-            <button className="clear__filter" onClick={() => setSelectedData({selectBrand:"", selectedRam:"", selectedStorage:"", selectedBackCam:"", selectedModel:""})}>Clear All Filter</button>
+            <button className="clear__filter" onClick={() => setSelectedData({selectBrand:"", selectedRam:"", selectedStorage:"", selectedBackCam:"", selectedModel:"", selectedDate:""})}>Clear All Filter</button>
             </div>
 
           </Col>
