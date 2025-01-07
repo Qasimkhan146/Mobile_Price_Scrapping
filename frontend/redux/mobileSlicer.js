@@ -125,7 +125,7 @@ const mobileSlice = createSlice({
     filterMobiles : [],
     advanceFilterMobiles:[],
     brandData:[],
-
+    editMobileData:null,
     error: null,
   },
   reducers: {},
@@ -186,6 +186,18 @@ const mobileSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+      .addCase(editMobile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(editMobile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.editMobileData = action.payload;
+      })
+      .addCase(editMobile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       
   },
 });
@@ -195,5 +207,6 @@ export const selectMobileDetail = (state) => state.mobile.mobileDetail;
 export const selectAllBrands = (state) => state.mobile.brandData;
 export const filterMobiles = (state) => state.mobile.filterMobiles;
 export const selectError = (state) => state.mobile.error;
+export const selectEditMobile = (state) => state.mobile.editMobileData;
 export const selectAdvanceFilterMobiles = (state) => state.mobile.advanceFilterMobiles;
 export default mobileSlice.reducer;

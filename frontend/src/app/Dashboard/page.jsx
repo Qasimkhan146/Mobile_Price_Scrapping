@@ -1,17 +1,50 @@
 "use client";
-
+import * as React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { logout } from "../../../redux/authSlicer";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
+import { fetch10LatestMobiles, selectFetch10Mobiles } from "../../../redux/mobileSlicer";
 const AdminDashboard = () => {
   const { user, loading: userLoading } = useSelector((state) => state.user);
   const router = useRouter();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const mobiles = useSelector(selectFetch10Mobiles);
+  console.log(mobiles, "Mobiles");
+  
+  const columns = [
+    // { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'mobile', headerName: 'Mobile Name', width: 130 },
+    { field: 'hamariweb', headerName: 'Hamari Web', width: 130 },
+    { field: 'mobilemate', headerName: 'MobileMate', width: 130 },
+    { field: 'priceoye', headerName: 'Price Oye', width: 130 },
+    { field: 'whatmobile', headerName: 'WhatMobile', width: 130 }
+  ];
+  // const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("AdminDashboard mounted");
+    dispatch(fetch10LatestMobiles());
+  }, [dispatch]);
+  const handleButton = () =>{
+    dispatch(fetch10LatestMobiles());
+  }
+  const rows = [
+    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  ];
 
+  const paginationModel = { page: 0, pageSize: 5 };
   useEffect(() => {
     if (!user && !userLoading) {
       router.push("/Login");
@@ -29,13 +62,13 @@ const AdminDashboard = () => {
     }, 2000);
   };
 
-  if (!user) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-gray-200">
-        <p className="text-lg font-medium">Redirecting to login...</p>
-      </div>
-    );
-  }
+  // if (!user) {
+  //   return (
+  //     <div className="flex items-center justify-center h-screen bg-gray-200">
+  //       <p className="text-lg font-medium">Redirecting to login...</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -86,8 +119,8 @@ const AdminDashboard = () => {
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-auto">
         <div className="bg-white shadow-lg rounded-lg p-6">
-          <h1 className="text-3xl font-bold mb-4">Welcome, {user.name}!</h1>
-          <p className="text-gray-700 mb-6">Role: {user.role}</p>
+          {/* <h1 className="text-3xl font-bold mb-4">Welcome, {user?.name}!</h1>
+          <p className="text-gray-700 mb-6">Role: {user?.role}</p> */}
 
           {/* User Statistics Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -106,48 +139,17 @@ const AdminDashboard = () => {
           </div>
 
           {/* Manage Users Table */}
-          <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
-            <table className="min-w-full text-sm text-gray-700">
-              <thead className="bg-blue-500 text-white">
-                <tr>
-                  <th className="px-4 py-2 text-left min-w-[150px]">
-                    Model_Names
-                  </th>
-                  <th className="px-4 py-2 text-left min-w-[120px]">
-                    WhatMobile
-                  </th>
-                  <th className="px-4 py-2 text-left min-w-[120px]">
-                    PriceOye
-                  </th>
-                  <th className="px-4 py-2 text-left min-w-[120px]">
-                    HamariWeb
-                  </th>
-                  <th className="px-4 py-2 text-left min-w-[120px]">
-                    MobileMate
-                  </th>
-                  <th className="px-4 py-2 text-left min-w-[200px]">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Example user rows */}
-                <tr>
-                  <td className="px-4 py-2 ">Iphone Xs Max</td>
-                  <td className="px-4 py-2">120000</td>
-                  <td className="px-4 py-2">123000</td>
-                  <td className="px-4 py-2">113000</td>
-                  <td className="px-4 py-2">133000</td>
-                  <td className="px-4 py-2">
-                    <button className="text-blue-600 hover:text-blue-800">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                {/* Add more rows dynamically */}
-              </tbody>
-            </table>
-          </div>
+          <Paper sx={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              initialState={{ pagination: { paginationModel } }}
+              pageSizeOptions={[5, 10]}
+              checkboxSelection
+              sx={{ border: 0 }}
+            />
+          </Paper>
+          <button onClick={handleButton}>Get Data</button>
         </div>
       </div>
     </div>
