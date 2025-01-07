@@ -17,6 +17,24 @@ export const fetch10LatestMobiles = createAsyncThunk(
     }
   }
 );
+//all Mobiles 
+export const fetchAllMobiles = createAsyncThunk(
+  "mobile/fetchAllMobiles",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        `https://7842.mobileprice.biz.pk/mobile/fetchAllMobiles`
+        
+      );
+      const data = await response.json();
+      // console.log("Model Data", data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+)
+
 export const fetchMobileDetail = createAsyncThunk(
   "mobile/fetchMobileDetail",
   async (model, { rejectWithValue }) => {
@@ -123,6 +141,7 @@ const mobileSlice = createSlice({
     fetch10Mobiles: [],
     mobileDetail: null,
     filterMobiles : [],
+    allMobiles:[],
     advanceFilterMobiles:[],
     brandData:[],
     editMobileData:null,
@@ -141,6 +160,19 @@ const mobileSlice = createSlice({
         state.fetch10Mobiles = action.payload;
       })
       .addCase(fetch10LatestMobiles.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchAllMobiles.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllMobiles.fulfilled, (state, action) => {
+        state.loading = false;
+        // state.createMobile.push(action.payload);
+        state.allMobiles = action.payload;
+      })
+      .addCase(fetchAllMobiles.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
@@ -209,4 +241,5 @@ export const filterMobiles = (state) => state.mobile.filterMobiles;
 export const selectError = (state) => state.mobile.error;
 export const selectEditMobile = (state) => state.mobile.editMobileData;
 export const selectAdvanceFilterMobiles = (state) => state.mobile.advanceFilterMobiles;
+export const selectAllMobiles = (state) => state.mobile.allMobiles;
 export default mobileSlice.reducer;
