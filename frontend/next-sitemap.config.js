@@ -14,7 +14,7 @@ const config = {
         const products = await response.json();
         // Map the product data to dynamic routes
         return products.map((product) => ({
-          loc: `/Mobile/${product?.mobile?.model?.replace(/ /g, '-')}`, 
+          loc: `/Mobile/${product?.model?.replace(/ /g, '-')}`, 
           changefreq: 'daily',
           priority: 0.8,
         }));
