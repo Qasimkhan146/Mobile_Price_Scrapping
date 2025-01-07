@@ -2,7 +2,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import HeroSection from "./component/HeroSection/HeroSection";
 
 export async function generateMetadata({params}) {
-  // const {slug} = params;
   let pageTitle = "Latest Mobile Price in Pakistan 2025 | Compare, ExPLORE & Buy Smartphones";
 
   return {
