@@ -39,15 +39,11 @@ export const fetch10LatestMobiles = async (req, res) => {
             const endOfYear = new Date(`${Year}-12-31T23:59:59.999Z`); // End of the year
             filterMobile.release = { $gte: startOfYear, $lte: endOfYear };
         }
-        const totalMobiles = await MobileDetails.countDocuments(filterMobile);
-        const skip = (parseInt(page) - 1) * parseInt(limit);
-
-
-        const mobiles = await MobileDetails.find(filterMobile).limit(10).sort({ release: -1 });
+        const mobiles = await MobileDetails.find(filterMobile).limit(10).sort({release: -1});
         if(!mobiles.length){
             return res.status(404).json({message:"Mobile not found"});
         }
-        res.status(200).json({mobiles});
+        res.status(200).json(mobiles);
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
@@ -66,7 +62,7 @@ export const fetchSearchMobile = async (req, res) =>{
     }
 }
 
-//Advance search mobile
+//Advace search mobiles
 export const fetchAdvanceSearchApi = async (req, res) => {
     try {
       const { model, brand, minRam,maxRam, minRom, maxRom, min_Back_Cam, max_Back_Cam,minPrice,maxPrice, page = 1, limit = 10, Year } = req.query;
@@ -101,7 +97,7 @@ export const fetchAdvanceSearchApi = async (req, res) => {
       const totalMobiles = await MobileDetails.countDocuments(filterMobile);
       const skip = (parseInt(page) - 1) * parseInt(limit);
   
-      const latestMobiles = await MobileDetails.find(filterMobile).sort({ release: -1 }).skip(skip).limit(parseInt(limit));
+      const latestMobiles = await MobileDetails.find(filterMobile).sort({ createdAt: -1 }).skip(skip).limit(parseInt(limit));
   
       if (!latestMobiles.length) {
         return res.status(404).json({ message: "No mobiles found" });
