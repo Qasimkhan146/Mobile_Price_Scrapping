@@ -74,7 +74,7 @@ export const fetchSearchMobile = async (req, res) =>{
     }
 }
 
-//Advace search mobiles
+//Advace search mobile
 export const fetchAdvanceSearchApi = async (req, res) => {
     try {
       const { model, brand, minRam,maxRam, minRom, maxRom, min_Back_Cam, max_Back_Cam,minPrice,maxPrice, page = 1, limit = 10, Year } = req.query;
