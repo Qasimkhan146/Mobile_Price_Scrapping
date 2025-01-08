@@ -17,7 +17,7 @@ export const fetchSingleMobilePrice = async (req, res) => {
 // fetch ten latest mobiles
 export const fetch10LatestMobiles = async (req, res) => {
     try{
-        const {model, brand, Ram, Rom, Back_Cam,Year, page = 1, limit = 10} = req.query;
+        const {model, brand, Ram, Rom, Back_Cam,Year} = req.query;
         const filterMobile = {};
         if(model){
             filterMobile.model = { $regex: model, $options: "i" };
@@ -43,19 +43,11 @@ export const fetch10LatestMobiles = async (req, res) => {
         const skip = (parseInt(page) - 1) * parseInt(limit);
 
 
-        const mobiles = await MobileDetails.find(filterMobile).sort({ release: -1 }).skip(skip).limit(parseInt(limit));
+        const mobiles = await MobileDetails.find(filterMobile).limit(10).sort({ release: -1 });
         if(!mobiles.length){
             return res.status(404).json({message:"Mobile not found"});
         }
-        res.status(200).json({
-          mobiles,
-          pagination: {
-            total : totalMobiles,
-            page: parseInt(page),
-            limit: parseInt(limit),
-            totalPages: Math.ceil(totalMobiles / parseInt(limit))
-          }
-        });
+        res.status(200).json({mobiles});
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
@@ -74,7 +66,7 @@ export const fetchSearchMobile = async (req, res) =>{
     }
 }
 
-//Advace search mobile
+//Advance search mobile
 export const fetchAdvanceSearchApi = async (req, res) => {
     try {
       const { model, brand, minRam,maxRam, minRom, maxRom, min_Back_Cam, max_Back_Cam,minPrice,maxPrice, page = 1, limit = 10, Year } = req.query;
