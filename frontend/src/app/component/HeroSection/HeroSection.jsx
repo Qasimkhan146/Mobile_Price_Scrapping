@@ -30,6 +30,7 @@ const HeroSection = () => {
     selectedModel:"",
     selectedDate:""
   });
+  const [page, setPage] = useState(0);
   useEffect(() => {
     dispatch(fetchAllBrands());  
 }, [dispatch]);
@@ -37,9 +38,9 @@ const HeroSection = () => {
   const [displayDropdown, setDisplayDropdown] = useState("");
   useEffect(() => {
     // if(selectedData.selectBrand){
-      dispatch(fetch10LatestMobiles({brand: selectedData.selectBrand, Ram:selectedData.selectedRam, Rom:selectedData.selectedStorage, Back_Cam: selectedData.selectedBackCam, model:selectedData.selectedModel, Year: selectedData.selectedDate}));
+      dispatch(fetch10LatestMobiles({brand: selectedData.selectBrand, Ram:selectedData.selectedRam, Rom:selectedData.selectedStorage, Back_Cam: selectedData.selectedBackCam, model:selectedData.selectedModel, Year: selectedData.selectedDate, page: page + 1}));
     
-}, [dispatch, selectedData]);
+}, [dispatch, selectedData, page]);
   useEffect(() => {
     const handleOutsideClick = (event) => {
       const isOutside = Object.entries(dropdownRefs.current).every(([key, ref]) => {
@@ -479,13 +480,12 @@ const HeroSection = () => {
         }
 
       </Row>
-
       <Row className="d-flex gap-5 mt-4">
         <Col md={12} className="shadow-sm p-3">
           <h3 className="differ__heading__text text-center mb-3 p-2">
             Mobile Phones Prices on Different Websites
           </h3>
-          <ContentArea />
+          <ContentArea page={page} setPage={setPage}/>
         </Col>
       </Row>
     </Container>
