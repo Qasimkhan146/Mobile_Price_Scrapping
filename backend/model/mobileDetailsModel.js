@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+const updateSchema = new mongoose.Schema({
+  updatedAt: { type: Date, required: true, default: Date.now },
+  changes: { type: Object, required: true }, // Stores the changed fields and their new values
+});
+
 const mobileDetailsSchema = new mongoose.Schema({
   model: { type: String, required: true },
   price: { type: Number, required: true },
@@ -54,7 +59,8 @@ const mobileDetailsSchema = new mongoose.Schema({
   hamariweb_link: { type: String},
   whatmobile_link:{ type: String},
   priceoye_link:{ type: String},
-  mobilemate_link:{ type: String}
+  mobilemate_link:{ type: String},
+  updateHistory: [updateSchema],
 });
 
 const MobileDetails = mongoose.model("mobileDetails",mobileDetailsSchema);
