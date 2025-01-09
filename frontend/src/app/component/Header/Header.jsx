@@ -32,6 +32,7 @@ function Header() {
           <Nav  style={{ maxHeight: '100px' }} navbarScroll>
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/AdvanceSearch">AdvanceSearch</Nav.Link>
+      <Nav.Link href="/Contact-Us" className="pt-2">Contact Us</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

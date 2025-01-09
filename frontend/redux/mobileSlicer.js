@@ -6,7 +6,7 @@ export const fetch10LatestMobiles = createAsyncThunk(
   async ({brand,Ram,Rom,Back_Cam,model,Year}, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `https://7842.mobileprice.biz.pk/mobile/fetch10LatestMobiles?brand=${brand}&Ram=${Ram}&Rom=${Rom}&Back_Cam=${Back_Cam}&model=${model}&Year=${Year}`
+        `https://7842.mobileprice.biz.pk/mobile/fetch10LatestMobilesWithHistory?brand=${brand}&Ram=${Ram}&Rom=${Rom}&Back_Cam=${Back_Cam}&model=${model}&Year=${Year}`
         
       );
       const data = await response.json();

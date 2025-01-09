@@ -11,22 +11,22 @@
       color: #fff;
   }
   .clear__filter{
-    color: #e0134e;
+    color: #1eb8db;
     cursor: pointer;
     padding: 6px;
     border-radius: 8px;
-    border: 1px solid #e0134e;  
+    border: 1px solid #1eb8db;  
   }
   .brands__divs ul li{
-    background-color: #e0134e;
+    background-color: #1eb8db;
     color: #fff;
 }
  .differ__heading__text{
     color: #fff;
-    background-color: #e0134e;
+    background-color: #1eb8db;
   }
   .select-inputs{
-    background-color: #ee1351;
+    background-color: #1eb8db;
     color: #fff;
     border-radius: 20px;
     /* width: m; */
@@ -34,6 +34,11 @@
     min-width: 170px;
     padding: 6px;
     cursor: pointer;
+  }
+  .main-search{
+    background-color: #1eb8db;
+    color: #fff;
+    
   }
   .display__brands{
     position: absolute;
@@ -66,7 +71,7 @@
     position: absolute;
     width: 150%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     gap: 10px;
     top: 100%;
     padding: 20px;
@@ -118,7 +123,7 @@
     background-color: #fff;
   }
   .cam__btn{
-    background-color: #e0134e;
+    background-color: #1eb8db;
     color: #fff;
     padding: 10px;
     border-radius: 12px;
@@ -128,13 +133,25 @@
     width: 200%;
     display: grid;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px 0px;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     gap: 10px;
     top: 100%;
+    z-index: 10;
     padding: 20px;
     border-radius: 20px;
     background-color: #fff;
-    
+  }
+  .main__search__div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .6);
   }
   .brand__lists{
     list-style: none;
@@ -143,7 +160,7 @@
     cursor: pointer;
   }
   .brand__lists > div{
-    background: #ff0048;
+    background: #1eb8db;
     padding: 6px;
     border-radius: 50%;
   }
@@ -153,8 +170,8 @@
     border-radius: 50%;
   }
   .brands__div .select-inputs:focus{
-    background: #e0134e;
+    background: #1eb8db;
     color: #fff;
     box-shadow: none;
-    border-color: #e0134e;
+    border-color: #1eb8db;
   }
