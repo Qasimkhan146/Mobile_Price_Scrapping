@@ -7,19 +7,21 @@ import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import { fetchAllMobiles, selectAllMobiles } from "../../../redux/mobileSlicer";
 import { logout } from "../../../redux/authSlicer";
+import "./Dashboard.css";
 
 const AdminDashboard = () => {
   const { user, loading: userLoading } = useSelector((state) => state.user);
-  const mobiles = useSelector(selectAllMobiles); // Fetched mobiles data
+  const mobiles = useSelector(selectAllMobiles);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [searchModel, setSearchModel] = useState("");
   const [loading, setLoading] = useState(false);
-  const [rows, setRows] = useState([]); // State to store rows for DataGrid
+  const [rows, setRows] = useState([]);
+  const [filteredRows, setFilteredRows] = useState([]);
 
-  // Columns for DataGrid
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
-    { field: "mobile", headerName: "Mobile Name", width: 130 },
+    { field: "mobile", headerName: "Mobile Name", width: 160 },
     { field: "hamariweb", headerName: "Hamari Web", width: 130 },
     { field: "mobilemate", headerName: "MobileMate", width: 130 },
     { field: "priceoye", headerName: "Price Oye", width: 130 },
@@ -39,13 +41,12 @@ const AdminDashboard = () => {
     },
   ];
 
-  // Fetch mobiles on component mount
+  // Map mobiles to rows
   useEffect(() => {
     if (mobiles?.length > 0) {
-      // Map API data to rows format
       const formattedRows = mobiles.map((mobile, index) => ({
-        id: index + 1, // Generate ID
-        _id: mobile.model.replace(/ /g, "-"), // Add _id for dynamic route
+        id: index + 1,
+        _id: mobile.model.replace(/ /g, "-"),
         mobile: mobile.model || "N/A",
         hamariweb: mobile.hamariweb_price || "N/A",
         mobilemate: mobile.mobilemate_price || "N/A",
@@ -53,10 +54,11 @@ const AdminDashboard = () => {
         whatmobile: mobile.whatmobile_price || "N/A",
       }));
       setRows(formattedRows);
+      setFilteredRows(formattedRows); // Initialize filteredRows
     }
   }, [mobiles]);
 
-  // Dispatch action to fetch mobiles
+  // Fetch mobiles
   useEffect(() => {
     dispatch(fetchAllMobiles());
   }, [dispatch]);
@@ -71,11 +73,21 @@ const AdminDashboard = () => {
     }, 2000);
   };
 
+  // Redirect if user is not logged in
   useEffect(() => {
     if (!user && !userLoading) {
       router.push("/Login");
     }
   }, [user, userLoading, router]);
+
+  // Handle search
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const filterData = rows.filter((row) =>
+      row.mobile.toLowerCase().includes(searchModel.toLowerCase())
+    );
+    setFilteredRows(filterData);
+  };
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -117,18 +129,52 @@ const AdminDashboard = () => {
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-auto">
         <div className="bg-white shadow-lg rounded-lg p-6">
-          {/* User Statistics Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-blue-100 p-4 rounded-lg shadow-md text-center">
               <h3 className="text-xl font-semibold">Total Mobiles</h3>
               <p className="text-2xl font-bold text-blue-700">{mobiles?.length || 0}</p>
             </div>
+            <div className="p-4 shadow-md rounded-lg">
+              <h1 className="text-2xl font-bold mb-4">Search Mobile</h1>
+              <form onSubmit={handleSearchSubmit} className="flex gap-2">
+                <div className="relative">
+                  <label htmlFor="mobileSearch" className="sr-only">
+                    Search Mobile Model
+                  </label>
+                  <input
+                    id="mobileSearch"
+                    className="form-control px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full pr-10"
+                    value={searchModel}
+                    onChange={(e) => setSearchModel(e.target.value)}
+                    placeholder="Enter mobile model..."
+                  />
+                  {searchModel && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchModel("")}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                      aria-label="Clear input"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+                <button
+                  className="search-btn-dash bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-200"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+
+
           </div>
 
           {/* Data Table */}
-          <Paper sx={{ height: 400, width: "100%" }}>
+          <Paper sx={{ height: 700, width: "100%" }}>
             <DataGrid
-              rows={rows}
+              rows={filteredRows}
               columns={columns}
               pageSizeOptions={[5, 10]}
               checkboxSelection

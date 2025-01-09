@@ -17,7 +17,7 @@ const Footer = () => {
           height={50}
         />{" "}
       </Link>
-      <Link href="/" className="pt-2">Contact Us</Link>
+      <Link href="/Contact-Us" className="pt-2">Contact Us</Link>
     </div>
   );
 };

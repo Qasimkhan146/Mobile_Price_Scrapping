@@ -1,0 +1,8 @@
+.search-btn-dash{
+    background-color: #e0134e;
+    color: white;
+    /* border: 1px solid #e0134e; */
+    border-radius: 20px;
+    padding: 6px;
+    width: 100px;
+}
