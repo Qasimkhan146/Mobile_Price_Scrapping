@@ -49,6 +49,63 @@ export const fetch10LatestMobiles = async (req, res) => {
     }
 }
 
+//fetch10 latest mobiles with last object of update history
+export const fetch10LatestMobilesWithHistory = async (req, res) => {
+  try {
+    const { model, brand, Ram, Rom, Back_Cam, Year } = req.query;
+    const filterMobile = {};
+
+    if (model) {
+      filterMobile.model = { $regex: model, $options: "i" };
+    }
+    if (brand) {
+      filterMobile.brand = { $regex: brand, $options: "i" };
+    }
+    if (Ram) {
+      filterMobile.Ram = parseInt(Ram);
+    }
+    if (Rom) {
+      filterMobile.Rom = parseInt(Rom);
+    }
+    if (Back_Cam) {
+      filterMobile.Back_Cam = parseInt(Back_Cam);
+    }
+    if (Year) {
+      const startOfYear = new Date(`${Year}-01-01T00:00:00.000Z`); // Start of the year
+      const endOfYear = new Date(`${Year}-12-31T23:59:59.999Z`); // End of the year
+      filterMobile.release = { $gte: startOfYear, $lte: endOfYear };
+    }
+
+    // Find the mobiles and include only the last object in updateHistory
+    const mobiles = await MobileDetails.find(filterMobile)
+      .limit(10)
+      .sort({ release: -1 })
+      .select({
+        model: 1,
+        img_url_mobilemate:1 ,
+        mobilemate_price: 1,
+        mobilemate_link: 1,
+        priceoye_price: 1,
+        priceoye_link: 1,
+        whatmobile_price: 1,
+        whatmobile_link: 1,
+        hamariweb_price: 1,
+        hamariweb_link: 1,
+        updateHistory: { $slice: -1 }, // Include only the last element of the updateHistory
+
+      });
+
+    if (!mobiles.length) {
+      return res.status(404).json({ message: "Mobile not found" });
+    }
+
+    res.status(200).json(mobiles);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
+
 // fetch search mobile
 export const fetchSearchMobile = async (req, res) =>{
     try {
@@ -190,3 +247,60 @@ export const fetchAllMobiles = async (req, res) => {
     res.status(500).json({message:"Internal Server Error",error:error.message})
   }
 }
+
+//update with history
+export const updateMobileWithHistory = async (req, res) => {
+  try {
+    const { model } = req.params;
+    const updates = req.body;
+
+    console.log("Updates received:", updates);
+
+    // Fetch the existing document to calculate the changelog
+    const mobile = await MobileDetails.findOne({ model: new RegExp(model, "i") });
+    if (!mobile) {
+      return res.status(404).json({ message: "Mobile not found" });
+    }
+
+    const mobileObject = mobile.toObject();
+    const priceFields = [
+      "mobilemate_price",
+      "priceoye_price",
+      "hamariweb_price",
+      "whatmobile_price",
+    ];
+    const changeLog = {};
+
+    // Calculate the changelog only for price fields
+    for (const key of priceFields) {
+      if (mobile.schema.paths[key]) {
+        changeLog[key] = {
+          old: mobileObject[key],
+          new: updates[key] !== undefined ? updates[key] : mobileObject[key],
+        };
+      }
+    }
+
+    // Add the changelog to the updateHistory and update the main document
+    const updatedMobile = await MobileDetails.findOneAndUpdate(
+      { model: new RegExp(model, "i") },
+      {
+        $set: updates,
+        $push: {
+          updateHistory: {
+            updatedAt: new Date(),
+            changes: changeLog,
+          },
+        },
+      },
+      { new: true, fields: priceFields.reduce((acc, field) => ({ ...acc, [field]: 1 }), {}) } // Only return the price fields
+    );
+
+    res.status(200).json({
+      updatedPrices: changeLog,
+      updatedMobile,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+};
