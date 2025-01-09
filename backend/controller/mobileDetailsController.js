@@ -82,12 +82,17 @@ export const fetch10LatestMobilesWithHistory = async (req, res) => {
       .sort({ release: -1 })
       .select({
         model: 1,
-        brand: 1,
-        Ram: 1,
-        Rom: 1,
-        Back_Cam: 1,
-        release: 1,
+        img_url_mobilemate:1 ,
+        mobilemate_price: 1,
+        mobilemate_link: 1,
+        priceoye_price: 1,
+        priceoye_link: 1,
+        whatmobile_price: 1,
+        whatmobile_link: 1,
+        hamariweb_price: 1,
+        hamariweb_link: 1,
         updateHistory: { $slice: -1 }, // Include only the last element of the updateHistory
+
       });
 
     if (!mobiles.length) {
