@@ -26,6 +26,7 @@ const AdminDashboard = () => {
     { field: "mobilemate", headerName: "MobileMate", width: 130 },
     { field: "priceoye", headerName: "Price Oye", width: 130 },
     { field: "whatmobile", headerName: "WhatMobile", width: 130 },
+    { field: "daraz", headerName: "Daraz", width: 130 },
     {
       field: "operations",
       headerName: "Operations",
@@ -52,6 +53,7 @@ const AdminDashboard = () => {
         mobilemate: mobile.mobilemate_price || "N/A",
         priceoye: mobile.priceoye_price || "N/A",
         whatmobile: mobile.whatmobile_price || "N/A",
+        daraz: mobile.daraz_price || "Comming soon",
       }));
       setRows(formattedRows);
       setFilteredRows(formattedRows); // Initialize filteredRows
