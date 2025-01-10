@@ -96,6 +96,36 @@ export const editMobile = createAsyncThunk(
   }
 );
 
+export const editPrices = createAsyncThunk(
+  "mobile/editPrices",
+  async ({ model, updatedPrices }, { rejectWithValue }) => {
+    try {
+      console.log(updatedPrices,"Model");
+      
+      const response = await fetch(
+        `https://7842.mobileprice.biz.pk/mobile/updateMobileWithHistory/${model}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedPrices),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
 export const fetchFilterMobiles = createAsyncThunk(
   "mobile/fetchFilterMobiles",
   async ({brand}, { rejectWithValue }) => {
@@ -146,6 +176,7 @@ const mobileSlice = createSlice({
     brandData:[],
     editMobileData:null,
     error: null,
+    updatedPrice: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -230,6 +261,18 @@ const mobileSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+      .addCase(editPrices.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(editPrices.fulfilled, (state, action) => {
+        state.loading = false;
+        state.updatedPrice = action.payload;
+      })
+      .addCase(editPrices.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       
   },
 });
@@ -242,4 +285,5 @@ export const selectError = (state) => state.mobile.error;
 export const selectEditMobile = (state) => state.mobile.editMobileData;
 export const selectAdvanceFilterMobiles = (state) => state.mobile.advanceFilterMobiles;
 export const selectAllMobiles = (state) => state.mobile.allMobiles;
+export const selectUpdatedPrice = (state) => state.mobile.updatedPrice;
 export default mobileSlice.reducer;

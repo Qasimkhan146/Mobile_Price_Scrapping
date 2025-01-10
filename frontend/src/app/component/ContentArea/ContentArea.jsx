@@ -96,8 +96,8 @@ const ContentArea = ({ mobiles }) => {
                           <div>
                             <button className="new-data">New Price</button>
                             <p className="fw-semibold">{mobile.updateHistory[0].changes.mobilemate_price.new} PKR</p>
-                            <a target="_blank" href={mobile.mobilemate_link} className="text-sm">
-                            {mobile.updateHistory[0].changes.mobilemate_price.new === 0 ? "N/A" : `Click Here`}
+                            <a target="_blank" href={mobile.mobilemate_link} className="text-sm click__text">
+                            {mobile.updateHistory[0].changes.mobilemate_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
                           </a>
                           </div>
                         </>)}
@@ -177,8 +177,8 @@ const ContentArea = ({ mobiles }) => {
                           <div>
                             <button className="new-data">New Price</button>
                             <p className="fw-semibold">{mobile.updateHistory[0].changes.whatmobile_price.new} PKR</p>
-                            <a target="_blank" href={mobile.whatmobile_link}>
-                            {mobile.updateHistory[0].changes.whatmobile_price.new === 0 ? "N/A" : `Click Here`}
+                            <a target="_blank" href={mobile.whatmobile_link} className="click__text">
+                            {mobile.updateHistory[0].changes.whatmobile_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
                           </a>
                           </div>
                         </>)}
@@ -215,8 +215,8 @@ const ContentArea = ({ mobiles }) => {
                           <div>
                             <button className="new-data">New Price</button>
                             <p className="fw-semibold">{mobile.updateHistory[0].changes.priceoye_price.new} PKR</p>
-                            <a target="_blank" href={mobile.priceoye_link}>
-                            {mobile.updateHistory[0].changes.priceoye_price.new === 0 ? "N/A" : `Click Here`}
+                            <a target="_blank" href={mobile.priceoye_link} className="click__text">
+                            {mobile.updateHistory[0].changes.priceoye_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
                           </a>
                           </div>
                         </>)}

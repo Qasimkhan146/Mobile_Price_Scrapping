@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMobileDetail, selectMobileDetail, editMobile, selectEditMobile } from "../../../../redux/mobileSlicer";
+import { fetchMobileDetail, selectMobileDetail, editMobile, selectEditMobile, editPrices } from "../../../../redux/mobileSlicer";
 import { toast } from "react-toastify";
 const Dashboard = () => {
   const mobileDetail = useSelector(selectMobileDetail);
@@ -14,12 +14,11 @@ const Dashboard = () => {
   const brandName = slugParts[0].toUpperCase();
   const modelName = slugParts.slice(1).join("-").replace(/-/g, " ");
   const [prices, setPrices] = useState([]);
-  // State to manage the form inputs
   const [formValues, setFormValues] = useState({});
-
-  // List of fields to make read-only
-  const readOnlyFields = ["Ram", "Rom", "Back_Cam", "front_Cam", "Capacity"];
-
+  const editableFields = ["Ram", "Rom", "Back_Cam", "front_Cam", "Capacity"];
+  const priceFields = ["mobilemate_price", "hamariweb_price", "whatmobile_price", "priceoye_price"];
+  const linkFields = ["mobilemate_link", "hamariweb_link", "whatmobile_link", "priceoye_link"];
+  // const [disableUpdateBtn, setDisableUpdateBtn] = useState(true);
   // Field types mapping
   const fieldTypes = {
     price: "number",
@@ -47,33 +46,52 @@ const Dashboard = () => {
       setPrices(mobileDetail.prices);
     }
   }, [mobileDetail]);
-  const handlePriceChange = (index, newPrice) => {
-    setPrices((prevPrices) =>
-      prevPrices.map((price, i) =>
-        i === index ? { ...price, price: newPrice } : price
-      )
-    );
+  const handlePriceChange = (field, value) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [field]: value,
+    }));
   };
-
-  // Handle input change
   const handleInputChange = (key, value) => {
     setFormValues((prevValues) => ({
       ...prevValues,
       [key]: value,
     }));
   };
+ const handlePrice = async () => {
+  // console.log(prices,"prices");
+  
+  try {
+    // Extract only the editable fields
+    const updatedData = Object.fromEntries(
+      Object.entries(formValues).filter(([key]) => [...priceFields, ...linkFields].includes(key))
+    );
+    
+    if(mobileDetail.mobilemate_price !== updatedData.mobilemate_price || mobileDetail.whatmobile_price !== updatedData.whatmobile_price || mobileDetail.priceoye_price !== updatedData.priceoye_price || mobileDetail.hamariweb_price !== updatedData.hamariweb_price){
+      console.log(updatedData,"updatde Data");     
+    }
+       
+    await dispatch(editPrices({ model: modelName, updatedPrices:updatedData })).unwrap();
+    toast.success("Mobile Price updated successfully!");
+  } catch (error) {
+    toast.error("Failed to update mobile details. Please try again.");
+  }
+ }
   const handleSave = async () => {
     try {
-      await dispatch(editMobile({ model: formValues?.model, updatedData: formValues })).unwrap(); // If using Redux Toolkit's createAsyncThunk
-      toast.success("WelDone Mubashar Putar Mobile Update Hogya!", {
-        // position: toast.POSITION.TOP_RIGHT,
-      });
+      // Extract only the editable fields
+      const updatedData = Object.fromEntries(
+        Object.entries(formValues).filter(([key]) => editableFields.includes(key))
+      );
+       console.log(updatedData,"updatde Data");
+       
+      await dispatch(editMobile({ model: modelName, updatedData })).unwrap();
+      toast.success("Mobile details updated successfully!");
     } catch (error) {
-      toast.error("Failed to update mobile details. Please try again.", {
-        // position: toast.POSITION.TOP_RIGHT,
-      });
+      toast.error("Failed to update mobile details. Please try again.");
     }
   };
+
   
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -87,7 +105,7 @@ const Dashboard = () => {
           className="rounded-lg shadow-md"
         />
       </div>
-      <div className="table-responsive w-100 table__container">
+      {/* <div className="table-responsive w-100 table__container">
         <table className="table border-1 table-striped">
           <thead>
             <tr>
@@ -124,32 +142,66 @@ const Dashboard = () => {
             </tr>
           </tbody>
         </table>
+      </div> */}
+            <div className="table-responsive w-100 table__container">
+        <table className="table border-1 table-striped">
+          <thead>
+            <tr>
+              {priceFields.map((field, index) => (
+                <th key={index}>{field.replace("_price", "").toUpperCase()}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {priceFields.map((field, index) => (
+                <td key={index}>
+                  <input
+                    type="number"
+                    className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    value={formValues[field] || 0}
+                    onChange={(e) => handlePriceChange(field, parseFloat(e.target.value) || 0)}
+                  />
+                </td>
+              ))}
+            </tr>
+            <tr>
+              {linkFields.map((field, index) => (
+                <td key={index}>
+                  <input
+                    type="text"
+                    className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    value={formValues[field] || ""}
+                    onChange={(e) => handleInputChange(field, e.target.value)}
+                  />
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {Object.entries(formValues)
-          .filter(([key]) => readOnlyFields.includes(key)) // Display only readonly fields
-          .map(([key, value]) => (
-            <div key={key} className="flex flex-col bg-white p-4 shadow-md rounded-lg">
-              <label className="font-medium text-gray-700 mb-2">{key}</label>
-              <input
-                className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                type={fieldTypes[key] || "text"} // Default to "text" if no type is specified
-                value={value || 0}
-                readOnly={!readOnlyFields.includes(key)} // Make field read-only if it is in the list
-                onChange={(e) =>
-                  readOnlyFields.includes(key) && handleInputChange(key, e.target.value)
-                }
-
-              />
-            </div>
-          ))}
+        <button className="btn btn-primary mb-3" 
+              disabled={mobileDetail?.mobilemate_price === formValues?.mobilemate_price && mobileDetail?.whatmobile_price === formValues?.whatmobile_price && mobileDetail?.priceoye_price === formValues?.priceoye_price && mobileDetail?.hamariweb_price === formValues?.hamariweb_price}
+        
+        onClick={handlePrice}>Update</button>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        {editableFields.map((field) => (
+          <div key={field} className="flex flex-col bg-white p-4 shadow-md rounded-lg">
+            <label className="font-medium text-gray-700 mb-2">{field}</label>
+            <input
+              className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              type="number"
+              value={formValues[field] || 0}
+              onChange={(e) => handleInputChange(field, parseFloat(e.target.value) || 0)}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="flex justify-center mt-6">
         <button
           className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 shadow-md"
-          onClick={() => handleSave()}
+          onClick={handleSave}
         >
           Save
         </button>
