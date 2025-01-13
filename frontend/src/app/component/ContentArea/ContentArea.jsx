@@ -234,43 +234,42 @@ const ContentArea = ({ mobiles }) => {
                 </td>
                 <td>
                 {mobile.updateHistory.length > 0 ? (
-                    // <div className="py-3">
-                    //   {mobile.updateHistory[0].changes.priceoye_price.old === mobile.updateHistory[0].changes.priceoye_price.new ? (
-                    //     mobile.priceoye_link === "N/A" ? (
-                    //       <span className="fw-semibold">{mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}</span>
-                    //     ) : (
-                    //       <a target="_blank" href={mobile.priceoye_link}>
-                    //         {mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}
-                    //       </a>
-                    //     )
-                    //   ) : (
-                    //     <>
-                    //       {mobile.updateHistory[0].changes.priceoye_price.old === 0 ? (
-                    //         <p className="fw-semibold">N/A</p>
-                    //       ) : (<div>
-                    //         <button className="prev-data">Previous Price</button>
-                    //         <p className="fw-semibold line-through">{mobile.updateHistory[0].changes.priceoye_price.old} PKR</p>
-                    //       </div>)}
+                    <div className="py-3">
+                      {mobile.updateHistory[0].changes?.daraz_price?.old === mobile.updateHistory[0]?.changes?.daraz_price?.new ? (
+                        mobile?.daraz_link === "N/A" ? (
+                          <span className="fw-semibold">{mobile?.daraz_price === 0 ? "N/A" : `${mobile?.daraz_price} PKR`}</span>
+                        ) : (
+                          <a target="_blank" href={mobile.daraz_link}>
+                            {mobile.daraz_price === 0 ? "N/A" : `${mobile.daraz_price} PKR`}
+                          </a>
+                        )
+                      ) : (
+                        <>
+                          {mobile.updateHistory[0].changes.daraz_price.old === 0 ? (
+                            <p className="fw-semibold">N/A</p>
+                          ) : (<div>
+                            <button className="prev-data">Previous Price</button>
+                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes.daraz_price.old} PKR</p>
+                          </div>)}
 
-                    //       <div>
-                    //         <button className="new-data">New Price</button>
-                    //         <p className="fw-semibold">{mobile.updateHistory[0].changes.priceoye_price.new} PKR</p>
-                    //         <a target="_blank" href={mobile.priceoye_link} className="click__text">
-                    //         {mobile.updateHistory[0].changes.priceoye_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
-                    //       </a>
-                    //       </div>
-                    //     </>)}
+                          <div>
+                            <button className="new-data">New Price</button>
+                            <p className="fw-semibold">{mobile.updateHistory[0].changes.daraz_price.new} PKR</p>
+                            <a target="_blank" href={mobile.daraz_link} className="click__text">
+                            {mobile.updateHistory[0].changes.daraz_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
+                          </a>
+                          </div>
+                        </>)}
 
-                    // </div>
-                    "Comming soon"
+                    </div>
                   ) : mobile.mobilemate_link === "N/A" ? (
-                    // <span className="fw-semibold">{mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}</span>
-                    "Comming Soon"
+                    <span className="fw-semibold">{mobile.darza_price === 0 ? "N/A" : `${mobile.daraz_price} PKR`}</span>
+                    // "Comming Soon"
                   ) : (
-                    // <a target="_blank" href={mobile.priceoye_link}>
-                    //   {mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}
-                    // </a>
-                    "Comming Soon"
+                    <a target="_blank" href={mobile.daraz_link}>
+                      {mobile.daraz_price === 0 ? "N/A" : `${mobile.daraz_price} PKR`}
+                    </a>
+                    // "Comming Soon"
                   )}
 
                 </td>

@@ -16,8 +16,8 @@ const Dashboard = () => {
   const [prices, setPrices] = useState([]);
   const [formValues, setFormValues] = useState({});
   const editableFields = ["Ram", "Rom", "Back_Cam", "front_Cam", "Capacity"];
-  const priceFields = ["mobilemate_price", "hamariweb_price", "whatmobile_price", "priceoye_price"];
-  const linkFields = ["mobilemate_link", "hamariweb_link", "whatmobile_link", "priceoye_link"];
+  const priceFields = ["mobilemate_price", "hamariweb_price", "whatmobile_price", "priceoye_price", "daraz_price"];
+  const linkFields = ["mobilemate_link", "hamariweb_link", "whatmobile_link", "priceoye_link", "daraz_link"];
   // const [disableUpdateBtn, setDisableUpdateBtn] = useState(true);
   // Field types mapping
   const fieldTypes = {
@@ -181,7 +181,7 @@ const Dashboard = () => {
         </table>
       </div>
         <button className="btn btn-primary mb-3" 
-              disabled={mobileDetail?.mobilemate_price === formValues?.mobilemate_price && mobileDetail?.whatmobile_price === formValues?.whatmobile_price && mobileDetail?.priceoye_price === formValues?.priceoye_price && mobileDetail?.hamariweb_price === formValues?.hamariweb_price}
+              disabled={mobileDetail?.mobilemate_price === formValues?.mobilemate_price && mobileDetail?.whatmobile_price === formValues?.whatmobile_price && mobileDetail?.priceoye_price === formValues?.priceoye_price && mobileDetail?.hamariweb_price === formValues?.hamariweb_price && mobileDetail?.daraz_price === formValues?.daraz_price && mobileDetail?.mobilemate_link === formValues?.mobilemate_link && mobileDetail?.whatmobile_link === formValues?.whatmobile_link && mobileDetail?.priceoye_link === formValues?.priceoye_link && mobileDetail?.hamariweb_link === formValues?.hamariweb_link && mobileDetail?.daraz_link === formValues?.daraz_link }
         
         onClick={handlePrice}>Update</button>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
