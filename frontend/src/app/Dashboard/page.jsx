@@ -53,7 +53,7 @@ const AdminDashboard = () => {
         mobilemate: mobile.mobilemate_price || "N/A",
         priceoye: mobile.priceoye_price || "N/A",
         whatmobile: mobile.whatmobile_price || "N/A",
-        daraz: mobile.daraz_price || "Comming soon",
+        daraz: mobile.daraz_price,
       }));
       setRows(formattedRows);
       setFilteredRows(formattedRows); // Initialize filteredRows

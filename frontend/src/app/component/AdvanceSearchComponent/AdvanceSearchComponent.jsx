@@ -371,6 +371,7 @@ const AdvanceSearchComponent = () => {
                                                 <th>Hamari Web</th>
                                                 <th>WhatMobile</th>
                                                 <th>PriceOye</th>
+                                                <th>Daraz</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -409,6 +410,15 @@ const AdvanceSearchComponent = () => {
                                                     ) : (
                                                         <a target="_blank" href={mobile?.priceoye_link}>
                                                             {mobile?.priceoye_price === 0 ? "N/A" : `${mobile?.priceoye_price} PKR`}
+                                                        </a>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {mobile?.daraz_link === "N/A" ? (
+                                                        <span className="fw-semibold">{mobile?.daraz_price === 0 ? "N/A" : `${mobile?.daraz_price} PKR`}</span>
+                                                    ) : (
+                                                        <a target="_blank" href={mobile?.daraz_link}>
+                                                            {mobile?.daraz_price === 0 ? "N/A" : `${mobile?.daraz_price} PKR`}
                                                         </a>
                                                     )}
                                                 </td>
