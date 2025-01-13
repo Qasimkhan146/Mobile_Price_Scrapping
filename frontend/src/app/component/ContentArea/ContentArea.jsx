@@ -146,7 +146,7 @@ const ContentArea = ({ mobiles }) => {
                         </>)}
 
                     </div>
-                  ) : mobile.mobilemate_link === "N/A" ? (
+                  ) : mobile.hamariweb_link === "N/A" ? (
                     <span className="fw-semibold">{mobile.hamariweb_price === 0 ? "N/A" : `${mobile.hamariweb_price} PKR`}</span>
                   ) : (
                     <a target="_blank" href={mobile.hamariweb_link}>
@@ -185,7 +185,7 @@ const ContentArea = ({ mobiles }) => {
                         </>)}
 
                     </div>
-                  ) : mobile.mobilemate_link === "N/A" ? (
+                  ) : mobile.whatmobile_link === "N/A" ? (
                     <span className="fw-semibold">{mobile.whatmobile_price === 0 ? "N/A" : `${mobile.whatmobile_price} PKR`}</span>
                   ) : (
                     <a target="_blank" href={mobile.whatmobile_link}>
@@ -223,7 +223,7 @@ const ContentArea = ({ mobiles }) => {
                         </>)}
 
                     </div>
-                  ) : mobile.mobilemate_link === "N/A" ? (
+                  ) : mobile.priceoye_link === "N/A" ? (
                     <span className="fw-semibold">{mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}</span>
                   ) : (
                     <a target="_blank" href={mobile.priceoye_link}>
@@ -262,8 +262,8 @@ const ContentArea = ({ mobiles }) => {
                         </>)}
 
                     </div>
-                  ) : mobile.mobilemate_link === "N/A" ? (
-                    <span className="fw-semibold">{mobile.darza_price === 0 ? "N/A" : `${mobile.daraz_price} PKR`}</span>
+                  ) : mobile.daraz_link === "N/A" ? (
+                    <span className="fw-semibold">{mobile.daraz_price === 0 ? "N/A" : `${mobile.daraz_price} PKR`}</span>
                     // "Comming Soon"
                   ) : (
                     <a target="_blank" href={mobile.daraz_link}>
