@@ -91,6 +91,8 @@ export const fetch10LatestMobilesWithHistory = async (req, res) => {
         whatmobile_link: 1,
         hamariweb_price: 1,
         hamariweb_link: 1,
+        daraz_price: 1,
+        daraz_link: 1,
         updateHistory: { $slice: -1 }, // Include only the last element of the updateHistory
 
       });
@@ -268,6 +270,7 @@ export const updateMobileWithHistory = async (req, res) => {
       "priceoye_price",
       "hamariweb_price",
       "whatmobile_price",
+      "daraz_price",
     ];
     const changeLog = {};
 
