@@ -56,10 +56,12 @@ const mobileDetailsSchema = new mongoose.Schema({
   mobilemate_price: { type: Number},
   hamariweb_price:{ type: Number},
   whatmobile_price: { type: Number},
+  daraz_price:{type: Number},
   hamariweb_link: { type: String},
   whatmobile_link:{ type: String},
   priceoye_link:{ type: String},
   mobilemate_link:{ type: String},
+  daraz_link:{type:String},
   updateHistory: [updateSchema],
 });
 
