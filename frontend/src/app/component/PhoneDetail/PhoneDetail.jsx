@@ -247,15 +247,16 @@ const PhoneDetail = () => {
             <h3 className="text-center mt-2 mb-2">
               Prices on Different Platforms
             </h3>
-            <table className="table border-1 d-none d-md-table table-striped">
+            <table className="table border-1  table-striped">
               {/* <caption>More Results</caption> */}
               <thead className="content__heads">
               <tr>
               {/* <th scope="col">Mobiles</th> */}
               <th>Mobilemate</th>
-              <th>Hamari Web</th>
+              <th>HamariWeb</th>
               <th>WhatMobile</th>
               <th>PriceOye</th>
+              <th>Daraz</th>
             </tr>
               </thead>
               <tbody>
@@ -295,6 +296,15 @@ const PhoneDetail = () => {
                   ) : (
                     <a target="_blank" href={mobileDetail?.priceoye_link}>
                       {mobileDetail?.priceoye_price === 0 ? "N/A" : `${mobileDetail?.priceoye_price} PKR`}
+                    </a>
+                  )}
+                </td>
+                <td>
+                  {mobileDetail?.daraz_link === "N/A" ? (
+                 <span className="fw-semibold">{mobileDetail?.daraz_price === 0 ? "N/A" : `${mobileDetail?.daraz_price} PKR`}</span>
+                  ) : (
+                    <a target="_blank" href={mobileDetail?.daraz_link}>
+                      {mobileDetail?.daraz_price === 0 ? "N/A" : `${mobileDetail?.daraz_price} PKR`}
                     </a>
                   )}
                 </td>
