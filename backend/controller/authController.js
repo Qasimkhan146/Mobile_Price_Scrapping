@@ -38,7 +38,7 @@ export const loginUser = async (req, res) => {
             httpOnly: true, // Secure cookie
             secure: process.env.NODE_ENV === "production", // Use secure flag in production
             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Adjust for cross-origin requests
-            maxAge: 3600, // 1 hour in milliseconds
+            maxAge: 60000, // 1 minute in milliseconds
         });
         
         return res.status(200).json({ user, token });
