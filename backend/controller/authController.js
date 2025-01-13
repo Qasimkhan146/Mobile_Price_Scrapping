@@ -29,15 +29,16 @@ export const loginUser = async (req, res) => {
         }
 
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
-            expiresIn: "1h", // Token expires in 1 hour
+            
+            expiresIn: "1m", // Token expires in 1 minute
         });
 
         // Set cookie with correct options
         res.cookie("token", token, {
             httpOnly: true, // Secure cookie
             secure: process.env.NODE_ENV === "production", // Use secure flag in production
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // Adjust for cross-origin requests
-            maxAge: 3600 * 1000, // 1 hour in milliseconds
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "none", // Adjust for cross-origin requests
+            maxAge: 3600, // 1 hour in milliseconds
         });
         
         return res.status(200).json({ user, token });
