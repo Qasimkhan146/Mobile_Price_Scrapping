@@ -5,12 +5,12 @@ import axios from 'axios';
 const API_URL = 'https://7842.mobileprice.biz.pk/auth';
 
 // Initialize from localStorage
-const savedUser = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : null;
-const savedToken = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+// const savedUser = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : null;
+// const savedToken = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
 const initialState = {
-  user: savedUser,
-  token: savedToken,
+  // user: savedUser,
+  // token: savedToken,
   loading: false,
   error: null,
 };
@@ -47,8 +47,8 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
-        localStorage.setItem('user', JSON.stringify(action.payload.user));
-        localStorage.setItem('token', action.payload.token);
+        // localStorage.setItem('user', JSON.stringify(action.payload.user));
+        // localStorage.setItem('token', action.payload.token);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
