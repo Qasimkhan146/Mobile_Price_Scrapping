@@ -25,14 +25,36 @@ export const loginUser = createAsyncThunk('user/login', async (credentials, thun
     return thunkAPI.rejectWithValue(error.response.data);
   }
 });
-export const adminUser = createAsyncThunk('user/admin', async ( thunkAPI) => {
-  try {
-    const response = await axios.get(`${API_URL}/DashboardAdmin`,  { withCredentials: true });
-    return response.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data);
+// import { createAsyncThunk } from '@reduxjs/toolkit';
+
+export const adminUser = createAsyncThunk(
+  'user/admin',
+  async (_, thunkAPI) => {
+    try {
+      const response = await fetch(`${API_URL}/DashboardAdmin`, {
+        method: 'GET', // Explicitly set method if needed
+        credentials: 'include', // Use 'include' to send cookies with the request
+        headers: {
+          'Content-Type': 'application/json', // Set headers if necessary
+        },
+      });
+
+      if (!response.ok) {
+        // Handle HTTP errors
+      const data = await response.json();
+ 
+        throw new Error(`${data.message}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      // Use rejectWithValue to handle errors
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
+
 
 // Create user slice
 const userSlice = createSlice({
@@ -80,7 +102,7 @@ const userSlice = createSlice({
       });
   },
 });
-
+export const selectErrors = (state) => state.user.error;
 export const selectAdmin = (state) => state.user.adminInfo;
 export const { logout } = userSlice.actions;
 export default userSlice.reducer;

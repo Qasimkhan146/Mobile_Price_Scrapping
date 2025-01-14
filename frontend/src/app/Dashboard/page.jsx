@@ -8,10 +8,11 @@ import Paper from "@mui/material/Paper";
 import { fetchAllMobiles, selectAllMobiles } from "../../../redux/mobileSlicer";
 import { logout } from "../../../redux/authSlicer";
 import "./Dashboard.css";
-import { adminUser, selectAdmin } from "../../../redux/authSlicer";
+import { adminUser, selectAdmin, selectErrors } from "../../../redux/authSlicer";
 const AdminDashboard = () => {
   const { user, loading: userLoading, error } = useSelector((state) => state.user);
   const mobiles = useSelector(selectAllMobiles);
+  const authError = useSelector(selectErrors);
   const adminInfo = useSelector(selectAdmin);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [rows, setRows] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
-  console.log(adminInfo,"adminInfo",error);
+  console.log(adminInfo,"adminInfo",authError);
   
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -94,10 +95,10 @@ const AdminDashboard = () => {
   //   }
   // }, [user, userLoading, router]);
    useEffect(()=>{
-    if(!adminInfo && !loading){
+    if(authError && authError === "No token found"){
       router.push("/Login");
     }
-   },[adminInfo])
+   },[authError])
   // Handle search
   const handleSearchSubmit = (e) => {
     e.preventDefault();
