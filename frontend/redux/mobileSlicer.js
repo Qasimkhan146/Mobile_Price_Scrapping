@@ -165,7 +165,7 @@ export const fetchAdvanceFilters = createAsyncThunk(
 
 export const fetchComments = createAsyncThunk("comments/fetchComments",async (model, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:4501/mobile/viewComments/${model}`);
+      const response = await fetch(`https://7842.mobileprice.biz.pk/mobile/viewComments/${model}`);
       const data = await response.json();
       return data; // Assuming your API returns comments under `comments` key
     } catch (error) {
@@ -180,7 +180,7 @@ export const submitComment = createAsyncThunk(
     console.log("Inside submitComment:", { data, commentId });
     try {
       const response = await fetch(
-        `http://localhost:4501/mobile/postComment/${commentId}`,
+        `https://7842.mobileprice.biz.pk/mobile/postComment/${commentId}`,
         {
           method: "PUT",
           headers: {
