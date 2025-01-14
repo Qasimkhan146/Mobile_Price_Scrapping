@@ -3,7 +3,7 @@ import MobileDetails from "../model/mobileDetailsModel.js";
 export const fetchSingleMobilePrice = async (req, res) => {
     try {
       const { model } = req.params;
-      const mobile = await MobileDetails.findOne({ model: new RegExp(model, "i") });
+      const mobile = await MobileDetails.findOne({ model: model });
       if (!mobile) {
         return res.status(404).json({ message: "Mobile not found" });
       }
@@ -222,7 +222,7 @@ export const fetchMobileFilters = async (req, res) => {
 export const updateMobile = async (req, res) => {
   try {
     const { model } = req.params;
-    const mobile = await MobileDetails.findOne({ model: new RegExp(model, "i") });
+    const mobile = await MobileDetails.findOne({ model: model });
     if (!mobile) {
       return res.status(404).json({ message: "Mobile not found" });
     }
