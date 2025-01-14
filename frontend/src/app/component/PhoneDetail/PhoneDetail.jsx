@@ -43,18 +43,14 @@ const PhoneDetail = () => {
   const modelName = slugParts.slice(1).join("-").replace(/-/g, " ");
   useEffect(() => {
     dispatch(fetchMobileDetail(newSlug));
-    dispatch(fetchComments({model:newSlug}));
-  }, [newSlug,dispatch]);
+    dispatch(fetchComments({ model: newSlug }));
+  }, [newSlug, dispatch]);
   // console.log(mobileDetail, "mobileDetail");
   const features = mobileDetail?.Features.split(",").map((feature) =>
     feature.trim()
   );
-  const Sound = mobileDetail?.Audio.split(",").map((feature) =>
-    feature.trim()
-  );
-  const cam = mobileDetail?.Front.split(",").map((feature) =>
-    feature.trim()
-  );
+  const Sound = mobileDetail?.Audio.split(",").map((feature) => feature.trim());
+  const cam = mobileDetail?.Front.split(",").map((feature) => feature.trim());
   const MainDisplay = mobileDetail?.Main.split(",").map((feature) =>
     feature.trim()
   );
@@ -72,8 +68,6 @@ const PhoneDetail = () => {
         console.log("Failed to submit comment:", error);
       });
   };
-
-
 
   const limitCharacters = (text, limit) => {
     return text?.length > limit ? text?.slice(0, limit) + "..." : text;
@@ -179,7 +173,7 @@ const PhoneDetail = () => {
               </div>
             </div>
             <div className="w-50 text-center phone__picture__section">
-            <h1 className="model__div px-2 mb-2">{mobileDetail?.model}</h1>
+              <h1 className="model__div px-2 mb-2">{mobileDetail?.model}</h1>
 
               <Image
                 src={mobileDetail?.imageSRC || image1}
@@ -188,9 +182,7 @@ const PhoneDetail = () => {
                 alt="main-section"
                 className=" custom-image"
               />
-              <h3 className="price__div px-2">
-                RS: {mobileDetail?.price}
-              </h3>
+              <h3 className="price__div px-2">RS: {mobileDetail?.price}</h3>
             </div>
             <div className="d-flex flex-column gap-4 w-50 text-start imp__specs">
               <div>
@@ -278,68 +270,97 @@ const PhoneDetail = () => {
             <table className="table border-1  table-striped">
               {/* <caption>More Results</caption> */}
               <thead className="content__heads">
-              <tr>
-              {/* <th scope="col">Mobiles</th> */}
-              <th>Mobilemate</th>
-              <th>HamariWeb</th>
-              <th>WhatMobile</th>
-              <th>PriceOye</th>
-              <th>Daraz</th>
-            </tr>
+                <tr>
+                  {/* <th scope="col">Mobiles</th> */}
+                  <th>Mobilemate</th>
+                  <th>HamariWeb</th>
+                  <th>WhatMobile</th>
+                  <th>PriceOye</th>
+                  <th>Daraz</th>
+                </tr>
               </thead>
               <tbody>
                 <tr className="content__tr">
-                {/* <th scope="row"><Link href={`/Mobile/${generateSlug(mobileDetail?.model)}`}>{mobileDetail?.model}</Link></th> */}
-                <td>
-                  {mobileDetail?.mobilemate_link === "N/A" ? (
-                 <span className="fw-semibold">{mobileDetail?.mobilemate_price === 0 ? "N/A" : `${mobileDetail?.mobilemate_price} PKR`}</span>
-                  ) : (
-                    <a target="_blank" href={mobileDetail?.mobilemate_link}>
-                      {mobileDetail?.mobilemate_price === 0 ? "N/A" : `${mobileDetail?.mobilemate_price} PKR`}
-                    </a>
-                  )}
-                </td>
-                <td>
-                  {mobileDetail?.hamariweb_link === "N/A" ? (
-                 <span className="fw-semibold">{mobileDetail?.hamariweb_price === 0 ? "N/A" : `${mobileDetail?.hamariweb_price} PKR`}</span>
-                  ) : (
-                    <a target="_blank" href={mobileDetail?.hamariweb_link}>
-                      {mobileDetail?.hamariweb_price === 0 ? "N/A" : `${mobileDetail?.hamariweb_price} PKR`}
-                    </a>
-                  )}
-                </td>
+                  {/* <th scope="row"><Link href={`/Mobile/${generateSlug(mobileDetail?.model)}`}>{mobileDetail?.model}</Link></th> */}
+                  <td>
+                    {mobileDetail?.mobilemate_link === "N/A" ? (
+                      <span className="fw-semibold">
+                        {mobileDetail?.mobilemate_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.mobilemate_price} PKR`}
+                      </span>
+                    ) : (
+                      <a target="_blank" href={mobileDetail?.mobilemate_link}>
+                        {mobileDetail?.mobilemate_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.mobilemate_price} PKR`}
+                      </a>
+                    )}
+                  </td>
+                  <td>
+                    {mobileDetail?.hamariweb_link === "N/A" ? (
+                      <span className="fw-semibold">
+                        {mobileDetail?.hamariweb_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.hamariweb_price} PKR`}
+                      </span>
+                    ) : (
+                      <a target="_blank" href={mobileDetail?.hamariweb_link}>
+                        {mobileDetail?.hamariweb_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.hamariweb_price} PKR`}
+                      </a>
+                    )}
+                  </td>
 
-                <td>
-                  {mobileDetail?.whatmobile_link === "N/A" ? (
-                 <span className="fw-semibold">{mobileDetail?.whatmobile_price === 0 ? "N/A" : `${mobileDetail?.whatmobile_price} PKR`}</span>
-                  ) : (
-                    <a target="_blank" href={mobileDetail?.whatmobile_link}>
-                      {mobileDetail?.whatmobile_price === 0 ? "N/A" : `${mobileDetail?.whatmobile_price} PKR`}
-                    </a>
-                  )}
-                </td>
-                <td>
-                  {mobileDetail?.priceoye_link === "N/A" ? (
-                 <span className="fw-semibold">{mobileDetail?.priceoye_price === 0 ? "N/A" : `${mobileDetail?.priceoye_price} PKR`}</span>
-                  ) : (
-                    <a target="_blank" href={mobileDetail?.priceoye_link}>
-                      {mobileDetail?.priceoye_price === 0 ? "N/A" : `${mobileDetail?.priceoye_price} PKR`}
-                    </a>
-                  )}
-                </td>
-                <td>
-                  {mobileDetail?.daraz_link === "N/A" ? (
-                 <span className="fw-semibold">{mobileDetail?.daraz_price === 0 ? "N/A" : `${mobileDetail?.daraz_price} PKR`}</span>
-                  ) : (
-                    <a target="_blank" href={mobileDetail?.daraz_link}>
-                      {mobileDetail?.daraz_price === 0 ? "N/A" : `${mobileDetail?.daraz_price} PKR`}
-                    </a>
-                  )}
-                </td>
+                  <td>
+                    {mobileDetail?.whatmobile_link === "N/A" ? (
+                      <span className="fw-semibold">
+                        {mobileDetail?.whatmobile_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.whatmobile_price} PKR`}
+                      </span>
+                    ) : (
+                      <a target="_blank" href={mobileDetail?.whatmobile_link}>
+                        {mobileDetail?.whatmobile_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.whatmobile_price} PKR`}
+                      </a>
+                    )}
+                  </td>
+                  <td>
+                    {mobileDetail?.priceoye_link === "N/A" ? (
+                      <span className="fw-semibold">
+                        {mobileDetail?.priceoye_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.priceoye_price} PKR`}
+                      </span>
+                    ) : (
+                      <a target="_blank" href={mobileDetail?.priceoye_link}>
+                        {mobileDetail?.priceoye_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.priceoye_price} PKR`}
+                      </a>
+                    )}
+                  </td>
+                  <td>
+                    {mobileDetail?.daraz_link === "N/A" ? (
+                      <span className="fw-semibold">
+                        {mobileDetail?.daraz_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.daraz_price} PKR`}
+                      </span>
+                    ) : (
+                      <a target="_blank" href={mobileDetail?.daraz_link}>
+                        {mobileDetail?.daraz_price === 0
+                          ? "N/A"
+                          : `${mobileDetail?.daraz_price} PKR`}
+                      </a>
+                    )}
+                  </td>
                 </tr>
               </tbody>
             </table>
-            
           </div>
         </div>
         <div className="d-flex flex-column flex-lg-row gap-4 mt-4">
@@ -412,8 +433,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Dimensions && "Dimensions"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Dimensions &&
-                      mobileDetail?.Dimensions}
+                    {mobileDetail?.Dimensions && mobileDetail?.Dimensions}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
@@ -421,8 +441,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.weight && "Weight"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.weight &&
-                      mobileDetail?.weight}
+                    {mobileDetail?.weight && mobileDetail?.weight}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
@@ -438,8 +457,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Dimensions && "Dimensions"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Dimensions &&
-                      mobileDetail?.Dimensions}
+                    {mobileDetail?.Dimensions && mobileDetail?.Dimensions}
                   </p>
                 </div>
               </div>
@@ -454,8 +472,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Protection && "Protection"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Protection &&
-                      mobileDetail?.Protection}
+                    {mobileDetail?.Protection && mobileDetail?.Protection}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
@@ -463,8 +480,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Size && "Size"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Size &&
-                      `${mobileDetail?.Size}Inches`}
+                    {mobileDetail?.Size && `${mobileDetail?.Size}Inches`}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
@@ -472,8 +488,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Resolution && "Resolution"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Resolution &&
-                      mobileDetail?.Resolution}
+                    {mobileDetail?.Resolution && mobileDetail?.Resolution}
                   </p>
                 </div>
               </div>
@@ -496,8 +511,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.GPU && "GPU"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.GPU &&
-                      `${mobileDetail?.GPU}`}
+                    {mobileDetail?.GPU && `${mobileDetail?.GPU}`}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
@@ -513,8 +527,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Chipset && "Chipset"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Chipset &&
-                      mobileDetail?.Chipset}
+                    {mobileDetail?.Chipset && mobileDetail?.Chipset}
                   </p>
                 </div>
               </div>
@@ -563,8 +576,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Features && "Features"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Features &&
-                      `${mobileDetail?.Features}`}
+                    {mobileDetail?.Features && `${mobileDetail?.Features}`}
                   </p>
                 </div>
               </div>
@@ -619,8 +631,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Bluetooth && "Bluetooth"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Bluetooth &&
-                      mobileDetail?.Bluetooth}
+                    {mobileDetail?.Bluetooth && mobileDetail?.Bluetooth}
                   </p>
                 </div>
                 <div className="row mb-2 spec__subhead">
@@ -667,8 +678,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Sensors && "Sensors"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Sensors &&
-                      mobileDetail?.Sensors}
+                    {mobileDetail?.Sensors && mobileDetail?.Sensors}
                   </p>
                 </div>
                 <div className="row mb-2 gap-2 spec__subhead">
@@ -676,8 +686,7 @@ const PhoneDetail = () => {
                     {mobileDetail?.Technology && "Technology"}
                   </div>
                   <p className="col-8">
-                    {mobileDetail?.Technology &&
-                      mobileDetail?.Technology}
+                    {mobileDetail?.Technology && mobileDetail?.Technology}
                   </p>
                 </div>
               </div>
@@ -693,7 +702,7 @@ const PhoneDetail = () => {
             <div>
               <h2 className="fs-6">
                 <Link
-                 href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
+                  href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
                   className="fw-bold"
                 >
                   {mobileDetail?.model}{" "}
@@ -703,59 +712,62 @@ const PhoneDetail = () => {
             </div>
             <ul>
               <li>
-                <Link href={`/Mobile/${mobileDetail.model?.replace(/ /g, "-")}`}className="fw-bold">
+                <Link
+                  href={`/Mobile/${mobileDetail.model?.replace(/ /g, "-")}`}
+                  className="fw-bold"
+                >
                   {mobileDetail.model}{" "}
                 </Link>
                 Price in Pakistan: PKR.
                 <span className="fw-bold"> {mobileDetail.price}</span>
               </li>
               <li>
-                <Link href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`} className="fw-bold">
+                <Link
+                  href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
+                  className="fw-bold"
+                >
                   {mobileDetail.brand}{" "}
                 </Link>
-                <Link href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}className="fw-bold">
+                <Link
+                  href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
+                  className="fw-bold"
+                >
                   {mobileDetail.model}{" "}
                 </Link>
                 Price in USD:${" "}
-                <span className="fw-bold">
-                  {mobileDetail.PriceInUsd}
-                </span>
+                <span className="fw-bold">{mobileDetail.PriceInUsd}</span>
               </li>
             </ul>
             The <span className="fw-bold"> {mobileDetail.model}</span> is
-            powered by{" "}
-            <span className="fw-bold">{mobileDetail.brand}</span>
+            powered by <span className="fw-bold">{mobileDetail.brand}</span>
             {"'"}s , providing exceptional performance for all your daily
             activities and multitasking. Running on{" "}
             <span className="fw-bold">{mobileDetail.os}</span>, this{" "}
             <span className="fw-bold">{mobileDetail.model}</span> boasts{" "}
             <span className="fw-bold">{mobileDetail.brand}</span>
             {"'"}s signature sleek and premium design, measuring{" "}
-            <span className="fw-bold">{mobileDetail.Dimensions}</span>,
-            making it not only stylish but also comfortable to handle. The{" "}
-            <span className="fw-bold">{mobileDetail.model}</span>{" "}
-            features a{" "}
-            <span className="fw-bold">{mobileDetail.Size}</span> inch
-            Retina display with a resolution of{" "}
-            <span className="fw-bold">{mobileDetail.Resolution}</span>,
-            offers an immersive and crystal clear visual experience, perfect for
+            <span className="fw-bold">{mobileDetail.Dimensions}</span>, making
+            it not only stylish but also comfortable to handle. The{" "}
+            <span className="fw-bold">{mobileDetail.model}</span> features a{" "}
+            <span className="fw-bold">{mobileDetail.Size}</span> inch Retina
+            display with a resolution of{" "}
+            <span className="fw-bold">{mobileDetail.Resolution}</span>, offers
+            an immersive and crystal clear visual experience, perfect for
             streaming, gaming, or everyday use. Under the hood, the{" "}
-            <span className="fw-bold">{mobileDetail.model}</span>{" "}
-            includes <span className="fw-bold">{mobileDetail.Ram}</span>{" "}
-            GB of RAM and{" "}
-            <span className="fw-bold">{mobileDetail.Rom}</span> GB of
-            internal storage, ensuring ample space for your apps, media, and
-            files. The{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> excels
-            in photography, featuring a{" "}
-            <span className="fw-bold">{mobileDetail.Back_Cam}</span> MP
-            rear camera that captures professional quality photos and a{" "}
-            <span className="fw-bold">{mobileDetail.front_Cam}</span> MP
-            front camera for stunning selfies and FaceTime calls. Additionally,
-            the long lasting{" "}
-            <span className="fw-bold">{mobileDetail.Capacity}</span> mAh
-            battery ensures you can enjoy uninterrupted usage throughout the day
-            without needing frequent recharges. The{" "}
+            <span className="fw-bold">{mobileDetail.model}</span> includes{" "}
+            <span className="fw-bold">{mobileDetail.Ram}</span> GB of RAM and{" "}
+            <span className="fw-bold">{mobileDetail.Rom}</span> GB of internal
+            storage, ensuring ample space for your apps, media, and files. The{" "}
+            <span className="fw-bold">{mobileDetail.model}</span> excels in
+            photography, featuring a{" "}
+            <span className="fw-bold">{mobileDetail.Back_Cam}</span> MP rear
+            camera that captures professional quality photos and a{" "}
+            <span className="fw-bold">{mobileDetail.front_Cam}</span> MP front
+            camera for stunning selfies and FaceTime calls. Additionally, the
+            long lasting{" "}
+            <span className="fw-bold">{mobileDetail.Capacity}</span> mAh battery
+            ensures you can enjoy uninterrupted usage throughout the day without
+            needing frequent recharges. The{" "}
             <span className="fw-bold">
               {mobileDetail.brand} {mobileDetail.model}
             </span>{" "}
@@ -769,25 +781,33 @@ const PhoneDetail = () => {
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=15000&maxPrice=30000`}>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=15000&maxPrice=30000`}
+                >
                   {mobileDetail.brand} mobile price in Pakistan 15000 to 30000
                 </Link>
               </li>
-             
+
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=30000&maxPrice=50000`}>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=30000&maxPrice=50000`}
+                >
                   {mobileDetail.brand} mobile price in Pakistan 30000 to 50000
                 </Link>
               </li>
-              
+
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=50000&maxPrice=70000`}>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=50000&maxPrice=70000`}
+                >
                   {mobileDetail.brand} mobile price in Pakistan 50000 to 70000
                 </Link>
               </li>
-              
+
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=80000&maxPrice=100000`}>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=80000&maxPrice=100000`}
+                >
                   {mobileDetail.brand} mobile price in Pakistan 80000 to 100000
                 </Link>
               </li>
@@ -796,218 +816,281 @@ const PhoneDetail = () => {
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul mx-1">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=4&maxRam=4`}>{mobileDetail?.brand}{" "}4GB Ram Mobile Phones Price in Pakistan{" "}</Link>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=4&maxRam=4`}
+                >
+                  {mobileDetail?.brand} 4GB Ram Mobile Phones Price in Pakistan{" "}
+                </Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=6&maxRam=6`}>{mobileDetail?.brand}{" "}6GB Ram Mobile Phones Price in Pakistan</Link>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=6&maxRam=6`}
+                >
+                  {mobileDetail?.brand} 6GB Ram Mobile Phones Price in Pakistan
+                </Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=8&maxRam=8`}>{mobileDetail?.brand}{" "}8GB Ram Mobile Phones Price in Pakistan</Link>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=8&maxRam=8`}
+                >
+                  {mobileDetail?.brand} 8GB Ram Mobile Phones Price in Pakistan
+                </Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=12&maxRam=12`}>{mobileDetail?.brand}{" "}12GB Ram Mobile Phones Price in Pakistan</Link>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minRam=12&maxRam=12`}
+                >
+                  {mobileDetail?.brand} 12GB Ram Mobile Phones Price in Pakistan
+                </Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=64&storageMax=64`}>{mobileDetail?.brand}{" "}64GB Rom Mobile Phones  Price in Pakistan</Link>
+                <Link
+                  href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=64&storageMax=64`}
+                >
+                  {mobileDetail?.brand} 64GB Rom Mobile Phones Price in Pakistan
+                </Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=128&storageMax=128`}>{mobileDetail?.brand}{" "}128GB Rom Mobile Phones Price in Lahore</Link>
+                <Link
+                  href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=128&storageMax=128`}
+                >
+                  {mobileDetail?.brand} 128GB Rom Mobile Phones Price in Lahore
+                </Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=256&storageMax=256`}>{mobileDetail?.brand}{" "}256GB Rom Mobile Phones Price in Pakistan</Link>
+                <Link
+                  href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=256&storageMax=256`}
+                >
+                  {mobileDetail?.brand} 256GB Rom Mobile Phones Price in
+                  Pakistan
+                </Link>
               </li>
               <li className="description-para">
-                <Link href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=1024&storageMax=1024`}>{mobileDetail?.brand}{" "}1TB Rom Mobile Phones Price in Pakistan</Link>
+                <Link
+                  href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=1024&storageMax=1024`}
+                >
+                  {mobileDetail?.brand} 1TB Rom Mobile Phones Price in Pakistan
+                </Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
             <ul className="description-ul">
               <li className="description-para">
-                <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&backCamMin=20&backCamMax=29`}>{mobileDetail.brand}{" "} 20MP Camera Phones Price in Pakistan</Link>
+                <Link
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&backCamMin=20&backCamMax=29`}
+                >
+                  {mobileDetail.brand} 20MP Camera Phones Price in Pakistan
+                </Link>
               </li>
               <li className="description-para">
                 <Link
                   href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=30&backCamMax=49`}
                 >
-                 {mobileDetail.brand}{" "}30MP Camera Phones Price in Pakistan
+                  {mobileDetail.brand} 30MP Camera Phones Price in Pakistan
                 </Link>
               </li>
               <li className="description-para">
                 <Link
                   href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=50&backCamMax=99`}
                 >
-                  {mobileDetail.brand}{" "}50MP Camera Phones Price in Pakistan
+                  {mobileDetail.brand} 50MP Camera Phones Price in Pakistan
                 </Link>{" "}
               </li>
               <li className="description-para">
                 <Link
                   href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=100&backCamMax=99`}
                 >
-                  {mobileDetail.brand}{" "}100MP Camera Phones Price in Pakistan
+                  {mobileDetail.brand} 100MP Camera Phones Price in Pakistan
                 </Link>
               </li>
-              
             </ul>
           </div>
         </div>
-        
+
         {/* other websites */}
         <div className="row">
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
-          <h6>MobileMate</h6>
+            <h6>MobileMate</h6>
             <ul className="description-ul">
               <li className="description-para">
                 <Link href="https://www.mobilemate.io/">
-                Mobile phone prices in Pakistan mobilemate
+                  Mobile phone prices in Pakistan mobilemate
                 </Link>
               </li>
               <li className="description-para">
                 <Link href={`https://www.mobilemate.io/`}>
-                Latest mobile phone prices in Pakistan mobilemate
+                  Latest mobile phone prices in Pakistan mobilemate
                 </Link>
               </li>
               <li className="description-para">
                 <Link href={"https://www.mobilemate.io/"}>
-                latest mobile Price list in Pakistan mobilemate
+                  latest mobile Price list in Pakistan mobilemate
                 </Link>
               </li>
               <li className="description-para">
                 <Link href="https://www.mobilemate.io/OPPO">
-                Oppo mobile phone price in Pakistan mobilemate
+                  Oppo mobile phone price in Pakistan mobilemate
                 </Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
-          <h6>PriceOye</h6>
-          <ul className="description-ul">
+            <h6>PriceOye</h6>
+            <ul className="description-ul">
               <li className="description-para">
                 <Link href="https://priceoye.pk/mobiles">
-                Mobile phone prices in Pakistan PriceOye
+                  Mobile phone prices in Pakistan PriceOye
                 </Link>
               </li>
               <li className="description-para">
                 <Link href={`https://priceoye.pk/mobiles`}>
-                Latest mobile phone prices in Pakistan PriceOye
+                  Latest mobile phone prices in Pakistan PriceOye
                 </Link>
               </li>
               <li className="description-para">
                 <Link href={"https://priceoye.pk/mobiles"}>
-                latest mobile Price list in Pakistan PriceOye
+                  latest mobile Price list in Pakistan PriceOye
                 </Link>
               </li>
               <li className="description-para">
                 <Link href="https://priceoye.pk/mobiles/oppo">
-                Oppo mobile phone price in Pakistan PriceOye
+                  Oppo mobile phone price in Pakistan PriceOye
                 </Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
-          <h6>WhatMobile</h6>
-          <ul className="description-ul">
+            <h6>WhatMobile</h6>
+            <ul className="description-ul">
               <li className="description-para">
                 <Link href="https://www.whatmobile.com.pk/">
-                Mobile phone prices in Pakistan WhatMobile
+                  Mobile phone prices in Pakistan WhatMobile
                 </Link>
               </li>
               <li className="description-para">
                 <Link href={`https://www.whatmobile.com.pk/`}>
-                Latest mobile phone prices in Pakistan WhatMobile
+                  Latest mobile phone prices in Pakistan WhatMobile
                 </Link>
               </li>
               <li className="description-para">
                 <Link href={"https://www.whatmobile.com.pk/"}>
-                latest mobile Price list in Pakistan WhatMobile
+                  latest mobile Price list in Pakistan WhatMobile
                 </Link>
               </li>
               <li className="description-para">
                 <Link href="https://www.whatmobile.com.pk/Oppo_Mobiles_Prices">
-                Oppo mobile phone price in Pakistan WhatMobile
+                  Oppo mobile phone price in Pakistan WhatMobile
                 </Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6 d-flex flex-column mt-3">
-          <h6>HamariWeb</h6>
-          <ul className="description-ul">
+            <h6>HamariWeb</h6>
+            <ul className="description-ul">
               <li className="description-para">
                 <Link href="https://hamariweb.com/">
-                Mobile phone prices in Pakistan HamariWeb
+                  Mobile phone prices in Pakistan HamariWeb
                 </Link>
               </li>
               <li className="description-para">
                 <Link href={`https://hamariweb.com/`}>
-                Latest mobile phone prices in Pakistan HamariWeb
+                  Latest mobile phone prices in Pakistan HamariWeb
                 </Link>
               </li>
               <li className="description-para">
                 <Link href={"https://hamariweb.com/"}>
-                latest mobile Price list in Pakistan HamariWeb
+                  latest mobile Price list in Pakistan HamariWeb
                 </Link>
               </li>
               <li className="description-para">
                 <Link href="https://hamariweb.com/mobiles/oppo">
-                Oppo mobile phone price in Pakistan HamariWeb
+                  Oppo mobile phone price in Pakistan HamariWeb
                 </Link>
               </li>
             </ul>
           </div>
         </div>
-
       </div>
       <section>
-      {/* Other details */}
-      
-      {/* Comments Section */}
-      <div className="comments-section">
-        <h2>Comments</h2>
-        
-        {/* Display Comments */}
-        <ul className="comments-list">
-          {comments.length > 0 ? (
-            comments.map((comment, index) => (
-              <li key={index} className="comment-item">
-                <strong>{comment.name}</strong> (<i>{comment.email}</i>):<br />
-                {comment.comment}
-              </li>
-            ))
-          ) : (
-            <p>No comments yet. Be the first to comment!</p>
-          )}
-        </ul>
+        {/* Other details */}
 
-        {/* Add New Comment */}
-        <form onSubmit={handleCommentSubmit} className="comment-form">
-          <input
-            type="text"
-            placeholder="Your Name"
-            value={newComment.name}
-            onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            value={newComment.email}
-            onChange={(e) => setNewComment({ ...newComment, email: e.target.value })}
-            required
-          />
-          <textarea
-            placeholder="Your Comment"
-            value={newComment.comment}
-            onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
-            required
-          />
-          <button type="submit">Post Comment</button>
-        </form>
-      </div>
-    </section>
+        {/* Comments Section */}
+        <div className="comments-section mt-8 p-6 border border-gray-300 rounded-lg bg-gray-50">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+            Comments
+          </h2>
+
+          {/* Display Comments */}
+          <ul className="comments-list space-y-4 mb-6">
+            {comments.length > 0 ? (
+              comments.map((comment, index) => (
+                <li
+                  key={index}
+                  className="comment-item border-b border-gray-300 pb-4 last:border-b-0"
+                >
+                  <strong className="text-gray-700">{comment.name}</strong> (
+                  <i className="text-gray-500">{comment.email}</i>):
+                  <br />
+                  <span className="mt-2 block text-gray-800">
+                    {comment.comment}
+                  </span>
+                </li>
+              ))
+            ) : (
+              <p className="no-comments text-gray-500 italic">
+                No comments yet. Be the first to comment!
+              </p>
+            )}
+          </ul>
+
+          {/* Add New Comment */}
+          <form
+            onSubmit={handleCommentSubmit}
+            className="comment-form flex flex-col space-y-4"
+          >
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={newComment.name}
+              onChange={(e) =>
+                setNewComment({ ...newComment, name: e.target.value })
+              }
+              required
+              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              value={newComment.email}
+              onChange={(e) =>
+                setNewComment({ ...newComment, email: e.target.value })
+              }
+              required
+              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <textarea
+              placeholder="Your Comment"
+              value={newComment.comment}
+              onChange={(e) =>
+                setNewComment({ ...newComment, comment: e.target.value })
+              }
+              required
+              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none min-h-[100px]"
+            />
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
+            >
+              Post Comment
+            </button>
+          </form>
+        </div>
+      </section>
     </section>
   );
 };
