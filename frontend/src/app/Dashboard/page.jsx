@@ -94,10 +94,10 @@ const AdminDashboard = () => {
   //   }
   // }, [user, userLoading, router]);
    useEffect(()=>{
-    if(!adminInfo){
+    if(!adminInfo && !loading){
       router.push("/Login");
     }
-   })
+   },[adminInfo])
   // Handle search
   const handleSearchSubmit = (e) => {
     e.preventDefault();
