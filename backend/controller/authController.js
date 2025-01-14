@@ -47,3 +47,36 @@ export const loginUser = async (req, res) => {
         return res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 };
+
+// to check the token is valid or not
+export const checkToken = async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(401).json({ message: "No token found" });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        const user = await User.findById(decoded.id);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        return res.status(200).json({ user });
+    } catch (error) {
+        return res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+};
+
+//log out 
+export const logoutUser = async (req, res) => {
+    try {
+        res.clearCookie("token");
+        return res.status(200).json({ message: "Logout successful" });
+        
+    } catch (error) {
+        return res.status(500).json({ message: "Internal Server Error", error: error.message });
+        
+    }
+};

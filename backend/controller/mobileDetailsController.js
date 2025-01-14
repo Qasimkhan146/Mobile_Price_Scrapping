@@ -321,10 +321,12 @@ export const postCommentOnMobile = async (req, res) => {
       return res.status(404).json({ message: "Mobile not found" });
     }
 
-    // Use $push to directly add the new comment
+    // Append the new comment to the existing array and set the updated array
+    const updatedComments = [...mobile.comments, { name, email, comment }];
+
     const result = await MobileDetails.findOneAndUpdate(
       { model: model },
-      { $push: { comments: { name, email, comment } } }, // Add new comment
+      { $set: { comments: updatedComments } }, // Overwrite comments array
       { new: true } // Return the updated document
     );
 
@@ -334,6 +336,7 @@ export const postCommentOnMobile = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+
 
 //view comments on mobile
 

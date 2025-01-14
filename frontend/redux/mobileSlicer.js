@@ -174,29 +174,36 @@ export const fetchComments = createAsyncThunk("comments/fetchComments",async (mo
   }
 );
 
-export const submitComment = createAsyncThunk("NewsData/submitComment",async ({data, commentId}) => {
-  console.log("whats comming in commentId", commentId, data);
-      try {
-        const response = await fetch(`http://localhost:4501/mobile/postComment/${commentId}`, {
-          method: 'PATCH',
+export const submitComment = createAsyncThunk(
+  "NewsData/submitComment",
+  async ({ data, commentId }, thunkAPI) => {
+    console.log("Inside submitComment:", { data, commentId });
+    try {
+      const response = await fetch(
+        `http://localhost:4501/mobile/postComment/${commentId}`,
+        {
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(data)
-        });
-  
-        if (!response.ok) {
-          throw new Error('Failed to post comment.');
+          body: JSON.stringify(data),
         }
-  
-        const result = await response.json();
-        console.log('Comment posted successfully:', result);
-        return result;
-      } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to post comment.");
       }
+
+      const result = await response.json();
+      console.log("Comment posted successfully:", result);
+      return result;
+    } catch (error) {
+      console.error("Error in submitComment:", error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
-  );
+  }
+);
+
 
 
 

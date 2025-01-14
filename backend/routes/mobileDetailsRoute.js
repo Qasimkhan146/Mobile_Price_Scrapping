@@ -13,7 +13,7 @@ mobileDetailsRouter.get("/fetchAdvanceFilters", fetchAdvanceSearchApi);
 // mobileDetailsRouter.put("/updateMobile/:model",authenticateToken,authorizeRole("admin"),updateMobileAndPrices)
 mobileDetailsRouter.put("/updateMobile/:model",updateMobile)
 mobileDetailsRouter.put("/updateMobileWithHistory/:model",updateMobileWithHistory)
-mobileDetailsRouter.patch("/postComment/:model",postCommentOnMobile)
+mobileDetailsRouter.put("/postComment/:model",postCommentOnMobile)
 mobileDetailsRouter.get("/viewComments/:model",viewCommentsOnMobile)
 
 

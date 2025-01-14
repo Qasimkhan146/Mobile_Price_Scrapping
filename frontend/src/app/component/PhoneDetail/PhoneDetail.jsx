@@ -37,12 +37,14 @@ const PhoneDetail = () => {
   const { comments } = useSelector(selectAllComments);
   const { slug } = useParams();
   const slugParts = slug.split("-");
+  const newSlug = slugParts.join("-").replace(/-/g, " ");
+  console.log("newSlug", newSlug);
   const brandName = slugParts[0].toUpperCase();
   const modelName = slugParts.slice(1).join("-").replace(/-/g, " ");
   useEffect(() => {
-    dispatch(fetchMobileDetail(modelName));
-    dispatch(fetchComments({model:modelName}));
-  }, [modelName,dispatch]);
+    dispatch(fetchMobileDetail(newSlug));
+    dispatch(fetchComments({model:newSlug}));
+  }, [newSlug,dispatch]);
   // console.log(mobileDetail, "mobileDetail");
   const features = mobileDetail?.Features.split(",").map((feature) =>
     feature.trim()
@@ -62,7 +64,7 @@ const PhoneDetail = () => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    dispatch(submitComment({ data: newComment, commentId: modelName }))
+    dispatch(submitComment({ data: newComment, commentId: newSlug }))
       .then(() => {
         setNewComment({ name: "", email: "", comment: "" }); // Reset form after successful submission
       })
