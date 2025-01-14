@@ -7,9 +7,13 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+// const { register, handleSubmit, reset, formState: { errors } } = useForm();
 import {
+  fetchComments,
   fetchMobileDetail,
+  selectAllComments,
   selectMobileDetail,
+  submitComment,
 } from "../../../../redux/mobileSlicer";
 import Link from "next/link";
 
@@ -22,14 +26,23 @@ const PhoneDetail = () => {
     }, [3000]);
   });
 
+  // Local state for comment inputs
+  const [newComment, setNewComment] = useState({
+    name: "",
+    email: "",
+    comment: "",
+  });
+
   const mobileDetail = useSelector(selectMobileDetail);
+  const { comments } = useSelector(selectAllComments);
   const { slug } = useParams();
   const slugParts = slug.split("-");
   const brandName = slugParts[0].toUpperCase();
   const modelName = slugParts.slice(1).join("-").replace(/-/g, " ");
   useEffect(() => {
     dispatch(fetchMobileDetail(modelName));
-  }, [dispatch]);
+    dispatch(fetchComments({model:modelName}));
+  }, [modelName,dispatch]);
   // console.log(mobileDetail, "mobileDetail");
   const features = mobileDetail?.Features.split(",").map((feature) =>
     feature.trim()
@@ -46,6 +59,19 @@ const PhoneDetail = () => {
 
   // const sources = mobileDetail?.prices.map((price) => price.source);
   // console.log("Sources", sources);
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    dispatch(submitComment({ data: newComment, commentId: modelName }))
+      .then(() => {
+        setNewComment({ name: "", email: "", comment: "" }); // Reset form after successful submission
+      })
+      .catch((error) => {
+        console.log("Failed to submit comment:", error);
+      });
+  };
+
+
 
   const limitCharacters = (text, limit) => {
     return text?.length > limit ? text?.slice(0, limit) + "..." : text;
@@ -311,32 +337,7 @@ const PhoneDetail = () => {
                 </tr>
               </tbody>
             </table>
-            {/* <table className="w-100 table border-1 d-md-none table-striped">
-              <thead className="content__head">
-                <tr>
-                  <th scope="col">Platform</th>
-                  <th scope="col">Prices</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mobileDetail &&
-                  mobileDetail.prices &&
-                  mobileDetail.prices.map((mobile, index) => (
-                    <tr key={index} className="content__tr">
-                      <td>{mobile.source}</td>
-                      <td>
-                      {mobile.href === "N/A" ? (
-                      <span className="fw-semibold">{mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}</span>
-                    ) : (
-                      <a target="_blank" href={mobile.href}>
-                        {mobile.price === 0 ? "N/A" : `${mobile.price} PKR`}
-                      </a>
-                    )}
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table> */}
+            
           </div>
         </div>
         <div className="d-flex flex-column flex-lg-row gap-4 mt-4">
@@ -770,36 +771,19 @@ const PhoneDetail = () => {
                   {mobileDetail.brand} mobile price in Pakistan 15000 to 30000
                 </Link>
               </li>
-              {/* <li className="description-para">
-                <Link href={`/mobile_price_15000_to_30000`}>
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 20000 to 30000
-                </Link>
-              </li> */}
-              {/* <li className="description-para">
-                <Link href={"/mobile_price_15000_to_30000"}>
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 20000 to 40000
-                </Link>
-              </li> */}
+             
               <li className="description-para">
                 <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=30000&maxPrice=50000`}>
                   {mobileDetail.brand} mobile price in Pakistan 30000 to 50000
                 </Link>
               </li>
-              {/* <li className="description-para">
-                <Link href="/mobile_price_40000_to_50000">
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 40000 to 60000
-                </Link>
-              </li> */}
+              
               <li className="description-para">
                 <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=50000&maxPrice=70000`}>
                   {mobileDetail.brand} mobile price in Pakistan 50000 to 70000
                 </Link>
               </li>
-              {/* <li className="description-para">
-                <Link href="/mobile_price_50000_to_100000">
-                  {mobileDetail.mobile.brand} mobile price in Pakistan 70000 to 80000
-                </Link>
-              </li> */}
+              
               <li className="description-para">
                 <Link href={`/AdvanceSearch?brand=${mobileDetail?.brand}&minPrice=80000&maxPrice=100000`}>
                   {mobileDetail.brand} mobile price in Pakistan 80000 to 100000
@@ -975,6 +959,53 @@ const PhoneDetail = () => {
         </div>
 
       </div>
+      <section>
+      {/* Other details */}
+      
+      {/* Comments Section */}
+      <div className="comments-section">
+        <h2>Comments</h2>
+        
+        {/* Display Comments */}
+        <ul className="comments-list">
+          {comments.length > 0 ? (
+            comments.map((comment, index) => (
+              <li key={index} className="comment-item">
+                <strong>{comment.name}</strong> (<i>{comment.email}</i>):<br />
+                {comment.comment}
+              </li>
+            ))
+          ) : (
+            <p>No comments yet. Be the first to comment!</p>
+          )}
+        </ul>
+
+        {/* Add New Comment */}
+        <form onSubmit={handleCommentSubmit} className="comment-form">
+          <input
+            type="text"
+            placeholder="Your Name"
+            value={newComment.name}
+            onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            value={newComment.email}
+            onChange={(e) => setNewComment({ ...newComment, email: e.target.value })}
+            required
+          />
+          <textarea
+            placeholder="Your Comment"
+            value={newComment.comment}
+            onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
+            required
+          />
+          <button type="submit">Post Comment</button>
+        </form>
+      </div>
+    </section>
     </section>
   );
 };

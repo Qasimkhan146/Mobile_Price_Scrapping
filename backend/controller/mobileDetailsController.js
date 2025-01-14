@@ -307,3 +307,45 @@ export const updateMobileWithHistory = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+
+//post comment on mobile
+export const postCommentOnMobile = async (req, res) => {
+  try {
+    const { model } = req.params;
+    const { name, email, comment } = req.body;
+
+    console.log("for check", name, email, comment);
+
+    const mobile = await MobileDetails.findOne({ model: new RegExp(model, "i") });
+    if (!mobile) {
+      return res.status(404).json({ message: "Mobile not found" });
+    }
+
+    // Use $push to directly add the new comment
+    const result = await MobileDetails.findOneAndUpdate(
+      { model: model },
+      { $push: { comments: { name, email, comment } } }, // Add new comment
+      { new: true } // Return the updated document
+    );
+
+    console.log("result", result);
+    res.status(200).json({ message: "Comment posted successfully", result });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
+//view comments on mobile
+
+export const viewCommentsOnMobile = async (req, res) => {
+  try{
+    const { model } = req.params;
+    const mobile = await MobileDetails.findOne({ model: new RegExp(model, "i") });
+    if (!mobile) {
+      return res.status(404).json({ message: "Mobile not found" });
+    }
+    res.status(200).json({comments:mobile.comments});
+  }catch(error){
+    res.status(500).json({message:"Internal Server Error",error:error.message});
+  }
+}

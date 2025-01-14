@@ -163,12 +163,51 @@ export const fetchAdvanceFilters = createAsyncThunk(
   }
 );
 
+export const fetchComments = createAsyncThunk("comments/fetchComments",async (model, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`http://localhost:4501/mobile/viewComments/${model}`);
+      const data = await response.json();
+      return data; // Assuming your API returns comments under `comments` key
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const submitComment = createAsyncThunk("NewsData/submitComment",async ({data, commentId}) => {
+  console.log("whats comming in commentId", commentId, data);
+      try {
+        const response = await fetch(`http://localhost:4501/mobile/postComment/${commentId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to post comment.');
+        }
+  
+        const result = await response.json();
+        console.log('Comment posted successfully:', result);
+        return result;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+
+
+
 
 const mobileSlice = createSlice({
   name: "mobile",
   initialState: {
     loading: false,
     fetch10Mobiles: [],
+    comments:{},
+    allComments: { comments: [] },
     mobileDetail: null,
     filterMobiles : [],
     allMobiles:[],
@@ -273,7 +312,34 @@ const mobileSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+
+      //for comments on mobiles
+      .addCase(submitComment.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(submitComment.fulfilled, (state, action) => {
+        state.loading = false;
+        state.comments.push(action.payload); 
+        state.error = null;
+      })
+      .addCase(submitComment.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       
+      //for all comments
+      .addCase(fetchComments.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchComments.fulfilled, (state, action) => {
+        state.loading = false;
+        state.allComments = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchComments.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
@@ -286,4 +352,10 @@ export const selectEditMobile = (state) => state.mobile.editMobileData;
 export const selectAdvanceFilterMobiles = (state) => state.mobile.advanceFilterMobiles;
 export const selectAllMobiles = (state) => state.mobile.allMobiles;
 export const selectUpdatedPrice = (state) => state.mobile.updatedPrice;
+//for comments
+export const selectComment = (state) => state.mobile.comments;
+export const selectAllComments = (state) => state.mobile.allComments;
 export default mobileSlice.reducer;
+
+
+

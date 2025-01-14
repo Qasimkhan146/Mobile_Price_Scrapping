@@ -62,6 +62,7 @@ const mobileDetailsSchema = new mongoose.Schema({
   priceoye_link:{ type: String},
   mobilemate_link:{ type: String},
   daraz_link:{type:String},
+  comments: [{name: String, comment: String,email: String}],
   updateHistory: [updateSchema],
 });
 
