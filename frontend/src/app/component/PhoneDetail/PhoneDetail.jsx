@@ -44,13 +44,12 @@ const PhoneDetail = () => {
   useEffect(() => {
     dispatch(fetchMobileDetail(newSlug));
     // dispatch(fetchComments({ model: newSlug }));
-
   }, [newSlug, dispatch]);
 
   useEffect(() => {
-    dispatch(fetchComments({ model: newSlug }));
+    dispatch(fetchComments( newSlug ));
     // setLoading(false)
-  },[loading,dispatch])
+  }, [loading, dispatch]);
   // console.log(mobileDetail, "mobileDetail");
   const features = mobileDetail?.Features.split(",").map((feature) =>
     feature.trim()
@@ -71,7 +70,6 @@ const PhoneDetail = () => {
         setNewComment({ name: "", email: "", comment: "" }); // Reset form after successful submission
         setLoading(!loading);
       })
-      
 
       .catch((error) => {
         console.log("Failed to submit comment:", error);
@@ -1025,43 +1023,27 @@ const PhoneDetail = () => {
           </div>
         </div>
       </div>
-      <section>
-        {/* Other details */}
-
+      <section className="max-w-4xl mx-auto mt-10 mb-4">
         {/* Comments Section */}
-        <div className="comments-section mt-8 p-6 border border-gray-300 rounded-lg bg-gray-50">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+        <div className="comments-section mt-8 p-8 border border-gray-300 rounded-lg bg-white shadow-md">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 border-b pb-2 border-gray-200">
             Comments
           </h2>
 
           {/* Display Comments */}
-          <ul className="comments-list space-y-4 mb-6">
-            {comments.length > 0 ? (
-              comments.map((comment, index) => (
-                <li
-                  key={index}
-                  className="comment-item border-b border-gray-300 pb-4 last:border-b-0"
-                >
-                  <strong className="text-gray-700">{comment.name}</strong> (
-                  <i className="text-gray-500">{comment.email}</i>):
-                  <br />
-                  <span className="mt-2 block text-gray-800">
-                    {comment.comment}
-                  </span>
-                </li>
-              ))
-            ) : (
-              <p className="no-comments text-gray-500 italic">
-                No comments yet. Be the first to comment!
-              </p>
-            )}
-          </ul>
-
-          {/* Add New Comment */}
           <form
             onSubmit={handleCommentSubmit}
-            className="comment-form flex flex-col space-y-4"
+            className="comment-form gap-6 flex flex-wrap mb-2"
           >
+            <textarea
+              placeholder="Your Comment"
+              value={newComment.comment}
+              onChange={(e) =>
+                setNewComment({ ...newComment, comment: e.target.value })
+              }
+              required
+              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 resize-none min-h-[80px]"
+            />
             <input
               type="text"
               placeholder="Your Name"
@@ -1070,7 +1052,7 @@ const PhoneDetail = () => {
                 setNewComment({ ...newComment, name: e.target.value })
               }
               required
-              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className=" p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 h-[40px]"
             />
             <input
               type="email"
@@ -1080,24 +1062,47 @@ const PhoneDetail = () => {
                 setNewComment({ ...newComment, email: e.target.value })
               }
               required
-              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 h-[40px]"
             />
-            <textarea
-              placeholder="Your Comment"
-              value={newComment.comment}
-              onChange={(e) =>
-                setNewComment({ ...newComment, comment: e.target.value })
-              }
-              required
-              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none min-h-[100px]"
-            />
+            
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
+              className="px-3 py-1  bg-[#1eb8db] text-white font-bold rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-700 transition duration-300 h-[40px]"
             >
               Post Comment
             </button>
           </form>
+          <ul className="comments-list space-y-6 mb-8">
+            {comments.length > 0 ? (
+              comments
+                .slice()
+                .reverse()
+                .slice(0, 10)
+                .map((comment, index) => (
+                  <li
+                    key={index}
+                    className="comment-item bg-gray-100 p-4 rounded-lg shadow-sm"
+                  >
+                    <div className="flex items-center mb-2">
+                      <strong className="text-gray-800 text-lg mr-2">
+                        {comment.name}
+                      </strong>
+                      <span className="text-sm text-gray-500">
+                        ({comment.email})
+                      </span>
+                    </div>
+                    <p className="text-gray-700">{comment.comment}</p>
+                  </li>
+                ))
+            ) : (
+              <p className="no-comments text-gray-500 italic text-center">
+                No comments yet. Be the first to comment!
+              </p>
+            )}
+          </ul>
+
+          {/* Add New Comment */}
+          
         </div>
       </section>
     </section>
