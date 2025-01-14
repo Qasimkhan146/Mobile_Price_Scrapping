@@ -177,8 +177,7 @@ export const fetchComments = createAsyncThunk("comments/fetchComments",async (mo
 export const submitComment = createAsyncThunk(
   "NewsData/submitComment",
   async ({ data, commentId }, thunkAPI) => {
-    console.log("Inside submitComment:", { data, commentId });
-    try {
+      try {
       const response = await fetch(
         `https://7842.mobileprice.biz.pk/mobile/postComment/${commentId}`,
         {
@@ -195,8 +194,7 @@ export const submitComment = createAsyncThunk(
       }
 
       const result = await response.json();
-      console.log("Comment posted successfully:", result);
-      return result;
+       return result;
     } catch (error) {
       console.error("Error in submitComment:", error.message);
       return thunkAPI.rejectWithValue(error.message);
@@ -213,7 +211,7 @@ const mobileSlice = createSlice({
   initialState: {
     loading: false,
     fetch10Mobiles: [],
-    comments:{},
+    comments:[],
     allComments: { comments: [] },
     mobileDetail: null,
     filterMobiles : [],

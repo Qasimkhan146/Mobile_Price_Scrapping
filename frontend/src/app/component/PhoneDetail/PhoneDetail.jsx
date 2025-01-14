@@ -20,11 +20,11 @@ import Link from "next/link";
 const PhoneDetail = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setInterval(() => {
-      setLoading(false);
-    }, [3000]);
-  });
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setLoading(false);
+  //   }, [3000]);
+  // });
 
   // Local state for comment inputs
   const [newComment, setNewComment] = useState({
@@ -43,8 +43,14 @@ const PhoneDetail = () => {
   const modelName = slugParts.slice(1).join("-").replace(/-/g, " ");
   useEffect(() => {
     dispatch(fetchMobileDetail(newSlug));
-    dispatch(fetchComments({ model: newSlug }));
+    // dispatch(fetchComments({ model: newSlug }));
+
   }, [newSlug, dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchComments({ model: newSlug }));
+    // setLoading(false)
+  },[loading,dispatch])
   // console.log(mobileDetail, "mobileDetail");
   const features = mobileDetail?.Features.split(",").map((feature) =>
     feature.trim()
@@ -63,7 +69,10 @@ const PhoneDetail = () => {
     dispatch(submitComment({ data: newComment, commentId: newSlug }))
       .then(() => {
         setNewComment({ name: "", email: "", comment: "" }); // Reset form after successful submission
+        setLoading(!loading);
       })
+      
+
       .catch((error) => {
         console.log("Failed to submit comment:", error);
       });

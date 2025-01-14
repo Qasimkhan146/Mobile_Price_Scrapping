@@ -489,7 +489,7 @@ const HeroSection = () => {
           <h1 className="text-3xl font-semibold text-[#1eb8db] text-center">Search for Mobile Phones Price Comparison</h1>
           <div className="flex gap-2 justify-center mt-2">
             <input type="text" placeholder="Search" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} className="search__input form-control w-[75%]" />
-            <button className="px-2 rounded-md main-search"> <Link href={`/AdvanceSearch?model=${searchInput}`}> Search </Link></button>
+            <button className="px-2 rounded-md main-search"> <Link href={`/AdvanceSearch?model=${searchInput.replace(/\s/g, "-")}`}> Search </Link></button>
           </div>
           <Col className="d-none mt-2 d-lg-flex gap-2 brands__div flex-wrap justify-content-center">
             <div ref={(node) => setDropdownRef("brand", node)} className="position-relative">
