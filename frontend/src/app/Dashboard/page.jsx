@@ -75,6 +75,15 @@ const AdminDashboard = () => {
     }, 2000);
   };
 
+  // useEffect(() => {
+  //   const cookies = document.cookie;
+  //   const tokenExists = cookies.split("; ").some((cookie) => cookie.startsWith("token="));
+
+  //   if (!tokenExists) {
+  //     router.push("/Login");
+  //   }
+  // }, [router]);
+
   // Redirect if user is not logged in
   useEffect(() => {
     if (!user && !userLoading) {
