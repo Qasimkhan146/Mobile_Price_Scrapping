@@ -26,7 +26,8 @@ const AdvanceSearchComponent = () => {
     const advanceMobiles = useSelector(selectAdvanceFilterMobiles);
     const [advanceData, setAdvanceData] = useState([]);
     const searchParams = useSearchParams();
-    const queryModel = searchParams.get('model');
+    // const queryBrands = searchParams.get('brand');
+    const queryModel = searchParams.get('model')?.replace(/-/g, " ");
     const queryBrand = searchParams.get('brand');
     const queryRamMin = searchParams.get('minRam');
     const queryRamMax = searchParams.get('maxRam');
