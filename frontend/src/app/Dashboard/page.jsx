@@ -8,17 +8,20 @@ import Paper from "@mui/material/Paper";
 import { fetchAllMobiles, selectAllMobiles } from "../../../redux/mobileSlicer";
 import { logout } from "../../../redux/authSlicer";
 import "./Dashboard.css";
-
+import { adminUser, selectAdmin, selectErrors } from "../../../redux/authSlicer";
 const AdminDashboard = () => {
-  const { user, loading: userLoading } = useSelector((state) => state.user);
+  const { user, loading: userLoading, error } = useSelector((state) => state.user);
   const mobiles = useSelector(selectAllMobiles);
+  const authError = useSelector(selectErrors);
+  const adminInfo = useSelector(selectAdmin);
   const router = useRouter();
   const dispatch = useDispatch();
   const [searchModel, setSearchModel] = useState("");
   const [loading, setLoading] = useState(false);
   const [rows, setRows] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
-
+  console.log(adminInfo,"adminInfo",authError);
+  
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "mobile", headerName: "Mobile Name", width: 160 },
@@ -63,6 +66,7 @@ const AdminDashboard = () => {
   // Fetch mobiles
   useEffect(() => {
     dispatch(fetchAllMobiles());
+    dispatch(adminUser());
   }, [dispatch]);
 
   // Logout handler
@@ -85,12 +89,16 @@ const AdminDashboard = () => {
   // }, [router]);
 
   // Redirect if user is not logged in
-  useEffect(() => {
-    if (!user && !userLoading) {
+  // useEffect(() => {
+  //   if (!user && !userLoading) {
+  //     router.push("/Login");
+  //   }
+  // }, [user, userLoading, router]);
+   useEffect(()=>{
+    if(authError && authError === "No token found"){
       router.push("/Login");
     }
-  }, [user, userLoading, router]);
-
+   },[authError])
   // Handle search
   const handleSearchSubmit = (e) => {
     e.preventDefault();
