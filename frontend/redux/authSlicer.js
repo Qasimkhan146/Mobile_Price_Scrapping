@@ -13,12 +13,21 @@ const initialState = {
   // token: savedToken,
   loading: false,
   error: null,
+  adminInfo:null
 };
 
 // Async thunk for user login
 export const loginUser = createAsyncThunk('user/login', async (credentials, thunkAPI) => {
   try {
     const response = await axios.post(`${API_URL}/login`, credentials, { withCredentials: true });
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data);
+  }
+});
+export const adminUser = createAsyncThunk('user/admin', async ( thunkAPI) => {
+  try {
+    const response = await axios.get(`${API_URL}/DashboardAdmin`,  { withCredentials: true });
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data);
@@ -53,9 +62,25 @@ const userSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(adminUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(adminUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.adminInfo = action.payload.user;
+        // state.token = action.payload;
+        // localStorage.setItem('user', JSON.stringify(action.payload.user));
+        // localStorage.setItem('token', action.payload.token);
+      })
+      .addCase(adminUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
+export const selectAdmin = (state) => state.user.adminInfo;
 export const { logout } = userSlice.actions;
 export default userSlice.reducer;
