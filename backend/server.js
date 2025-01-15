@@ -16,7 +16,7 @@ connectDB();
 
 const app = express();
 app.use(cors({
-    origin:["*","http://localhost:3005","https://www.mobileprice.biz.pk"],
+    origin:["*","http://localhost:3005","https://www.mobileprice.biz.pk","https://mobileprice.biz.pk"],
     credentials: true,              // Allow cookies
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],       // Allowed methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
