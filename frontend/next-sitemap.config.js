@@ -7,7 +7,7 @@ const config = {
     additionalPaths: async (config) => {
       try {
         // Generate additional paths for dynamic routes
-        const response = await fetch('https://7842.mobileprice.biz.pk/mobile/fetchAllMobiles');
+        const response = await fetch('http://localhost:4501/mobile/fetchAllMobiles');
         if (!response.ok) {
           throw new Error('Failed to fetch mobile data');
         }
