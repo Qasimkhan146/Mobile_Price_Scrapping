@@ -24,7 +24,7 @@ const AdminDashboard = () => {
   
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
-    { field: "mobile", headerName: "Mobile Name", width: 160 },
+    { field: "mobile", headerName: "Mobile Name", width: 250 },
     { field: "hamariweb", headerName: "Hamari Web", width: 130 },
     { field: "mobilemate", headerName: "MobileMate", width: 130 },
     { field: "priceoye", headerName: "Price Oye", width: 130 },

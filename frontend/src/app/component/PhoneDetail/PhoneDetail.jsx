@@ -856,21 +856,21 @@ const PhoneDetail = () => {
             <ul className="description-ul">
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=64&storageMax=64`}
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&storageMin=64&storageMax=64`}
                 >
                   {mobileDetail?.brand} 64GB Rom Mobile Phones Price in Pakistan
                 </Link>
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=128&storageMax=128`}
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&storageMin=128&storageMax=128`}
                 >
                   {mobileDetail?.brand} 128GB Rom Mobile Phones Price in Lahore
                 </Link>
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=256&storageMax=256`}
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&storageMin=256&storageMax=256`}
                 >
                   {mobileDetail?.brand} 256GB Rom Mobile Phones Price in
                   Pakistan
@@ -878,7 +878,7 @@ const PhoneDetail = () => {
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.brand}&storageMin=1024&storageMax=1024`}
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&storageMin=1024&storageMax=1024`}
                 >
                   {mobileDetail?.brand} 1TB Rom Mobile Phones Price in Pakistan
                 </Link>
@@ -896,21 +896,21 @@ const PhoneDetail = () => {
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=30&backCamMax=49`}
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&backCamMin=30&backCamMax=49`}
                 >
                   {mobileDetail.brand} 30MP Camera Phones Price in Pakistan
                 </Link>
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=50&backCamMax=99`}
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&backCamMin=50&backCamMax=99`}
                 >
                   {mobileDetail.brand} 50MP Camera Phones Price in Pakistan
                 </Link>{" "}
               </li>
               <li className="description-para">
                 <Link
-                  href={`/AdvanceSearch?${mobileDetail?.brand}&backCamMin=100&backCamMax=99`}
+                  href={`/AdvanceSearch?brand=${mobileDetail?.brand}&backCamMin=100&backCamMax=99`}
                 >
                   {mobileDetail.brand} 100MP Camera Phones Price in Pakistan
                 </Link>
