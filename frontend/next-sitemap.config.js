@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-    siteUrl: process.env.SITE_URL || 'https://mobileprice.biz.pk',
+    siteUrl: process.env.SITE_URL || 'https://www.mobileprice.biz.pk',
     generateRobotsTxt: true, 
     sitemapSize: 7000, 
     exclude: ['/Dashboard/*', '/Dashboard', '/Login'], 
