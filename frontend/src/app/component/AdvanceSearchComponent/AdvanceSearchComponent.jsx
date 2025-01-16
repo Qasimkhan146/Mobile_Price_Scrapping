@@ -14,7 +14,6 @@ import { fetchAdvanceFilters, selectAdvanceFilterMobiles } from '../../../../red
 import { FormatListBulleted, Window } from "@mui/icons-material";
 import slugify from 'slugify';
 import { toast } from 'react-toastify';
-
 const AdvanceSearchComponent = () => {
     const router = useRouter();
     const dispatch = useDispatch();
@@ -154,7 +153,7 @@ const AdvanceSearchComponent = () => {
     const handleSearch = (e) => {
         e.preventDefault();
         setAdvanceData([]);
-
+        setPage(1);
         dispatch(fetchAdvanceFilters({ brand: brandName, model: modelName, minRam: ramRange[0], maxRam: ramRange[1], minRom: storageRange[0], maxRom: storageRange[1], min_Back_Cam: backCamRange[0], max_Back_Cam: backCamRange[1], minPrice: priceRange[0], maxPrice: priceRange[1], page: page, Year: selectedYear }))
         const params = new URLSearchParams(searchParams); // Clone existing query parameters
         params.set("brand", brandName);
@@ -179,6 +178,7 @@ const AdvanceSearchComponent = () => {
         setBackCamRange([4, 100]);
         setPriceRange([0, 700000]);
         setSelectedYear("")
+        setPage(1);
     }
 
     if (advanceMobiles.length === 0) return (
@@ -338,7 +338,7 @@ const AdvanceSearchComponent = () => {
                     </div>
                     <div className={`d-flex flex-wrap mt-2 justify-content-between gap-3 ${displayView === "list" ? "flex-column" : "flex-row"}`}>
                         {advanceMobiles?.message && <h2 className="text-center">{advanceMobiles?.message}</h2>}
-                        {advanceData && advanceData?.length > 0 && advanceData.map((mobile, index) => (
+                        {advanceMobiles && advanceMobiles?.latestMobiles?.length > 0 && advanceMobiles.latestMobiles.map((mobile, index) => (
                             <div key={index} className={`mobile__card p-2 ${displayView === "list" ? "w-100" : "w-[48%]"} gap-2`}>
                                 <div className={` gap-2 p-2 d-flex ${displayView === "grid" || isSmallMobile ? "flex-column align-items-center" : "flex-row"}`}>
 
@@ -369,7 +369,7 @@ const AdvanceSearchComponent = () => {
                                         <thead className="price__head">
                                             <tr>
                                                 <th>Mobilemate</th>
-                                                <th>Hamari Web</th>
+                                                <th>HamariWeb</th>
                                                 <th>WhatMobile</th>
                                                 <th>PriceOye</th>
                                                 <th>Daraz</th>
@@ -430,8 +430,13 @@ const AdvanceSearchComponent = () => {
                             </div>
                         ))}
                     </div>
-                    <div className='d-flex justify-content-center'>
-                        <button className={`load__more__btn mb-3 mt-3 ${page === advanceMobiles?.pagination?.totalPages ? "d-none" : ""}`} onClick={() => setPage(page + 1)}>Load More</button>
+                    <div className='d-flex justify-content-center align-items-center gap-2 mt-2'>
+                    <button className={`load__more__btn mb-3 mt-3 ${page <= 1 ? "d-none" : ""}`} onClick={() => setPage(page - 1)}>Prev</button>
+                      <button className='d-flex justify-content-center align-items-center bg-[#ddd] color-[#000] rounded-full text-xl px-3 py-2 h-[40px]'>{page}</button>
+                       of
+                      <button className='d-flex justify-content-center align-items-center bg-[#ddd] color-[#000] rounded-full text-xl px-3 py-2 h-[40px]'> {advanceMobiles?.pagination?.totalPages}</button>
+
+                        <button className={`load__more__btn mb-3 mt-3 ${page === advanceMobiles?.pagination?.totalPages ? "d-none" : ""}`} onClick={() => setPage(page + 1)}>Next</button>
                     </div>
                 </div>
 

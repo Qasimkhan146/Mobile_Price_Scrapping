@@ -12,6 +12,7 @@ const Dashboard = () => {
   const { id } = useParams();
   const slugParts = id.split("-");
   const brandName = slugParts[0].toUpperCase();
+  const newSlug = slugParts.join("-").replace(/-/g, " ");
   const modelName = slugParts.slice(1).join("-").replace(/-/g, " ");
   const [prices, setPrices] = useState([]);
   const [formValues, setFormValues] = useState({});
@@ -34,7 +35,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchMobileDetail(modelName));
+    dispatch(fetchMobileDetail(newSlug));
   }, [dispatch]);
   //   const sources = mobileDetail?.prices.map((price) => price.source);
 
