@@ -222,20 +222,26 @@ export const fetchMobileFilters = async (req, res) => {
 export const updateMobile = async (req, res) => {
   try {
     const { model } = req.params;
+
+    // Find the mobile with an exact match for the model
     const mobile = await MobileDetails.findOne({ model: model });
     if (!mobile) {
       return res.status(404).json({ message: "Mobile not found" });
     }
+
+    // Update the mobile
     const updatedMobile = await MobileDetails.findOneAndUpdate(
-      { model: new RegExp(model, "i") },
+      { model: model }, // Exact match filter
       req.body,
-      { new: true }
+      { new: true } // Return the updated document
     );
+
     res.status(200).json(updatedMobile);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+
 
 export const fetchAllMobiles = async (req, res) => {
   try{
