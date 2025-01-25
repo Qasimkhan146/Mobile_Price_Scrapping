@@ -265,7 +265,7 @@ export const updateMobileWithHistory = async (req, res) => {
     console.log("Updates received:", updates);
 
     // Fetch the existing document to calculate the changelog
-    const mobile = await MobileDetails.findOne({ model: new RegExp(model, "i") });
+    const mobile = await MobileDetails.findOne({ model: model });
     if (!mobile) {
       return res.status(404).json({ message: "Mobile not found" });
     }
@@ -292,7 +292,7 @@ export const updateMobileWithHistory = async (req, res) => {
 
     // Add the changelog to the updateHistory and update the main document
     const updatedMobile = await MobileDetails.findOneAndUpdate(
-      { model: new RegExp(model, "i") },
+      { model: model },
       {
         $set: updates,
         $push: {
