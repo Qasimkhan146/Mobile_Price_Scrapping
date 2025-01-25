@@ -14,7 +14,7 @@ const Dashboard = () => {
   const brandName = slugParts[0].toUpperCase();
   const newSlug = slugParts.join("-").replace(/-/g, " ");
   // const modelName = slugParts.slice(1).join("-").replace(/-/g, " ");
-  const modelName  = id;
+  const modelName  = id.split("-").join(" ");
   const [prices, setPrices] = useState([]);
   const [formValues, setFormValues] = useState({});
   const editableFields = ["Ram", "Rom", "Back_Cam", "front_Cam", "Capacity"];
