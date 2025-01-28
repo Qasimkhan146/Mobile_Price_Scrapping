@@ -703,9 +703,6 @@ const PhoneDetail = () => {
         </div>
         <div className="row">
           <div className="col-md-12 my-4">
-            {/* <div> */}
-            {/* {parse(mobileDetail.description || "")}     */}
-            {/* </div> */}
             <div>
               <h2 className="fs-6">
                 <Link
@@ -714,11 +711,11 @@ const PhoneDetail = () => {
                 >
                   {mobileDetail?.model}{" "}
                 </Link>
-                Prices in Pakistan 2024
+                Price in Pakistan 2025
               </h2>
             </div>
-            <ul>
-              <li>
+            <ul className="custom-list">
+              <li className="ms-4">
                 <Link
                   href={`/Mobile/${mobileDetail.model?.replace(/ /g, "-")}`}
                   className="fw-bold"
@@ -728,7 +725,7 @@ const PhoneDetail = () => {
                 Price in Pakistan: PKR.
                 <span className="fw-bold"> {mobileDetail.price}</span>
               </li>
-              <li>
+              <li className="ms-4">
                 <Link
                   href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
                   className="fw-bold"
@@ -739,49 +736,19 @@ const PhoneDetail = () => {
                   href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
                   className="fw-bold"
                 >
-                  {mobileDetail.model}{" "}
+                  {mobileDetail?.model}{" "}
                 </Link>
                 Price in USD:${" "}
-                <span className="fw-bold">{mobileDetail.PriceInUsd}</span>
+                <span className="fw-bold">{mobileDetail?.PriceInUsd}</span>
               </li>
             </ul>
-            The <span className="fw-bold"> {mobileDetail.model}</span> is
-            powered by <span className="fw-bold">{mobileDetail.brand}</span>
-            {"'"}s , providing exceptional performance for all your daily
-            activities and multitasking. Running on{" "}
-            <span className="fw-bold">{mobileDetail.os}</span>, this{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> boasts{" "}
-            <span className="fw-bold">{mobileDetail.brand}</span>
-            {"'"}s signature sleek and premium design, measuring{" "}
-            <span className="fw-bold">{mobileDetail.Dimensions}</span>, making
-            it not only stylish but also comfortable to handle. The{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> features a{" "}
-            <span className="fw-bold">{mobileDetail.Size}</span> inch Retina
-            display with a resolution of{" "}
-            <span className="fw-bold">{mobileDetail.Resolution}</span>, offers
-            an immersive and crystal clear visual experience, perfect for
-            streaming, gaming, or everyday use. Under the hood, the{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> includes{" "}
-            <span className="fw-bold">{mobileDetail.Ram}</span> GB of RAM and{" "}
-            <span className="fw-bold">{mobileDetail.Rom}</span> GB of internal
-            storage, ensuring ample space for your apps, media, and files. The{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> excels in
-            photography, featuring a{" "}
-            <span className="fw-bold">{mobileDetail.Back_Cam}</span> MP rear
-            camera that captures professional quality photos and a{" "}
-            <span className="fw-bold">{mobileDetail.front_Cam}</span> MP front
-            camera for stunning selfies and FaceTime calls. Additionally, the
-            long lasting{" "}
-            <span className="fw-bold">{mobileDetail.Capacity}</span> mAh battery
-            ensures you can enjoy uninterrupted usage throughout the day without
-            needing frequent recharges. The{" "}
-            <span className="fw-bold">
-              {mobileDetail.brand} {mobileDetail.model}
-            </span>{" "}
-            is the perfect blend of cutting edge technology, style, and
-            reliability, making it an ideal choice for anyone seeking a high
-            performance smartphone.
-          </div>
+          <span className="fw-bold">{mobileDetail?.model}{" "}</span> is a mobile phone that combines style, performance, design and reliability. Driven by cutting-edge processor and running on the latest operating system <span className="fw-bold">{mobileDetail?.OS}</span> OS, this device is designed to perform daily activities with ease. Its smooth design, measuring
+          <span className="fw-bold">{mobileDetail?.Dimensions}</span>, ensures a comfortable grip and a premium feel.
+Featuring a <span className="fw-bold">{mobileDetail?.Size}</span>-inch Retina display with a resolution of <span className="fw-bold">{mobileDetail?.Resolution}</span>, the
+{" "}<span className="fw-bold">{mobileDetail?.model}</span>{" "} brings stunning visuals, making it flawless for gaming, video streaming, or everyday use. This phone comes with <span className="fw-bold">{mobileDetail?.Rom}</span>GB of internal storage and <span className="fw-bold">{mobileDetail?.Ram}</span>GB of RAM, offering sufficient space for your downloaded apps, files, and media.
+In terms of taking pictures, the <span className="fw-bold">{mobileDetail?.model}</span> claims a <span className="fw-bold">{mobileDetail?.Back_Cam}</span>MP rear camera for professional-quality photos and a <span className="fw-bold">{mobileDetail?.front_Cam}</span>MP front camera for classy selfies and video calls. Its powerful <span className="fw-bold">{mobileDetail?.Capacity}</span>mAh battery ensures all-day usage without frequent charging.
+If you're looking for an outstanding camera, powerful battery and high-performance smartphone with advanced features, the <span className="fw-bold">{mobileDetail?.model}</span> is a superb choice in it price range.
+                 </div>
         </div>
         {/* our website */}
         <div className="row">

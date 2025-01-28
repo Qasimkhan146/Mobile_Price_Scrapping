@@ -23,10 +23,10 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${pageTitle} price in Pakistan`,
-    description: `${pageTitle} mobile specification RAM ${pageDetail.Ram}, ROM ${pageDetail.Rom}, Front Camera ${pageDetail.front_Cam} price in Pakistan, Back Camera ${pageDetail.Back_Cam} price in Pakistan, Battery: ${pageDetail.Capacity} MAH, Screen ${pageDetail.Size} IN, OS ${pageDetail.OS} ....`,
+    description: `${pageTitle} mobile specifications include ${pageDetail.Ram} RAM, ${pageDetail.Rom} ROM, a front camera of ${pageDetail.front_Cam}, and a back camera of ${pageDetail.Back_Cam}. With a battery capacity of ${pageDetail.Capacity} mAh, a ${pageDetail.Size}-inch screen, and running on ${pageDetail.OS}, it offers excellent value for its price in Pakistan....`,
     openGraph: {
       title: `${pageTitle} price in Pakistan`,
-      description: `${pageTitle} mobile specification RAM ${pageDetail.Ram}, ROM ${pageDetail.Rom}, Front Camera ${pageDetail.front_Cam} price in Pakistan, Back Camera ${pageDetail.Back_Cam} price in Pakistan, Battery: ${pageDetail.Capacity} MAH, Screen ${pageDetail.Size} IN, OS ${pageDetail.OS} ....`,
+      description: `${pageTitle} mobile specifications include ${pageDetail.Ram} RAM, ${pageDetail.Rom} ROM, a front camera of ${pageDetail.front_Cam}, and a back camera of ${pageDetail.Back_Cam}. With a battery capacity of ${pageDetail.Capacity} mAh, a ${pageDetail.Size}-inch screen, and running on ${pageDetail.OS}....`,
       url: `https://mobileprice.biz.pk/Mobile/${slug}`,
       type: "website",
       images: [
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }) {
     twitter: {
       card: "summary_large_image",
       title: `${pageTitle} price in Pakistan`,
-      description: `${pageTitle} mobile specification RAM ${pageDetail.Ram}, ROM ${pageDetail.Rom}, Front Camera ${pageDetail.front_Cam} price in Pakistan, Back Camera ${pageDetail.Back_Cam} price in Pakistan, Battery: ${pageDetail.Capacity} MAH, Screen ${pageDetail.Size} IN, OS ${pageDetail.OS} ....`,
+      description: `${pageTitle} mobile specification include ${pageDetail.Ram} RAM, ${pageDetail.Rom} ROM, a front Camera of ${pageDetail.front_Cam} and a back Camera ${pageDetail.Back_Cam}. With a battery: ${pageDetail.Capacity}mAh, a ${pageDetail.Size}-inch screen, and running on ${pageDetail.OS} ....`,
       image:
         pageDetail.img_url_mobilemate ||
         "https://mobileprice.biz.pk/images/MOBILE PRI.png",

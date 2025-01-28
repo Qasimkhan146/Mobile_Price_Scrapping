@@ -174,3 +174,6 @@
 .content__tr td a{
     text-decoration: underline;
 }
+.custom-list {
+    list-style-type: disc; /* Default dots */
+  }
