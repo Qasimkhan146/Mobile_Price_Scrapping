@@ -68,13 +68,13 @@ const ContentArea = ({ mobiles }) => {
             {fetch10Mobiles.length > 0 && fetch10Mobiles.map((mobile, index) => (
               <tr key={index} className="contents__tr">
                 <td scope="row" className="place-items-center">
-                  <Image src={mobile.img_url_mobilemate} alt="Image" width={50} height={50} />
+                  <Image src={mobile?.img_url_mobilemate} alt="Image" width={50} height={50} />
                   <Link href={`/Mobile/${generateSlug(mobile.model)}`}>{mobile.model}</Link>
                 </td>
                 <td>
                   {mobile.updateHistory.length > 0 ? (
                     <div className="py-3">
-                      {mobile.updateHistory[0].changes.mobilemate_price.old === mobile.updateHistory[0].changes.mobilemate_price.new ? (
+                      {mobile.updateHistory[0].changes?.mobilemate_price.old === mobile.updateHistory[0].changes?.mobilemate_price.new ? (
                         mobile.mobilemate_link === "N/A" ? (
                           <span className="fw-semibold">{mobile.mobilemate_price === 0 ? "N/A" : `${mobile.mobilemate_price} PKR`}</span>
                         ) : (
@@ -84,11 +84,11 @@ const ContentArea = ({ mobiles }) => {
                         )
                       ) : (
                         <>
-                          {mobile.updateHistory[0].changes.mobilemate_price.old === 0 ? (
+                          {mobile.updateHistory[0].changes?.mobilemate_price.old === 0 ? (
                             <p className="fw-semibold">N/A</p>
                           ) : (<div>
                             <button className="prev-data">Previous Price</button>
-                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes.mobilemate_price.old} PKR</p>
+                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes?.mobilemate_price.old} PKR</p>
                             {/* <a target="_blank" href={mobile.mobilemate_link} className="underline">
                             {mobile.updateHistory[0].changes.mobilemate_price.old === 0 ? "N/A" : `Click Here`}
                           </a> */}
@@ -96,19 +96,19 @@ const ContentArea = ({ mobiles }) => {
 
                           <div>
                             <button className="new-data">New Price</button>
-                            <p className="fw-semibold">{mobile.updateHistory[0].changes.mobilemate_price.new} PKR</p>
-                            <a target="_blank" href={mobile.mobilemate_link} className="text-sm click__text">
-                            {mobile.updateHistory[0].changes.mobilemate_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
+                            <p className="fw-semibold">{mobile.updateHistory[0].changes?.mobilemate_price.new} PKR</p>
+                            <a target="_blank" href={mobile?.mobilemate_link} className="text-sm click__text">
+                            {mobile.updateHistory[0].changes?.mobilemate_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
                           </a>
                           </div>
                         </>)}
 
                     </div>
                   ) : mobile.mobilemate_link === "N/A" ? (
-                    <span className="fw-semibold">{mobile.mobilemate_price === 0 ? "N/A" : `${mobile.mobilemate_price} PKR`}</span>
+                    <span className="fw-semibold">{mobile?.mobilemate_price === 0 ? "N/A" : `${mobile?.mobilemate_price} PKR`}</span>
                   ) : (
-                    <a target="_blank" href={mobile.mobilemate_link}>
-                      {mobile.mobilemate_price === 0 ? "N/A" : `${mobile.mobilemate_price} PKR`}
+                    <a target="_blank" href={mobile?.mobilemate_link}>
+                      {mobile?.mobilemate_price === 0 ? "N/A" : `${mobile?.mobilemate_price} PKR`}
                     </a>
                   )}
 
@@ -116,21 +116,21 @@ const ContentArea = ({ mobiles }) => {
                 <td>
                 {mobile.updateHistory.length > 0 ? (
                     <div className="py-3">
-                      {mobile.updateHistory[0].changes.hamariweb_price.old === mobile.updateHistory[0].changes.hamariweb_price.new ? (
+                      {mobile.updateHistory[0].changes?.hamariweb_price.old === mobile.updateHistory[0]?.changes?.hamariweb_price.new ? (
                         mobile.hamariweb_link === "N/A" ? (
-                          <span className="fw-semibold">{mobile.hamariweb_price === 0 ? "N/A" : `${mobile.hamariweb_price} PKR`}</span>
+                          <span className="fw-semibold">{mobile?.hamariweb_price === 0 ? "N/A" : `${mobile?.hamariweb_price} PKR`}</span>
                         ) : (
-                          <a target="_blank" href={mobile.hamariweb_link}>
-                            {mobile.hamariweb_price === 0 ? "N/A" : `${mobile.hamariweb_price} PKR`}
+                          <a target="_blank" href={mobile?.hamariweb_link}>
+                            {mobile?.hamariweb_price === 0 ? "N/A" : `${mobile?.hamariweb_price} PKR`}
                           </a>
                         )
                       ) : (
                         <>
-                          {mobile.updateHistory[0].changes.hamariweb_price.old === 0 ? (
+                          {mobile.updateHistory[0].changes?.hamariweb_price.old === 0 ? (
                             <p className="fw-semibold">N/A</p>
                           ) : (<div>
                             <button className="prev-data">Previous Price</button>
-                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes.hamariweb_price.old} PKR</p>
+                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes?.hamariweb_price.old} PKR</p>
                             {/* <a target="_blank" href={mobile.hamariweb_link} className="underline">
                             {mobile.updateHistory[0].changes.hamariweb_price.old === 0 ? "N/A" : `Click Here`}
                           </a> */}
@@ -138,9 +138,9 @@ const ContentArea = ({ mobiles }) => {
 
                           <div>
                             <button className="new-data">New Price</button>
-                            <p className="fw-semibold">{mobile.updateHistory[0].changes.hamariweb_price.new} PKR</p>
-                            <a target="_blank" href={mobile.hamariweb_link} className="click__text">
-                            {mobile.updateHistory[0].changes.hamariweb_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
+                            <p className="fw-semibold">{mobile.updateHistory[0].changes?.hamariweb_price.new} PKR</p>
+                            <a target="_blank" href={mobile?.hamariweb_link} className="click__text">
+                            {mobile.updateHistory[0].changes?.hamariweb_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
                           </a>
                           </div>
                         </>)}
@@ -158,28 +158,28 @@ const ContentArea = ({ mobiles }) => {
                 <td>
                 {mobile.updateHistory.length > 0 ? (
                     <div className="py-3">
-                      {mobile.updateHistory[0].changes.whatmobile_price.old === mobile.updateHistory[0].changes.whatmobile_price.new ? (
+                      {mobile.updateHistory[0].changes?.whatmobile_price.old === mobile.updateHistory[0].changes?.whatmobile_price.new ? (
                         mobile.whatmobile_link === "N/A" ? (
-                          <span className="fw-semibold">{mobile.whatmobile_price === 0 ? "N/A" : `${mobile.whatmobile_price} PKR`}</span>
+                          <span className="fw-semibold">{mobile?.whatmobile_price === 0 ? "N/A" : `${mobile?.whatmobile_price} PKR`}</span>
                         ) : (
-                          <a target="_blank" href={mobile.whatmobile_link}>
-                            {mobile.whatmobile_price === 0 ? "N/A" : `${mobile.whatmobile_price} PKR `}
+                          <a target="_blank" href={mobile?.whatmobile_link}>
+                            {mobile?.whatmobile_price === 0 ? "N/A" : `${mobile?.whatmobile_price} PKR `}
                           </a>
                         )
                       ) : (
                         <>
-                          {mobile.updateHistory[0].changes.whatmobile_price.old === 0 ? (
+                          {mobile.updateHistory[0].changes?.whatmobile_price.old === 0 ? (
                             <p className="fw-semibold">N/A</p>
                           ) : (<div>
                             <button className="prev-data">Previous Price</button>
-                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes.whatmobile_price.old} PKR</p>
+                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes?.whatmobile_price.old} PKR</p>
                           </div>)}
 
                           <div>
                             <button className="new-data">New Price</button>
-                            <p className="fw-semibold">{mobile.updateHistory[0].changes.whatmobile_price.new} PKR</p>
-                            <a target="_blank" href={mobile.whatmobile_link} className="click__text">
-                            {mobile.updateHistory[0].changes.whatmobile_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
+                            <p className="fw-semibold">{mobile.updateHistory[0].changes?.whatmobile_price.new} PKR</p>
+                            <a target="_blank" href={mobile?.whatmobile_link} className="click__text">
+                            {mobile.updateHistory[0].changes?.whatmobile_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
                           </a>
                           </div>
                         </>)}
@@ -196,9 +196,9 @@ const ContentArea = ({ mobiles }) => {
                 <td>
                 {mobile.updateHistory.length > 0 ? (
                     <div className="py-3">
-                      {mobile.updateHistory[0].changes.priceoye_price.old === mobile.updateHistory[0].changes.priceoye_price.new ? (
+                      {mobile.updateHistory[0].changes?.priceoye_price.old === mobile.updateHistory[0].changes?.priceoye_price.new ? (
                         mobile.priceoye_link === "N/A" ? (
-                          <span className="fw-semibold">{mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}</span>
+                          <span className="fw-semibold">{mobile?.priceoye_price === 0 ? "N/A" : `${mobile?.priceoye_price} PKR`}</span>
                         ) : (
                           <a target="_blank" href={mobile.priceoye_link}>
                             {mobile.priceoye_price === 0 ? "N/A" : `${mobile.priceoye_price} PKR`}
@@ -206,16 +206,16 @@ const ContentArea = ({ mobiles }) => {
                         )
                       ) : (
                         <>
-                          {mobile.updateHistory[0].changes.priceoye_price.old === 0 ? (
+                          {mobile.updateHistory[0].changes?.priceoye_price.old === 0 ? (
                             <p className="fw-semibold">N/A</p>
                           ) : (<div>
                             <button className="prev-data">Previous Price</button>
-                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes.priceoye_price.old} PKR</p>
+                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes?.priceoye_price.old} PKR</p>
                           </div>)}
 
                           <div>
                             <button className="new-data">New Price</button>
-                            <p className="fw-semibold">{mobile.updateHistory[0].changes.priceoye_price.new} PKR</p>
+                            <p className="fw-semibold">{mobile.updateHistory[0].changes?.priceoye_price.new} PKR</p>
                             <a target="_blank" href={mobile.priceoye_link} className="click__text">
                             {mobile.updateHistory[0].changes.priceoye_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
                           </a>
@@ -245,18 +245,18 @@ const ContentArea = ({ mobiles }) => {
                         )
                       ) : (
                         <>
-                          {mobile.updateHistory[0].changes.daraz_price.old === 0 ? (
+                          {mobile.updateHistory[0].changes?.daraz_price.old === 0 ? (
                             <p className="fw-semibold">N/A</p>
                           ) : (<div>
                             <button className="prev-data">Previous Price</button>
-                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes.daraz_price.old} PKR</p>
+                            <p className="fw-semibold line-through">{mobile.updateHistory[0].changes?.daraz_price.old} PKR</p>
                           </div>)}
 
                           <div>
                             <button className="new-data">New Price</button>
-                            <p className="fw-semibold">{mobile.updateHistory[0].changes.daraz_price.new} PKR</p>
+                            <p className="fw-semibold">{mobile.updateHistory[0].changes?.daraz_price.new} PKR</p>
                             <a target="_blank" href={mobile.daraz_link} className="click__text">
-                            {mobile.updateHistory[0].changes.daraz_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
+                            {mobile.updateHistory[0].changes?.daraz_price.new === 0 ? "N/A" : (<div> Click Here <IosShare sx={{fontSize:"14px"}}/></div>)}
                           </a>
                           </div>
                         </>)}
