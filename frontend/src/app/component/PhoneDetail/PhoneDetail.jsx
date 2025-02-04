@@ -422,7 +422,16 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">Announced</div>
-                  <p className="col-8">{mobileDetail?.release ? new Date(mobileDetail.release).toLocaleDateString() : "N/A"}</p>
+                  <p className="col-8">
+  {mobileDetail?.release
+    ? new Date(mobileDetail.release).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : "N/A"}
+</p>
+
                 </div>
               </div>
             </div>
