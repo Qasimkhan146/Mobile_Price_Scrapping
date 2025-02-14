@@ -3,6 +3,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Accordion from "react-bootstrap/Accordion";
 import { Col, Container, Row } from "react-bootstrap";
+import Head from "next/head";
 // import Header from "../components/Header/Header";
 // import Image from "next/image";
 // import Adds from "../components/Ads/Ads";
