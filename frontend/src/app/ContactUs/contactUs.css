@@ -1,0 +1,29 @@
+
+/* .privacy-banner{
+  height: 25rem;
+  width: 100%;
+} */
+.Privacy-Policy-sub-container{
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    margin-top: 5rem;
+  }
+  .Privacy-Policy-sub-container h2{
+    text-align: center;
+  }
+  .Privacy-Policy-sub-container .mmm{
+    text-align: center;
+  }
+  .ppp{
+    font-weight: bolder;
+  }
+  .create-div{
+    display: flex;
+    gap: 1rem;
+  }
+  .contactUs-h1{
+    color: white;
+    font-size: 1px;
+  }
+  

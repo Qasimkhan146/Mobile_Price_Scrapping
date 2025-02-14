@@ -12,8 +12,6 @@ import { IosShare } from "@mui/icons-material";
 
 const ContentArea = ({ mobiles }) => {
   const fetch10Mobiles = useSelector(selectFetch10Mobiles);
-  console.log(fetch10Mobiles, "fetch10Mobiles");
-  // const  fetchFilterMobiles  = useSelector(filterMobiles);
   const error = useSelector(selectError);
 
   const [loading, setLoading] = useState(true);
@@ -38,8 +36,7 @@ const ContentArea = ({ mobiles }) => {
   const generateSlug = (title) => {
     return `${slugify(title)}`;
   };
-  //  console.log(loading,"loading");
-  //  console.log(selectAllBrands,"Select All Brands");
+
 
   if (fetch10Mobiles.length === 0) return (
     <div className="loading__class" >

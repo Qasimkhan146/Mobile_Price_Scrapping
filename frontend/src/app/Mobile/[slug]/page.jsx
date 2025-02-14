@@ -48,6 +48,9 @@ export async function generateMetadata({ params }) {
         pageDetail.img_url_mobilemate ||
         "https://mobileprice.biz.pk/images/MOBILE PRI.png",
     },
+    alternates: {
+      canonical: `https://www.mobileprice.biz.pk/Mobile/${slug}`,
+    },
   };
 }
 

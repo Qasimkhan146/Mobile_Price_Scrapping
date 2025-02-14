@@ -61,10 +61,8 @@ const Dashboard = () => {
     }));
   };
  const handlePrice = async () => {
-  // console.log(prices,"prices");
   
   try {
-    // Extract only the editable fields
     const updatedData = Object.fromEntries(
       Object.entries(formValues).filter(([key]) => [...priceFields, ...linkFields].includes(key))
     );
@@ -81,11 +79,9 @@ const Dashboard = () => {
  }
   const handleSave = async () => {
     try {
-      // Extract only the editable fields
       const updatedData = Object.fromEntries(
         Object.entries(formValues).filter(([key]) => editableFields.includes(key))
       );
-       console.log(updatedData,"updatde Data");
        
       await dispatch(editMobile({ model: modelName, updatedData })).unwrap();
       toast.success("Mobile details updated successfully!");
@@ -107,44 +103,7 @@ const Dashboard = () => {
           className="rounded-lg shadow-md"
         />
       </div>
-      {/* <div className="table-responsive w-100 table__container">
-        <table className="table border-1 table-striped">
-          <thead>
-            <tr>
-              <th>Mobilemate</th>
-              <th>Hamari Web</th>
-              <th>WhatMobile</th>
-              <th>PriceOye</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {["mobilemate_price", "hamariweb_price", "whatmobile_price", "priceoye_price"].map((field, index) => (
-                <td key={index}>
-                  <input
-                    type="number"
-                    className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    value={formValues[field] || 0}
-                    onChange={(e) => handleInputChange(field, parseFloat(e.target.value) || 0)}
-                  />
-                </td>
-              ))}
-            </tr>
-            <tr>
-              {["mobilemate_link", "hamariweb_link", "whatmobile_link", "priceoye_link"].map((field, index) => (
-                <td key={index}>
-                  <input
-                    type="text"
-                    className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    value={formValues[field] || ""}
-                    onChange={(e) => handleInputChange(field, e.target.value)}
-                  />
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div> */}
+
             <div className="table-responsive w-100 table__container">
         <table className="table border-1 table-striped">
           <thead>

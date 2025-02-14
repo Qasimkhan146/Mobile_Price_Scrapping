@@ -66,20 +66,7 @@ const AdvanceSearchComponent = () => {
 
         return () => mediaQuery.removeEventListener("change", handleChange);
     }, []);
-    // useEffect(() => {
-    //     if (queryBrand && queryBrand !== brandName) {
-    //         setBrandName(queryBrand)
-    //         // console.log("dsda");
 
-    //     }
-    // }, [queryBrand])
-    // useEffect(() => {
-    //     if (queryModel && queryModel !== modelName) {
-    //         setModelName(queryModel)
-    //         //  console.log("dsda");
-
-    //     }
-    // }, [queryModel])
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 1280px)");
 
@@ -114,17 +101,6 @@ const AdvanceSearchComponent = () => {
             setAdvanceData((prevData) => [...prevData, ...advanceMobiles?.latestMobiles]);
         }
     }, [advanceMobiles]);
-    // useEffect(() => {
-    //     if (advanceMobiles?.data?.length > 0) {
-    //         if (advanceData[0]?.mobile.brand !== brandName && brandName !== "" || advanceData[0]?.mobile.model !== modelName || advanceData[0]?.mobile.model !== advanceData[1]?.mobile.model) {
-    //             setAdvanceData([...advanceMobiles.data]);
-    //         } else {
-    //             // Append data for "load more"
-    //             setAdvanceData((prevData) => [...prevData, ...advanceMobiles.data]);
-    //         }
-    //     }
-    // }, [advanceMobiles, brandName, modelName]);
-    // console.log(advanceData,"Advance Data");
 
     const handleRamChange = (values) => {
         setRamRange(values);
@@ -133,18 +109,14 @@ const AdvanceSearchComponent = () => {
         setStorageRange(values);
     };
     const handleBackCamChange = (values) => {
-        // console.log(values, "Values");
 
         setBackCamRange(values);
-        // fetchAds();
     };
     const handlePriceChange = (values) => {
-        // console.log(values, "Values");
 
         setPriceRange(values);
-        // fetchAds();
     };
-    // console.log(selectedYear,"sdsajkdhsjdh");
+
     useEffect(() => {
         if (advanceMobiles?.message) {
             toast.error(advanceMobiles?.message)
@@ -169,7 +141,6 @@ const AdvanceSearchComponent = () => {
         params.set("Year", selectedYear)
         router.push(`/AdvanceSearch?${params.toString()}`);
     }
-    // console.log(advanceMobiles, "Advance Mobiles");
     const handleRefresh = () => {
         setBrandName("");
         setModelName("");

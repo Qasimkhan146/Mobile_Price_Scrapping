@@ -20,7 +20,6 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [rows, setRows] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
-  console.log(adminInfo,"adminInfo",authError);
   
   const columns = [
     { field: "id", headerName: "ID", width: 70 },

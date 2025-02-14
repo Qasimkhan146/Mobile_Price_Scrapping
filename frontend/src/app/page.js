@@ -32,8 +32,8 @@ export async function generateMetadata({params}) {
       image:"https://mobileprice.biz.pk/images/MOBILE PRI.png",
     },
     alternates: {
-      canonical: "https://mobileprice.biz.pk/images/MOBILE PRI.png",
-   },
+      canonical: `https://www.mobileprice.biz.pk/`,
+    },
  };
 
 }

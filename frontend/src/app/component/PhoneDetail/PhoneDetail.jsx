@@ -38,19 +38,15 @@ const PhoneDetail = () => {
   const { slug } = useParams();
   const slugParts = slug.split("-");
   const newSlug = slugParts.join("-").replace(/-/g, " ");
-  console.log("newSlug", newSlug);
   const brandName = slugParts[0].toUpperCase();
   const modelName = slugParts.slice(1).join("-").replace(/-/g, " ");
   useEffect(() => {
     dispatch(fetchMobileDetail(newSlug));
-    // dispatch(fetchComments({ model: newSlug }));
   }, [newSlug, dispatch]);
 
   useEffect(() => {
     dispatch(fetchComments( newSlug ));
-    // setLoading(false)
   }, [loading, dispatch]);
-  // console.log(mobileDetail, "mobileDetail");
   const features = mobileDetail?.Features.split(",").map((feature) =>
     feature.trim()
   );
@@ -60,8 +56,6 @@ const PhoneDetail = () => {
     feature.trim()
   );
 
-  // const sources = mobileDetail?.prices.map((price) => price.source);
-  // console.log("Sources", sources);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
