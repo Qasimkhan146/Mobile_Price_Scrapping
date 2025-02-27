@@ -2,7 +2,6 @@ import Header from "./component/Header/Header";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import { ToastContainer } from "react-toastify";
-import Script from "next/script"; // Import the Script component
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./component/Footer/Footer";
