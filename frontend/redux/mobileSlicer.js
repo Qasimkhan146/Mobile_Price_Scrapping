@@ -193,8 +193,17 @@ export const submitComment = createAsyncThunk(
   }
 );
 
-
-
+export const fetchNewArrivalMobiles = createAsyncThunk("mobile/fetchNewArrivalMobiles",async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`http://localhost:4501/mobile/fetchNewArrivalMobiles`);
+      const data = await response.json();
+      console.log("what us ",data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 
 const mobileSlice = createSlice({
@@ -202,6 +211,7 @@ const mobileSlice = createSlice({
   initialState: {
     loading: false,
     fetch10Mobiles: [],
+    fetchNewArrivalMobiles:[],
     comments:[],
     allComments: { comments: [] },
     mobileDetail: null,
@@ -335,6 +345,18 @@ const mobileSlice = createSlice({
       .addCase(fetchComments.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchNewArrivalMobiles.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchNewArrivalMobiles.fulfilled, (state, action) => {
+        state.loading = false;
+        state.fetchNewArrivalMobiles = action.payload;
+      })
+      .addCase(fetchNewArrivalMobiles.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
@@ -348,6 +370,7 @@ export const selectEditMobile = (state) => state.mobile.editMobileData;
 export const selectAdvanceFilterMobiles = (state) => state.mobile.advanceFilterMobiles;
 export const selectAllMobiles = (state) => state.mobile.allMobiles;
 export const selectUpdatedPrice = (state) => state.mobile.updatedPrice;
+export const selectNewArrivalMobiles = (state) => state.mobile.fetchNewArrivalMobiles;
 //for comments
 export const selectComment = (state) => state.mobile.comments;
 export const selectAllComments = (state) => state.mobile.allComments;

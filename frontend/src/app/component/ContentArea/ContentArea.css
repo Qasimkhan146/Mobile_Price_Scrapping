@@ -1,14 +1,11 @@
-.contents__head tr th{
+/* .contents__head tr th{
    font-weight: 500;
    font-size: 18px;
    color: #1eb8db;
 }
-/* .contents__head */
-/* .content__tr{
-    height: 60px;
-} */
+
  .contents__tr td a{
-    /* text-decoration: none; */
+
     color: #000;
     font-weight: 500;
     text-decoration: underline;
@@ -32,7 +29,6 @@
    border: 1px solid #999;
  }
  .contents__tr th a{
-    /* text-decoration: none; */
     color: #000;
  }
  .contents__tr th{
@@ -61,6 +57,84 @@
 }
 .click__text{
    font-size: 12px !important;
-   /* text-align: start; */
    text-decoration: underline;
-}
+} */
+
+.grid__container {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+   gap: 3px;
+   padding: 10px;
+ }
+ 
+ .mobile__card {
+   max-width : 300px;
+   height: 20rem;
+   background: #fff;
+   border: 1px solid #e1e1e1;
+   border-radius: 10px;
+   overflow: hidden;
+   transition: transform 0.3s ease;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ }
+
+ 
+ .mobile__image {
+   display: flex;
+   height: 110px;
+   /* object-fit: contain; */
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+   padding: 5px;
+   background: #f7f7f7;
+ }
+ 
+ .mobile__info {
+   z-index: 1;
+   background-color: #f7f7f7;
+   overflow: auto;
+   padding: 10px;
+   text-align: center;
+ }
+ 
+ .mobile__info h3 {
+   font-size: small;
+   /* margin-bottom: 10px; */
+   color: #333;
+ }
+ 
+ .price__list {
+   display: flex;
+   flex-direction: column;
+   gap: 3px;
+ }
+ 
+ .price__box {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background: #f9f9f9;
+   padding: 5px;
+   border-radius: 5px;
+ }
+ 
+ .website__name {
+   font-weight: bold;
+   color: #555;
+ }
+ 
+ .price__link {
+   color: #007bff;
+   text-decoration: none;
+   font-weight: bold;
+ }
+ 
+ .price__link:hover {
+   text-decoration: underline;
+ }
+ 
+ .price__text {
+   color: #888;
+ }
+ 

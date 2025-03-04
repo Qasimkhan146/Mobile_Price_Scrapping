@@ -1,7 +1,8 @@
 //page.js   //home page
 import { Col, Container, Row } from "react-bootstrap";
 import HeroSection from "./component/HeroSection/HeroSection";
-
+import NewArrivals from "./component/NewArrivals/NewArrivals";
+import FaqSection from "./component/FaqSection/FaqSection";
 export async function generateMetadata({params}) {
   let pageTitle = "Latest Mobile Price in Pakistan 2025 | Compare, ExPLORE & Buy Smartphones";
 
@@ -43,7 +44,10 @@ export default function Home() {
     <Container className="bg-[#eee] ">
       <Row>
         <Col md={12} lg={12}>
+        
           <HeroSection/>
+          <NewArrivals/>
+          <FaqSection/>
         </Col>
       </Row>
       
