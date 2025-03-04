@@ -409,3 +409,6 @@ export const updateMobileAndPrices = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+
+
+// fetch five latest mobiles with their prices

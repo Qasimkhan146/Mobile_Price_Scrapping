@@ -1,5 +1,5 @@
 import express from "express";
-import { fetch10LatestMobiles, fetch10LatestMobilesWithHistory, fetchAdvanceSearchApi, fetchAllMobiles, fetchSearchMobile, fetchSingleMobilePrice, postCommentOnMobile, updateMobile, updateMobileWithHistory, viewCommentsOnMobile } from "../controller/mobileDetailsController.js";
+import { fetch10LatestMobiles, fetch10LatestMobilesWithHistory, fetchAdvanceSearchApi, fetchAllMobiles, fetchNewArrivalMobiles, fetchSearchMobile, fetchSingleMobilePrice, postCommentOnMobile, updateMobile, updateMobileWithHistory, viewCommentsOnMobile } from "../controller/mobileDetailsController.js";
 // import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.js";
 
 const mobileDetailsRouter = express.Router();
@@ -15,6 +15,7 @@ mobileDetailsRouter.put("/updateMobile/:model",updateMobile)
 mobileDetailsRouter.put("/updateMobileWithHistory/:model",updateMobileWithHistory)
 mobileDetailsRouter.put("/postComment/:model",postCommentOnMobile)
 mobileDetailsRouter.get("/viewComments/:model",viewCommentsOnMobile)
+mobileDetailsRouter.get("/fetchNewArrivalMobiles",fetchNewArrivalMobiles);
 
 
 export default mobileDetailsRouter;

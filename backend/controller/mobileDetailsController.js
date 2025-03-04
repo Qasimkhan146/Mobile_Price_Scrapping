@@ -358,3 +358,12 @@ export const viewCommentsOnMobile = async (req, res) => {
     res.status(500).json({message:"Internal Server Error",error:error.message});
   }
 }
+
+export const fetchNewArrivalMobiles = async (req, res) => {
+  try {
+    const mobiles = await MobileDetails.find().sort({ createdAt: -1 }).limit(8);
+    res.status(200).json(mobiles);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+};

@@ -1,5 +1,5 @@
 import express from "express";
-import { createMobile, fetch10LatestMobilesWithPrices, fetchAdvanceSearchApi, fetchMobileFilters,  fetchSearchMobile, fetchSingleMobilePrice, updateMobileAndPrices} from "../controller/mobileController.js";
+import { createMobile, fetch10LatestMobilesWithPrices, fetchAdvanceSearchApi, fetchMobileFilters,  fetchNewArrivalMobiles,  fetchSearchMobile, fetchSingleMobilePrice, updateMobileAndPrices} from "../controller/mobileController.js";
 import { upload } from "../config/cloudinaryConfig.js";
 import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.js";
 
@@ -14,4 +14,5 @@ mobileRouter.post("/createMobile",upload.single("image"), createMobile);
 mobileRouter.get("/mobileFilters",fetchMobileFilters);
 // mobileRouter.put("/updateMobile/:model",fetchMobileWithPriceById)
 mobileRouter.put("/updateMobile/:model",authenticateToken,authorizeRole("admin"),updateMobileAndPrices)
+// mobileRouter.get("/fetchNewArrivalMobiles",fetchNewArrivalMobiles );
 export default mobileRouter;
