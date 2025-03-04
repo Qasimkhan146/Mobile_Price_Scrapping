@@ -195,7 +195,7 @@ export const submitComment = createAsyncThunk(
 
 export const fetchNewArrivalMobiles = createAsyncThunk("mobile/fetchNewArrivalMobiles",async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:4501/mobile/fetchNewArrivalMobiles`);
+      const response = await fetch(`https://7842.mobileprice.biz.pk/mobile/fetchNewArrivalMobiles`);
       const data = await response.json();
       console.log("what us ",data);
       return data;
