@@ -54,7 +54,7 @@ const AdvanceSearchComponent = () => {
         setSelectedYear(year);
     };
 
-    const years = ["2020", "2021", "2022", "2023", "2024"];
+    const years = ["2020", "2021", "2022", "2023", "2024","2025"];
     const mainColor = "#e0134e";
 
     useEffect(() => {
