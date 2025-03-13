@@ -69,7 +69,18 @@ const PhoneDetail = () => {
         console.log("Failed to submit comment:", error);
       });
   };
-
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A"; // Handle empty cases
+  
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "Invalid Date"; // Handle invalid dates
+  
+    return date.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
   const limitCharacters = (text, limit) => {
     return text?.length > limit ? text?.slice(0, limit) + "..." : text;
   };
@@ -416,11 +427,7 @@ const PhoneDetail = () => {
               <div className="w-100 w-md-75">
                 <div className="row mb-2 gap-2 spec__subhead">
                   <div className="col-3 fw-bold">Announced</div>
-                  <p className="col-8">2024, September 26</p>
-                </div>
-                <div className="row gap-2 mb-2">
-                  <div className="col-3 fw-bold">Status</div>
-                  <div className="col-8">Availabe</div>
+                  <p className="col-8">{formatDate(mobileDetail?.release)}</p>
                 </div>
               </div>
             </div>
@@ -702,13 +709,8 @@ const PhoneDetail = () => {
             {/* </div> */}
             <div>
               <h2 className="fs-6">
-                <Link
-                  href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
-                  className="fw-bold"
-                >
                   {mobileDetail?.model}{" "}
-                </Link>
-                Prices in Pakistan 2024
+                Prices in Pakistan 2025
               </h2>
             </div>
             <ul>
@@ -727,54 +729,21 @@ const PhoneDetail = () => {
                   href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
                   className="fw-bold"
                 >
-                  {mobileDetail.brand}{" "}
-                </Link>
-                <Link
-                  href={`/Mobile/${mobileDetail?.model?.replace(/ /g, "-")}`}
-                  className="fw-bold"
-                >
                   {mobileDetail.model}{" "}
                 </Link>
                 Price in USD:${" "}
                 <span className="fw-bold">{mobileDetail.PriceInUsd}</span>
               </li>
             </ul>
-            The <span className="fw-bold"> {mobileDetail.model}</span> is
-            powered by <span className="fw-bold">{mobileDetail.brand}</span>
-            {"'"}s , providing exceptional performance for all your daily
-            activities and multitasking. Running on{" "}
-            <span className="fw-bold">{mobileDetail.os}</span>, this{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> boasts{" "}
-            <span className="fw-bold">{mobileDetail.brand}</span>
-            {"'"}s signature sleek and premium design, measuring{" "}
-            <span className="fw-bold">{mobileDetail.Dimensions}</span>, making
-            it not only stylish but also comfortable to handle. The{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> features a{" "}
-            <span className="fw-bold">{mobileDetail.Size}</span> inch Retina
-            display with a resolution of{" "}
-            <span className="fw-bold">{mobileDetail.Resolution}</span>, offers
-            an immersive and crystal clear visual experience, perfect for
-            streaming, gaming, or everyday use. Under the hood, the{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> includes{" "}
-            <span className="fw-bold">{mobileDetail.Ram}</span> GB of RAM and{" "}
-            <span className="fw-bold">{mobileDetail.Rom}</span> GB of internal
-            storage, ensuring ample space for your apps, media, and files. The{" "}
-            <span className="fw-bold">{mobileDetail.model}</span> excels in
-            photography, featuring a{" "}
-            <span className="fw-bold">{mobileDetail.Back_Cam}</span> MP rear
-            camera that captures professional quality photos and a{" "}
-            <span className="fw-bold">{mobileDetail.front_Cam}</span> MP front
-            camera for stunning selfies and FaceTime calls. Additionally, the
-            long lasting{" "}
-            <span className="fw-bold">{mobileDetail.Capacity}</span> mAh battery
-            ensures you can enjoy uninterrupted usage throughout the day without
-            needing frequent recharges. The{" "}
-            <span className="fw-bold">
-              {mobileDetail.brand} {mobileDetail.model}
-            </span>{" "}
-            is the perfect blend of cutting edge technology, style, and
-            reliability, making it an ideal choice for anyone seeking a high
-            performance smartphone.
+            The <span className="fw-bold"> {mobileDetail.model} </span> 
+             is equipped with a <span className="fw-bold">{mobileDetail.Chipset}{"'"}s </span>
+             chipset , delivering reliable performance for your everyday activities. With its{" "}
+            <span className="fw-bold">{mobileDetail.OS}</span> operating system, this smartphone boasts a sleek and compact design, measuring{" "}
+            <span className="fw-bold">{mobileDetail.Dimensions}</span>, making it comfortable to hold and operate. The  IPS LCD display, featuring a resolution of {""}
+            <span className="fw-bold">{mobileDetail.Resolution}</span>, offers vibrant visuals that enhance your viewing experience.
+            <br/>
+            Under the hood, the <span className="fw-bold">{mobileDetail?.model}</span> includes <span className="fw-bold">{mobileDetail?.Ram}</span>GB of RAM and <span className="fw-bold">{mobileDetail?.Rom}</span>GB of internal storage, which can be expanded to accommodate more apps and media. The phone excels in photography with  a <span className="fw-bold">{mobileDetail?.front_Cam}</span> MP front camera perfect for selfies. <span className="fw-bold">{mobileDetail?.model}</span>, the robust <span className="fw-bold">{mobileDetail?.Capacity}</span>mAh battery ensures you can use the device all day without the constant worry of recharging. This makes the <span className="fw-bold">{mobileDetail?.model}</span> an ideal choice for anyone seeking a dependable smartphone that combines style, functionality, and performance.
+ 
           </div>
         </div>
         {/* our website */}
