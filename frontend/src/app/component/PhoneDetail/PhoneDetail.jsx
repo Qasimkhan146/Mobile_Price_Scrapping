@@ -291,11 +291,11 @@ const PhoneDetail = () => {
                           : `${mobileDetail?.mobilemate_price} PKR`}
                       </span>
                     ) : (
-                      <a target="_blank" href={mobileDetail?.mobilemate_link}>
-                        {mobileDetail?.mobilemate_price === 0
+                      // <a target="_blank" href={mobileDetail?.mobilemate_link}>
+                        mobileDetail?.mobilemate_price === 0
                           ? "N/A"
-                          : `${mobileDetail?.mobilemate_price} PKR`}
-                      </a>
+                          : `${mobileDetail?.mobilemate_price} PKR`
+                      // {/* </a> */}
                     )}
                   </td>
                   <td>
@@ -306,11 +306,11 @@ const PhoneDetail = () => {
                           : `${mobileDetail?.hamariweb_price} PKR`}
                       </span>
                     ) : (
-                      <a target="_blank" href={mobileDetail?.hamariweb_link}>
-                        {mobileDetail?.hamariweb_price === 0
+                      // <a target="_blank" href={mobileDetail?.hamariweb_link}>
+                        mobileDetail?.hamariweb_price === 0
                           ? "N/A"
-                          : `${mobileDetail?.hamariweb_price} PKR`}
-                      </a>
+                          : `${mobileDetail?.hamariweb_price} PKR`
+                      // </a>
                     )}
                   </td>
 
@@ -322,11 +322,11 @@ const PhoneDetail = () => {
                           : `${mobileDetail?.whatmobile_price} PKR`}
                       </span>
                     ) : (
-                      <a target="_blank" href={mobileDetail?.whatmobile_link}>
-                        {mobileDetail?.whatmobile_price === 0
+                      // <a target="_blank" href={mobileDetail?.whatmobile_link}>
+                        mobileDetail?.whatmobile_price === 0
                           ? "N/A"
-                          : `${mobileDetail?.whatmobile_price} PKR`}
-                      </a>
+                          : `${mobileDetail?.whatmobile_price} PKR`
+                      // </a>
                     )}
                   </td>
                   <td>
@@ -337,11 +337,11 @@ const PhoneDetail = () => {
                           : `${mobileDetail?.priceoye_price} PKR`}
                       </span>
                     ) : (
-                      <a target="_blank" href={mobileDetail?.priceoye_link}>
-                        {mobileDetail?.priceoye_price === 0
+                      // <a target="_blank" href={mobileDetail?.priceoye_link}>
+                        mobileDetail?.priceoye_price === 0
                           ? "N/A"
-                          : `${mobileDetail?.priceoye_price} PKR`}
-                      </a>
+                          : `${mobileDetail?.priceoye_price} PKR`
+                      //  </a> 
                     )}
                   </td>
                   <td>
@@ -352,11 +352,11 @@ const PhoneDetail = () => {
                           : `${mobileDetail?.daraz_price} PKR`}
                       </span>
                     ) : (
-                      <a target="_blank" href={mobileDetail?.daraz_link}>
-                        {mobileDetail?.daraz_price === 0
+                      // <a target="_blank" href={mobileDetail?.daraz_link}>
+                        mobileDetail?.daraz_price === 0
                           ? "N/A"
-                          : `${mobileDetail?.daraz_price} PKR`}
-                      </a>
+                          : `${mobileDetail?.daraz_price} PKR`
+                      // </a>
                     )}
                   </td>
                 </tr>
@@ -919,24 +919,24 @@ const PhoneDetail = () => {
             <h6>MobileMate</h6>
             <ul className="description-ul">
               <li className="description-para">
-                <Link href="https://www.mobilemate.io/">
+                {/* <Link href="https://www.mobilemate.io/"> */}
                   Mobile phone prices in Pakistan mobilemate
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href={`https://www.mobilemate.io/`}>
+                {/* <Link href={`https://www.mobilemate.io/`}> */}
                   Latest mobile phone prices in Pakistan mobilemate
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href={"https://www.mobilemate.io/"}>
+                {/* <Link href={"https://www.mobilemate.io/"}> */}
                   latest mobile Price list in Pakistan mobilemate
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href="https://www.mobilemate.io/OPPO">
+                {/* <Link href="https://www.mobilemate.io/OPPO"> */}
                   Oppo mobile phone price in Pakistan mobilemate
-                </Link>
+                {/* </Link> */}
               </li>
             </ul>
           </div>
@@ -944,24 +944,24 @@ const PhoneDetail = () => {
             <h6>PriceOye</h6>
             <ul className="description-ul">
               <li className="description-para">
-                <Link href="https://priceoye.pk/mobiles">
+                {/* <Link href="https://priceoye.pk/mobiles"> */}
                   Mobile phone prices in Pakistan PriceOye
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href={`https://priceoye.pk/mobiles`}>
+                {/* <Link href={`https://priceoye.pk/mobiles`}> */}
                   Latest mobile phone prices in Pakistan PriceOye
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href={"https://priceoye.pk/mobiles"}>
+                {/* <Link href={"https://priceoye.pk/mobiles"}> */}
                   latest mobile Price list in Pakistan PriceOye
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href="https://priceoye.pk/mobiles/oppo">
+                {/* <Link href="https://priceoye.pk/mobiles/oppo"> */}
                   Oppo mobile phone price in Pakistan PriceOye
-                </Link>
+                {/* </Link> */}
               </li>
             </ul>
           </div>
@@ -969,24 +969,24 @@ const PhoneDetail = () => {
             <h6>WhatMobile</h6>
             <ul className="description-ul">
               <li className="description-para">
-                <Link href="https://www.whatmobile.com.pk/">
+                {/* <Link href="https://www.whatmobile.com.pk/"> */}
                   Mobile phone prices in Pakistan WhatMobile
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href={`https://www.whatmobile.com.pk/`}>
+                {/* <Link href={`https://www.whatmobile.com.pk/`}> */}
                   Latest mobile phone prices in Pakistan WhatMobile
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href={"https://www.whatmobile.com.pk/"}>
+                {/* <Link href={"https://www.whatmobile.com.pk/"}> */}
                   latest mobile Price list in Pakistan WhatMobile
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href="https://www.whatmobile.com.pk/Oppo_Mobiles_Prices">
+                {/* <Link href="https://www.whatmobile.com.pk/Oppo_Mobiles_Prices"> */}
                   Oppo mobile phone price in Pakistan WhatMobile
-                </Link>
+                {/* </Link> */}
               </li>
             </ul>
           </div>
@@ -994,24 +994,24 @@ const PhoneDetail = () => {
             <h6>HamariWeb</h6>
             <ul className="description-ul">
               <li className="description-para">
-                <Link href="https://hamariweb.com/">
+                {/* <Link href="https://hamariweb.com/"> */}
                   Mobile phone prices in Pakistan HamariWeb
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href={`https://hamariweb.com/`}>
+                {/* <Link href={`https://hamariweb.com/`}> */}
                   Latest mobile phone prices in Pakistan HamariWeb
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href={"https://hamariweb.com/"}>
+                {/* <Link href={"https://hamariweb.com/"}> */}
                   latest mobile Price list in Pakistan HamariWeb
-                </Link>
+                {/* </Link> */}
               </li>
               <li className="description-para">
-                <Link href="https://hamariweb.com/mobiles/oppo">
+                {/* <Link href="https://hamariweb.com/mobiles/oppo"> */}
                   Oppo mobile phone price in Pakistan HamariWeb
-                </Link>
+                {/* </Link> */}
               </li>
             </ul>
           </div>

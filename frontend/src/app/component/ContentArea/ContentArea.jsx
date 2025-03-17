@@ -320,15 +320,15 @@ const ContentArea = ({ mobiles }) => {
                             : `${mobile[`${site}_price`]} PKR`}
                         </span>
                       ) : (
-                        <a
-                          href={mobile[`${site}_link`]}
-                          target="_blank"
-                          className="price__link"
-                        >
-                          {mobile[`${site}_price`] === 0
+                        // <a
+                        //   href={mobile[`${site}_link`]}
+                        //   target="_blank"
+                        //   className="price__link"
+                        // >
+                          mobile[`${site}_price`] === 0
                             ? "N/A"
-                            : `${mobile[`${site}_price`]} PKR`}
-                        </a>
+                            : `${mobile[`${site}_price`]} PKR`
+                        // </a>
                       )
                     ) : (
                       <>
@@ -368,15 +368,15 @@ const ContentArea = ({ mobiles }) => {
                       : `${mobile[`${site}_price`]} PKR`}
                   </span>
                 ) : (
-                  <a
-                    href={mobile[`${site}_link`]}
-                    target="_blank"
-                    className="price__link"
-                  >
-                    {mobile[`${site}_price`] === 0
+                  // <a
+                  //   href={mobile[`${site}_link`]}
+                  //   target="_blank"
+                  //   className="price__link"
+                  // >
+                    mobile[`${site}_price`] === 0
                       ? "N/A"
-                      : `${mobile[`${site}_price`]} PKR`}
-                  </a>
+                      : `${mobile[`${site}_price`]} PKR`
+                  // </a>
                 )}
               </div>
             ))}
