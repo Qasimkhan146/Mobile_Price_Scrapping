@@ -307,6 +307,7 @@ const ContentArea = ({ mobiles }) => {
               { site: "priceoye", label: "PriceOye" },
               { site: "daraz", label: "Daraz" },
             ].map(({ site, label }, i) => (
+              
               <div key={i} className="price__box">
                 <span className="website__name text-sm">{label}</span>
 
