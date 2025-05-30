@@ -357,18 +357,18 @@ const AdvanceSearchComponent = () => {
                                                     {mobile?.mobilemate_link === "N/A" ? (
                                                         <span className="fw-semibold">{mobile?.mobilemate_price === 0 ? "N/A" : `${mobile?.mobilemate_price} PKR`}</span>
                                                     ) : (
-                                                        <a target="_blank" href={mobile?.mobilemate_link}>
-                                                            {mobile?.mobilemate_price === 0 ? "N/A" : `${mobile?.mobilemate_price} PKR`}
-                                                        </a>
+                                                        // <a target="_blank" href={mobile?.mobilemate_link}>
+                                                            mobile?.mobilemate_price === 0 ? "N/A" : `${mobile?.mobilemate_price} PKR`
+                                                        // </a>
                                                     )}
                                                 </td>
                                                 <td>
                                                     {mobile?.hamariweb_link === "N/A" ? (
                                                         <span className="fw-semibold">{mobile?.hamariweb_price === 0 ? "N/A" : `${mobile?.hamariweb_price} PKR`}</span>
                                                     ) : (
-                                                        <a target="_blank" href={mobile?.hamariweb_link}>
-                                                            {mobile?.hamariweb_price === 0 ? "N/A" : `${mobile?.hamariweb_price} PKR`}
-                                                        </a>
+                                                        // <a target="_blank" href={mobile?.hamariweb_link}>
+                                                            mobile?.hamariweb_price === 0 ? "N/A" : `${mobile?.hamariweb_price} PKR`
+                                                        // </a>
                                                     )}
                                                 </td>
 
@@ -376,27 +376,27 @@ const AdvanceSearchComponent = () => {
                                                     {mobile?.whatmobile_link === "N/A" ? (
                                                         <span className="fw-semibold">{mobile?.whatmobile_price === 0 ? "N/A" : `${mobile?.whatmobile_price} PKR`}</span>
                                                     ) : (
-                                                        <a target="_blank" href={mobile?.whatmobile_link}>
-                                                            {mobile?.whatmobile_price === 0 ? "N/A" : `${mobile?.whatmobile_price} PKR`}
-                                                        </a>
+                                                        // <a target="_blank" href={mobile?.whatmobile_link}>
+                                                            mobile?.whatmobile_price === 0 ? "N/A" : `${mobile?.whatmobile_price} PKR`
+                                                        // </a>
                                                     )}
                                                 </td>
                                                 <td>
                                                     {mobile?.priceoye_link === "N/A" ? (
                                                         <span className="fw-semibold">{mobile?.priceoye_price === 0 ? "N/A" : `${mobile?.priceoye_price} PKR`}</span>
                                                     ) : (
-                                                        <a target="_blank" href={mobile?.priceoye_link}>
-                                                            {mobile?.priceoye_price === 0 ? "N/A" : `${mobile?.priceoye_price} PKR`}
-                                                        </a>
+                                                        // <a target="_blank" href={mobile?.priceoye_link}>
+                                                            mobile?.priceoye_price === 0 ? "N/A" : `${mobile?.priceoye_price} PKR`
+                                                        //  </a> 
                                                     )}
                                                 </td>
                                                 <td>
                                                     {mobile?.daraz_link === "N/A" ? (
                                                         <span className="fw-semibold">{mobile?.daraz_price === 0 ? "N/A" : `${mobile?.daraz_price} PKR`}</span>
                                                     ) : (
-                                                        <a target="_blank" href={mobile?.daraz_link}>
-                                                            {mobile?.daraz_price === 0 ? "N/A" : `${mobile?.daraz_price} PKR`}
-                                                        </a>
+                                                        // <a target="_blank" href={mobile?.daraz_link}>
+                                                        mobile?.daraz_price === 0 ? "N/A" : `${mobile?.daraz_price} PKR`
+                                                        // </a>
                                                     )}
                                                 </td>
                                             </tr>

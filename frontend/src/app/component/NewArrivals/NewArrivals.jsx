@@ -6,6 +6,7 @@ import {
   selectNewArrivalMobiles,
 } from "../../../../redux/mobileSlicer";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const NewArrivals = () => {
   const dispatch = useDispatch();
@@ -78,9 +79,9 @@ const NewArrivals = () => {
             </div>
 
             {/* View Button */}
-            <button className="font-poppins text-sm absolute bottom-7 right-4 bg-[#1eb8db] text-white px-2 py-1 rounded-full hover:bg-yellow-500 transition-all duration-300">
+            <Link  href={`/Mobile/${product.model.replace(/\s+/g, '-')}`} className="font-poppins text-sm absolute bottom-7 right-4 bg-[#1eb8db] text-white px-2 py-1 rounded-full hover:bg-yellow-500 transition-all duration-300">
               View Details
-            </button>
+            </Link>
           </div>
         ))}
       </div>

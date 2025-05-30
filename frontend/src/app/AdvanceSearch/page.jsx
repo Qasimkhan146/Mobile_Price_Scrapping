@@ -9,6 +9,7 @@ const AdvanceSearch = () => {
       <Head>
         <title>Advance Search</title>
         <link rel="canonical" href="https://www.mobileprice.biz.pk/" />
+        <meta name="description" content="Find the perfect mobile for your needs with our Advance Search feature. Compare mobile rates, explore mobile specs, and get the Latest prices on All Vendors." />
       </Head>
       <Suspense fallback={<div>Loading...</div>}>
         <AdvanceSearchComponent />

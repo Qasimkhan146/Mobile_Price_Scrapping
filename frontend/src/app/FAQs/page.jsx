@@ -4,21 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Accordion from "react-bootstrap/Accordion";
 import { Col, Container, Row } from "react-bootstrap";
 import Head from "next/head";
-// import Header from "../components/Header/Header";
-// import Image from "next/image";
-// import Adds from "../components/Ads/Ads";
-// import News from "../components/News/News";
-// import Reviews from "../components/Reviews/Reviews";
-// import Footer from "../components/Footer/Footer";
-// import TabNavigation from "../components/TabNavigation/TabNavigation";
-// import "./FAQs.css";
-// import Header from "../component/Header/Header";
+
 const page = () => {
   return (
     <Container>
         <Head>
           <title>FAQs - MobilePrice</title>
-          <meta name="description" content="Frequently Asked Questions - MobilePrice" />
+          <meta name="description" content="Frequently Asked Questions - MobilePrice if you have any questions or need assistance, our team is here to help." />
           <link rel="canonical" href="https://www.mobileprice.biz.pk/" />
         </Head>
       <Row>
