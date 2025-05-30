@@ -14,6 +14,7 @@ import { fetchAdvanceFilters, selectAdvanceFilterMobiles } from '../../../../red
 import { FormatListBulleted, Window } from "@mui/icons-material";
 import slugify from 'slugify';
 import { toast } from 'react-toastify';
+import AdvanceSkeleton from "./AdvanceSkeleton";
 const AdvanceSearchComponent = () => {
     const router = useRouter();
     const dispatch = useDispatch();
@@ -151,11 +152,15 @@ const AdvanceSearchComponent = () => {
         setSelectedYear("")
         setPage(1);
     }
-
+    useEffect(()=>{
+  document.title = "Advance Search for Mobile | Compare, ExPLORE & Buy Smartphones";
+       
+    },[])
     if (advanceMobiles.length === 0) return (
-        <div className="loading__class" >
-            <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
-        </div>
+        // <div className="loading__class" >
+        //     <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
+        // </div>
+        <AdvanceSkeleton/>
     )
 
     return (

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { toast } from 'react-toastify';
 import Image from "next/image";
 import { IosShare } from "@mui/icons-material";
+import MainSkeleton from "./MainSkeleton"
 
 const ContentArea = ({ mobiles }) => {
   const fetch10Mobiles = useSelector(selectFetch10Mobiles);
@@ -39,9 +40,10 @@ const ContentArea = ({ mobiles }) => {
 
 
   if (fetch10Mobiles.length === 0) return (
-    <div className="loading__class" >
-      <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
-    </div>
+    // <div className="loading__class" >
+    //   <DotLottieReact src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie" style={{ width: "200px", height: "200px", background: "#eee" }} loop autoplay />
+    // </div>
+    <MainSkeleton/>
   )
 
   return (

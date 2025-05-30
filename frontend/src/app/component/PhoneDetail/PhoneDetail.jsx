@@ -6,6 +6,7 @@ import "./PhoneDetail.css";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from "next/navigation";
+import SkeletonLoader from "../SkeletonLoader/SkeletonLoader"
 import { useDispatch, useSelector } from "react-redux";
 // const { register, handleSubmit, reset, formState: { errors } } = useForm();
 import {
@@ -86,14 +87,15 @@ const PhoneDetail = () => {
   };
   if (!mobileDetail)
     return (
-      <div className="loading__class">
-        <DotLottieReact
-          src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie"
-          style={{ width: "200px", height: "200px" }}
-          loop
-          autoplay
-        />
-      </div>
+      // <div className="loading__class">
+      //   <DotLottieReact
+      //     src="https://lottie.host/1911b01f-ab86-4a45-89c5-aab3f0d4e209/WcQ9e9ozxp.lottie"
+      //     style={{ width: "200px", height: "200px" }}
+      //     loop
+      //     autoplay
+      //   />
+      // </div>
+      <SkeletonLoader/>
     );
   return (
     <section>

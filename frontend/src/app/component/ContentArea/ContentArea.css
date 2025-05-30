@@ -67,7 +67,7 @@
    padding: 10px;
  }
  
- .mobile__card {
+ /* .mobile__card {
    max-width : 300px;
    height: 20rem;
    background: #fff;
@@ -76,7 +76,7 @@
    overflow: hidden;
    transition: transform 0.3s ease;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- }
+ } */
 
  
  .mobile__image {
