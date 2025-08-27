@@ -239,11 +239,7 @@ const Page = async ({ params }) => {
               url: 'https://www.mobileprice.biz.pk',
               name: 'MobilePrice.biz.pk',
               description: 'Best mobile phone prices comparison in Pakistan',
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: 'https://www.mobileprice.biz.pk/search?q={search_term_string}',
-                'query-input': 'required name=search_term_string'
-              }
+              
             },
           })
         }}
